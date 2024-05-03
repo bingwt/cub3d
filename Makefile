@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/05/03 16:53:46 by btan             ###   ########.fr        #
+#    Updated: 2024/05/03 17:11:58 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
 LIBS = -lXext -lX11
 
 SOURCES = cub3d_errors.c \
-		  map.c \
+		  map_utils.c \
 		  main.c
 
 OBJECTS = $(SOURCES:.c=.o)
