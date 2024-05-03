@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/04/30 21:36:21 by xlow             ###   ########.fr       */
+/*   Updated: 2024/05/02 23:51:30 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ typedef struct s_mlx
 	void	*img_ptr;
 	void	*img_addr;
 }	t_mlx;
+
+// MAP
+void	read_map(char *file);
 
 #endif
