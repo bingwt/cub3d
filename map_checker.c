@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/03 14:33:06 by btan             ###   ########.fr       */
+/*   Created: 2024/05/03 14:36:10 by btan              #+#    #+#             */
+/*   Updated: 2024/05/03 14:36:31 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-//	t_mlx	mlx;
-
 	if (argc == 2)
 		read_map(argv[1]);
-//	mlx.mlx_ptr = mlx_init();
-//	mlx.window_ptr = mlx_new_window(mlx.mlx_ptr, 1000, 1000, "cub3D");
-//	mlx.img_ptr = mlx_new_image(mlx.mlx_ptr, 1000, 1000);
-//	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

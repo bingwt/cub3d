@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/02 23:51:30 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/03 14:29:30 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include "mlx.h"
 # include "libft/libft.h"
 

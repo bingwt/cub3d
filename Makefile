@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
+#    Updated: 2024/05/03 15:39:51 by btan             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D
 
 INCLUDES = .
@@ -8,7 +20,8 @@ CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
 
 LIBS = -lXext -lX11
 
-SOURCES = main.c
+SOURCES = map.c \
+		  main.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -29,6 +42,9 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+map:
+	cc map_checker.c map.c libft/libft.a -g -o validator
 
 debug: CFLAGS += -g
 debug: re
