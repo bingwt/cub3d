@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/03 17:06:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 00:23:05 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef enum e_error
 	INVALID_TEXTURE,
 	INVALID_COLOR
 }	t_error;
+
+typedef	struct s_texture
+{
+	char	*id;
+	char	*path;
+}	t_texture;
 
 typedef struct s_mlx
 {
