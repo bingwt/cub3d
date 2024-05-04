@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:34:26 by btan              #+#    #+#             */
-/*   Updated: 2024/05/05 00:24:11 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 01:11:38 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,31 @@ void	read_texture(char *str)
 	ft_free_split(&texture);
 }
 
+void	read_rgb(char *str)
+{
+	char	*ptr;
+	char	**colors;
+	char	*color;
+
+	ptr = str;
+	while (ft_iswhitespace(*ptr))
+		ptr++;
+	colors = ft_split(ptr, ' ');
+	if (!colors)
+		return ;
+	if (colors[1])
+	{
+		color = ft_strdup(colors[1]);
+		color[ft_strlen(color) - 1] = '\0';
+		if (!ft_strcmp(colors[0], "F"))
+			printf("Floor color is: %s\n", color);
+		else if (!ft_strcmp(colors[0], "C"))
+			printf("Ceiling color is: %s\n", color);
+		free(color);
+	}
+	ft_free_split(&colors);
+}
+
 void	read_map(char *file)
 {
 	int		fd;
@@ -68,6 +93,7 @@ void	read_map(char *file)
 		if (!line)
 			break ;
 		read_texture(line);
+		read_rgb(line);
 		printf("%s", line);
 	}
 	close(fd);
