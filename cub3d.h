@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/05 14:21:54 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 14:36:35 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef	struct s_texture
 
 typedef struct s_color
 {
-	float	red;
-	float	green;
-	float	blue;
+	int	red;
+	int	green;
+	int	blue;
 }	t_color;
 
 typedef struct s_assets

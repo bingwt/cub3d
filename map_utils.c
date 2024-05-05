@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:34:26 by btan              #+#    #+#             */
-/*   Updated: 2024/05/05 14:27:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 14:54:32 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ void	read_texture(char *str, t_texture *texture)
 	ft_free_split(&split);
 }
 
-void	read_rgb(char *str)
+void	read_color(char *str, t_assets *assets)
 {
 	char	*ptr;
 	char	**colors;
 	char	*color;
+	char	**rgb;
 
 	ptr = str;
 	while (ft_iswhitespace(*ptr))
@@ -62,11 +63,22 @@ void	read_rgb(char *str)
 	if (colors[1])
 	{
 		color = ft_strdup(colors[1]);
+		rgb = ft_split(color, ',');
 		color[ft_strlen(color) - 1] = '\0';
 		if (!ft_strcmp(colors[0], "F"))
+		{
 			printf("Floor color is: %s\n", color);
+			assets->floor.red = ft_atoi(rgb[0]);
+			assets->floor.green = ft_atoi(rgb[1]);
+			assets->floor.blue = ft_atoi(rgb[2]);
+		}
 		else if (!ft_strcmp(colors[0], "C"))
+		{
 			printf("Ceiling color is: %s\n", color);
+			assets->ceiling.red = ft_atoi(rgb[0]);
+			assets->ceiling.green = ft_atoi(rgb[1]);
+			assets->ceiling.blue = ft_atoi(rgb[2]);
+		}
 		free(color);
 	}
 	ft_free_split(&colors);
@@ -76,6 +88,7 @@ t_assets	*init_assets(int fd)
 {
 	t_assets	*assets;
 	char		*line;
+	char		*ptr;
 	int			i;
 
 	assets = ft_calloc(1, sizeof(t_assets));
@@ -85,6 +98,22 @@ t_assets	*init_assets(int fd)
 	{
 		line = get_next_line(fd);
 		read_texture(line, &assets->texture[i++]);
+		free(line);
+	}
+	while (i < 6)
+	{
+		line = get_next_line(fd);
+		ptr = line;
+		while (*ptr)
+		{
+			if (!ft_iswhitespace(*ptr))
+			{
+				read_color(line, assets);
+				i++;
+				break ;
+			}
+			ptr++;
+		}
 		free(line);
 	}
 	return (assets);
@@ -112,7 +141,7 @@ t_map	*read_map(char *file)
 		if (!line)
 			break ;
 		//read_texture(line);
-		read_rgb(line);
+		//read_rgb(line);
 		printf("%s", line);
 	}
 	close(fd);
