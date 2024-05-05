@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:34:26 by btan              #+#    #+#             */
-/*   Updated: 2024/05/05 12:35:41 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 14:27:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,32 @@ int	ft_iswhitespace(int c)
 	return (0);
 }
 
-void	read_texture(char *str)
+void	read_texture(char *str, t_texture *texture)
 {
-	char	*ptr;
-	char	**texture;
-	char	*path;
+	char		*ptr;
+	char		**split;
 
 	ptr = str;
 	while (ft_iswhitespace(*ptr))
 		ptr++;
-	texture = ft_split(ptr, ' ');
-	if (!texture)
-		return ;
-	if (texture[1])
+	split = ft_split(ptr, ' ');
+	if (!split)
+		texture = NULL;
+	texture->id = ft_strdup(split[0]);
+	if (split[1])
 	{
-		path = ft_strdup(texture[1]);
-		path[ft_strlen(path) - 1] = '\0';
-		if (!ft_strcmp(texture[0], "NO"))
-			printf("North path is: %s\n", path);
-		else if (!ft_strcmp(texture[0], "SO"))
-			printf("South path is: %s\n", path);
-		else if (!ft_strcmp(texture[0], "WE"))
-			printf("West path is: %s\n", path);
-		else if (!ft_strcmp(texture[0], "EA"))
-			printf("East path is %s\n", path);
-		free(path);
+		texture->path = ft_strdup(split[1]);
+		texture->path[ft_strlen(texture->path) - 1] = '\0';
+		if (!ft_strcmp(texture->id, "NO"))
+			printf("North path is: %s\n", texture->path);
+		else if (!ft_strcmp(texture->id, "SO"))
+			printf("South path is: %s\n", texture->path);
+		else if (!ft_strcmp(texture->id, "WE"))
+			printf("West path is: %s\n", texture->path);
+		else if (!ft_strcmp(texture->id, "EA"))
+			printf("East path is %s\n", texture->path);
 	}
-	ft_free_split(&texture);
+	ft_free_split(&split);
 }
 
 void	read_rgb(char *str)
@@ -73,15 +72,29 @@ void	read_rgb(char *str)
 	ft_free_split(&colors);
 }
 
-t_assets	*init_assets()
+t_assets	*init_assets(int fd)
 {
+	t_assets	*assets;
+	char		*line;
+	int			i;
+
+	assets = ft_calloc(1, sizeof(t_assets));
+	assets->texture = ft_calloc(4, sizeof(t_texture));
+	i = 0;
+	while (i < 4)
+	{
+		line = get_next_line(fd);
+		read_texture(line, &assets->texture[i++]);
+		free(line);
+	}
+	return (assets);
 }
 
 t_map	*read_map(char *file)
 {
-	int		fd;
-	t_map	*map;
-	char	*line;
+	int			fd;
+	t_map		*map;
+	char		*line;
 
 	fd = open(file, O_RDONLY);
 	map = ft_calloc(1, sizeof(t_map));
@@ -89,8 +102,8 @@ t_map	*read_map(char *file)
 		error_msg(FILE_NOT_FOUND, NULL);
 	if (!ft_strrchr(file, '.') || ft_strcmp(ft_strrchr(file, '.'), ".cub"))
 		error_msg(INVALID_EXT, file);
+	map->assets = init_assets(fd);
 	line = get_next_line(fd);
-	read_texture(line);
 	printf("%s", line);
 	while (line)
 	{
@@ -98,7 +111,7 @@ t_map	*read_map(char *file)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		read_texture(line);
+		//read_texture(line);
 		read_rgb(line);
 		printf("%s", line);
 	}
