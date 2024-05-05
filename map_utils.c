@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:34:26 by btan              #+#    #+#             */
-/*   Updated: 2024/05/05 01:11:38 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 12:35:41 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,18 @@ void	read_rgb(char *str)
 	ft_free_split(&colors);
 }
 
-void	read_map(char *file)
+t_assets	*init_assets()
+{
+}
+
+t_map	*read_map(char *file)
 {
 	int		fd;
+	t_map	*map;
 	char	*line;
 
 	fd = open(file, O_RDONLY);
+	map = ft_calloc(1, sizeof(t_map));
 	if (fd < 0)
 		error_msg(FILE_NOT_FOUND, NULL);
 	if (!ft_strrchr(file, '.') || ft_strcmp(ft_strrchr(file, '.'), ".cub"))
@@ -97,4 +103,58 @@ void	read_map(char *file)
 		printf("%s", line);
 	}
 	close(fd);
+	return (map);
 }
+
+//t_map	*read_map(char *file)
+//{
+//	int		i;
+//	int		fd;
+//	t_map	*map;
+//	char	*line;
+//	char	*ptr;
+//
+//	i = 0;
+//	fd = open(file, O_RDONLY);
+//	map = ft_calloc(1, sizeof(t_map));
+//	if (fd < 0)
+//		error_msg(FILE_NOT_FOUND, NULL);
+//	if (!ft_strrchr(file, '.') || ft_strcmp(ft_strrchr(file, '.'), ".cub"))
+//		error_msg(INVALID_EXT, file);
+//	line = get_next_line(fd);
+//	if (line)
+//		i++;
+//	read_texture(line);
+//	printf("%s", line);
+//	while (line)
+//	{
+//		free(line);
+//		line = get_next_line(fd);
+//		if (!line)
+//			break ;
+//		i++;
+//		printf("line: %d: ", i); 
+//		ptr = line;
+//		read_texture(line);
+//		read_rgb(line);
+//		while (*ptr)
+//		{
+//			if (map->start)
+//				break ;
+//			if (!ft_iswhitespace(*ptr))
+//			{
+//				map->start = i;
+//				break ;
+//			}
+//			ptr++;
+//		}
+//		printf("%s", line);
+//	}
+//	close(fd);
+//	printf("start: %d\n", map->start);
+//	return (map);
+//}
+
+//t_map	*init_map(char *file)
+//{
+//}

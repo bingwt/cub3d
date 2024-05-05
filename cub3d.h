@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/05 00:23:05 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 12:39:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,29 @@ typedef enum e_error
 	INVALID_COLOR
 }	t_error;
 
+typedef struct s_color
+{
+	float	red;
+	float	green;
+	float	blue;
+}	t_color;
+
+typedef struct s_assets
+{
+	t_texture	*textures;
+	t_color		floor;
+	t_color		ceiling;
+}	t_assets;
+
+typedef struct s_map
+{
+	int			rows;
+	int			cols;
+	int			start;
+	int			**matrix;
+	t_assets	assets;
+}	t_map;
+
 typedef	struct s_texture
 {
 	char	*id;
@@ -51,6 +74,6 @@ typedef struct s_mlx
 int	error_msg(t_error error, char *arg);
 
 // MAP
-void	read_map(char *file);
+t_map	*read_map(char *file);
 
 #endif
