@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:34:26 by btan              #+#    #+#             */
-/*   Updated: 2024/05/05 14:54:32 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/05 15:15:29 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,24 @@ t_assets	*init_assets(int fd)
 	return (assets);
 }
 
+void	map_size(int fd, t_map *map)
+{
+	char	*line;
+
+
+	line = get_next_line(fd);
+	map->cols = ft_strlen(line);
+	printf("len: %d: %s\n", ft_strlen(line), line);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+		if (ft_strlen(line) > map->cols)
+			map->cols = ft_strlen(line);
+		printf("len: %d: %s\n", ft_strlen(line), line);
+	}
+}
+
 t_map	*read_map(char *file)
 {
 	int			fd;
@@ -132,18 +150,7 @@ t_map	*read_map(char *file)
 	if (!ft_strrchr(file, '.') || ft_strcmp(ft_strrchr(file, '.'), ".cub"))
 		error_msg(INVALID_EXT, file);
 	map->assets = init_assets(fd);
-	line = get_next_line(fd);
-	printf("%s", line);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		//read_texture(line);
-		//read_rgb(line);
-		printf("%s", line);
-	}
+	map_size(fd, map);
 	close(fd);
 	return (map);
 }
