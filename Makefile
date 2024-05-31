@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/05/03 17:13:11 by btan             ###   ########.fr        #
+#    Updated: 2024/05/31 14:50:23 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,23 +16,25 @@ INCLUDES = .
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
+CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES) -Imlx
 
 LIBS = -lXext -lX11
 
-SOURCES = cub3d_errors.c \
-		  map_utils.c \
+SRCS = cub3d_errors.c \
 		  main.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) libft/libft.a $(INCLUDES)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) libft/libft.a $(LIBS)
+$(NAME): $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a $(INCLUDES)
+	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -Ilibft -Imlx libft/libft.a mlx/libmlx_Linux.a $(LIBS)
 
 libft/libft.a:
 	make -C libft
+
+mlx/libmlx_Linux.a:
+	make -C mlx
 
 clean:
 	make clean -C libft
