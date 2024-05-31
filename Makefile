@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/05/31 15:27:21 by btan             ###   ########.fr        #
+#    Updated: 2024/05/31 16:04:44 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
 
 LIBS = -lXext -lX11
 
-SRCS = srcs/handle_errors/cub3d_errors.c \
+SRCS = srcs/cub3d_errors.c \
+	   srcs/events.c \
 	   srcs/main.c
 
 OBJECTS = $(SOURCES:.c=.o)

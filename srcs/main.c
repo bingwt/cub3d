@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/31 14:36:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/31 16:06:03 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(void)
 	mlx.mlx_ptr = mlx_init();
 	mlx.window_ptr = mlx_new_window(mlx.mlx_ptr, 1000, 1000, "cub3D");
 	mlx.img_ptr = mlx_new_image(mlx.mlx_ptr, 1000, 1000);
+	handle_events(&mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

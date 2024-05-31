@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:55:45 by btan              #+#    #+#             */
-/*   Updated: 2024/05/31 14:58:56 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/31 16:15:41 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_color	*hex_to_rgb(char *hex)
 	t_color	*color;
 
 	base = "0123456789abcdef";
-	color = calloc(1, sizeof(t_color));
+	color = ft_calloc(1, sizeof(t_color));
 	color->blue = ft_atoi_base(hex + 4, base);
 	hex[4] = '\0';
 	color->green = ft_atoi_base(hex + 2, base);
@@ -47,7 +47,7 @@ t_color	*dec_to_rgb(int dec)
 {
 	t_color	*color;
 
-	color = calloc(1, sizeof(t_color));
+	color = ft_calloc(1, sizeof(t_color));
 	color->blue = dec % 256;
 	dec = dec / 256;
 	color->green = dec % 256;
