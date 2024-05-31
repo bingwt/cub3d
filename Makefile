@@ -6,11 +6,11 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/05/31 15:22:10 by btan             ###   ########.fr        #
+#    Updated: 2024/05/31 15:27:21 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
+NAME = cub3d
 
 INCLUDES = includes
 
