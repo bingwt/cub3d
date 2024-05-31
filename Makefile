@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/05/31 16:04:44 by btan             ###   ########.fr        #
+#    Updated: 2024/05/31 17:53:03 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,16 @@ CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
 LIBS = -lXext -lX11
 
 SRCS = srcs/cub3d_errors.c \
+	   srcs/cub3d_utils.c \
 	   srcs/events.c \
+	   srcs/raycast/pixel.c \
 	   srcs/main.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a $(INCLUDES)
+$(NAME): $(SRCS) $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a $(INCLUDES)
 	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) libft/libft.a mlx/libmlx_Linux.a $(LIBS)
 
 libft/libft.a:

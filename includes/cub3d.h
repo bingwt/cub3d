@@ -6,12 +6,20 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/31 16:09:51 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/31 18:19:18 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# ifndef WIDTH
+#  define WIDTH 1024
+# endif
+
+# ifndef HEIGHT
+#  define HEIGHT 1024
+# endif
 
 # include <math.h>
 # include <stdlib.h>
@@ -46,12 +54,26 @@ typedef struct s_color
 	int	blue;
 }	t_color;
 
+typedef struct s_pixel
+{
+	int		color;
+	int		next_color;
+	t_color	*step;
+}	t_pixel;
+
 typedef struct s_assets
 {
 	t_texture	*texture;
 	t_color		floor;
 	t_color		ceiling;
 }	t_assets;
+
+typedef struct s_image
+{
+	int	pixel_bits;
+	int	line_bytes;
+	int	endian;
+}	t_img;
 
 typedef struct s_map
 {
@@ -62,25 +84,33 @@ typedef struct s_map
 	t_assets	*assets;
 }	t_map;
 
-typedef struct s_mlx
+typedef struct s_prop
 {
-	void	*mlx_ptr;
-	void	*window_ptr;
-	void	*img_ptr;
-	void	*img_addr;
-}	t_mlx;
+	void		*mlx;
+	void		*window;
+	void		*image;
+	int			width;
+	int			height;
+	t_pixel		pixel;
+	t_img		img;
+	t_map		map;
+}	t_props;
 
 // ERRORS
 int	error_msg(t_error error, char *arg);
+
+// UTILS
+int	ft_atoi_base(const char *str, const char *base);
+void	draw_background(t_props *props);
 
 // MAP
 t_map	*read_map(char *file);
 
 // EVENTS
-void	handle_events(t_mlx *mlx);
+void	handle_events(t_props *props);
 
 // PIXEL
-void	draw_pixel(int x, int y, t_mlx *mlx);
+void	draw_pixel(int x, int y, t_props *props);
 t_color	*hex_to_rgb(char *hex);
 t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);

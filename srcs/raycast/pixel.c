@@ -6,13 +6,13 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:55:45 by btan              #+#    #+#             */
-/*   Updated: 2024/05/31 16:15:41 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/31 18:11:29 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_pixel(int x, int y, t_mlx *mlx)
+void	draw_pixel(int x, int y, t_props *props)
 {
 	char	*buffer;
 	int		offset;
