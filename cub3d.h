@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/05/05 14:36:35 by btan             ###   ########.fr       */
+/*   Updated: 2024/05/31 14:59:10 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,11 @@ int	error_msg(t_error error, char *arg);
 
 // MAP
 t_map	*read_map(char *file);
+
+// PIXEL
+void	draw_pixel(int x, int y, t_mlx *mlx);
+t_color	*hex_to_rgb(char *hex);
+t_color	*dec_to_rgb(int dec);
+int		rgb_to_dec(t_color *color);
 
 #endif
