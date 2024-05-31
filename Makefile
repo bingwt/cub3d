@@ -6,29 +6,29 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/05/31 14:50:23 by btan             ###   ########.fr        #
+#    Updated: 2024/05/31 15:22:10 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-INCLUDES = .
+INCLUDES = includes
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES) -Imlx
+CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
 
 LIBS = -lXext -lX11
 
-SRCS = cub3d_errors.c \
-		  main.c
+SRCS = srcs/handle_errors/cub3d_errors.c \
+	   srcs/main.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a $(INCLUDES)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -Ilibft -Imlx libft/libft.a mlx/libmlx_Linux.a $(LIBS)
+	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) libft/libft.a mlx/libmlx_Linux.a $(LIBS)
 
 libft/libft.a:
 	make -C libft
