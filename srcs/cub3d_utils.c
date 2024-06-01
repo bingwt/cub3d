@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/05/31 18:19:37 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/01 21:53:39 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ void	draw_background(t_props *props)
 			draw_pixel(++x, y, props);
 	}
 }
-

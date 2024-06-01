@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/05/31 17:53:03 by btan             ###   ########.fr        #
+#    Updated: 2024/06/01 15:11:53 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,3 +54,6 @@ map:
 
 debug: CFLAGS += -g
 debug: re
+
+debug-noflag: CFLAGS = -I$(INCLUDES) -g
+debug-noflag: re
