@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/01 21:53:39 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/01 22:29:18 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,41 @@ void	draw_background(t_props *props)
 	int	y;
 
 	y = 0;
+	printf("%d\n", props->pixel.color);
 	while (y++ < props->height)
 	{
 		x = 0;
 		while (x < props->width)
 			draw_pixel(++x, y, props);
+	}
+}
+
+void	draw_grid(t_props *props)
+{
+	t_color color;
+	t_color grid;
+	int	gap;
+	int	x;
+	int	y;
+
+	grid.red = 128;
+	grid.green = 128;
+	grid.blue = 128;
+	props->pixel.color = rgb_to_dec(&grid);
+	gap = WIDTH / TILE_SIZE;
+	y = 0;
+	while (y++ < props->height)
+	{
+		x = 0;
+		if (!(x % gap) || !(y % gap))
+		{
+			props->pixel.color = rgb_to_dec(&grid);
+		}
+		while (x < props->width)
+		{
+			if (!(x % gap) || !(y % gap))
+				draw_pixel(x, y, props);
+			x++;
+		}
 	}
 }

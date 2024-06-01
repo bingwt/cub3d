@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/01 15:28:12 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/01 22:31:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 
 # ifndef HEIGHT
 #  define HEIGHT 1024
+# endif
+
+# ifndef TILE_SIZE
+#  define TILE_SIZE 16
 # endif
 
 # include <math.h>
@@ -91,6 +95,7 @@ typedef struct s_prop
 	void		*image;
 	int			width;
 	int			height;
+	int			tile_size;
 	t_pixel		pixel;
 	t_img		img;
 	t_map		map;
@@ -102,6 +107,7 @@ int	error_msg(t_error error, char *arg);
 // UTILS
 int	ft_atoi_base(const char *str, const char *base);
 void	draw_background(t_props *props);
+void	draw_grid(t_props *props);
 
 // MAP
 t_map	*read_map(char *file);
