@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/01 22:31:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 14:32:18 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 
 # ifndef HEIGHT
 #  define HEIGHT 1024
+# endif
+
+# ifndef TILE
+#  define TILE 8
 # endif
 
 # ifndef TILE_SIZE
@@ -88,6 +92,12 @@ typedef struct s_map
 	t_assets	*assets;
 }	t_map;
 
+typedef struct s_mouse
+{
+	int	x;
+	int	y;
+}	t_mouse;
+
 typedef struct s_prop
 {
 	void		*mlx;
@@ -99,6 +109,7 @@ typedef struct s_prop
 	t_pixel		pixel;
 	t_img		img;
 	t_map		map;
+	t_mouse		mouse;
 }	t_props;
 
 // ERRORS

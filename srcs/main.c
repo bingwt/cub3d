@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 14:09:14 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 14:11:41 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(void)
 
 //	if (argc == 2)
 //		read_map(argv[1]);
-	props.map.rows = 10;
-	props.map.cols = 10;
+	props.map.rows = TILE;
+	props.map.cols = TILE;
 	props.map.matrix = ft_calloc(props.map.cols, sizeof(sizeof(int *)));
 	i = 0;
 	while (i < TILE_SIZE)
