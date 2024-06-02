@@ -6,13 +6,13 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:59:41 by btan              #+#    #+#             */
-/*   Updated: 2024/06/02 15:45:16 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 17:01:25 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fill_player(int x, int y, t_props *props)
+void	fill_point(int x, int y, t_props *props)
 {
 	int	fill;
 	int	end_x;
@@ -53,7 +53,7 @@ void	player(t_props *props)
 			if ((x == props->player.x) && (y == props->player.y))
 			{
 				draw_pixel(x, y, props);
-				fill_player(x, y,  props);
+				fill_point(x, y,  props);
 			}
 			x++;
 		}
