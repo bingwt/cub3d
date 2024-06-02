@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 14:11:41 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 15:15:24 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_window(t_props *props)
 //int	main(int argc, char **argv)
 int	main(void)
 {
-	int		**map;
 	int		i;
 	t_color color;
 	t_props	props;
@@ -39,6 +38,8 @@ int	main(void)
 	i = 0;
 	while (i < TILE_SIZE)
 		props.map.matrix[i++] = ft_calloc(props.map.rows, sizeof(int));
+	props.player.x = 64;
+	props.player.y = 64;
 	color.red = 255;
 	color.green = 255;
 	color.blue = 255;
@@ -46,6 +47,7 @@ int	main(void)
 	props.pixel.color = rgb_to_dec(&color);
 	draw_background(&props);
 	draw_grid(&props);
+	player(&props);
 	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
 	handle_events(&props);
 	mlx_loop(props.mlx);

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/02 14:08:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 14:46:50 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	draw_background(t_props *props)
 
 void	draw_grid(t_props *props)
 {
-	t_color color;
 	t_color grid;
 	int	gap;
 	int	x;

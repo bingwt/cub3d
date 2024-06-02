@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 14:32:18 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 15:05:03 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,12 @@ typedef struct s_mouse
 	int	y;
 }	t_mouse;
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+}	t_player;
+
 typedef struct s_prop
 {
 	void		*mlx;
@@ -110,6 +116,7 @@ typedef struct s_prop
 	t_img		img;
 	t_map		map;
 	t_mouse		mouse;
+	t_player	player;
 }	t_props;
 
 // ERRORS
@@ -131,5 +138,8 @@ void	draw_pixel(int x, int y, t_props *props);
 t_color	*hex_to_rgb(char *hex);
 t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
+
+// PLAYER
+void	player(t_props *props);
 
 #endif
