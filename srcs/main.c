@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 15:15:24 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 16:03:39 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	init_window(t_props *props)
 	props->image = mlx_new_image(props->mlx, props->width, props->height);
 }
 
+void	init_player(t_props *props)
+{
+	props->player.size = 10;
+	props->player.speed = 1;
+}
+
 //int	main(int argc, char **argv)
 int	main(void)
 {
@@ -34,10 +40,10 @@ int	main(void)
 //		read_map(argv[1]);
 	props.map.rows = TILE;
 	props.map.cols = TILE;
-	props.map.matrix = ft_calloc(props.map.cols, sizeof(sizeof(int *)));
+	props.map.matrix = ft_calloc(props.map.rows, sizeof(int *));
 	i = 0;
-	while (i < TILE_SIZE)
-		props.map.matrix[i++] = ft_calloc(props.map.rows, sizeof(int));
+	while (i < props.map.cols)
+		props.map.matrix[i++] = ft_calloc(props.map.cols, sizeof(int));
 	props.player.x = 64;
 	props.player.y = 64;
 	color.red = 255;
@@ -47,6 +53,7 @@ int	main(void)
 	props.pixel.color = rgb_to_dec(&color);
 	draw_background(&props);
 	draw_grid(&props);
+	init_player(&props);
 	player(&props);
 	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
 	handle_events(&props);
