@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/02 16:26:40 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 17:24:33 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ int	ft_atoi_base(const char *str, const char *base)
 		i++;
 	}
 	return (value * neg);
+}
+
+void	ft_swap(float *a, float *b)
+{
+	float	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
 void	draw_background(t_props *props)

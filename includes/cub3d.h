@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 16:56:00 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 17:29:10 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,20 @@ typedef struct s_prop
 	t_player	player;
 }	t_props;
 
+typedef struct s_line
+{
+	float	x0;
+	float	y0;
+	float	x1;
+	float	y1;
+}	t_line;
+
 // ERRORS
 int	error_msg(t_error error, char *arg);
 
 // UTILS
-int	ft_atoi_base(const char *str, const char *base);
+int		ft_atoi_base(const char *str, const char *base);
+void	ft_swap(float *a, float *b);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 
@@ -142,7 +151,7 @@ t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
 
 //RAYCAST
-void	dda_line(int x, int y, t_props *props);
+void	draw_bresenham(t_line *line, t_props *props);
 
 // PLAYER
 void	fill_point(int x, int y, t_props *props);
