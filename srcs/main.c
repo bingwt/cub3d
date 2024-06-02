@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/01 22:54:30 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 14:09:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ int	main(void)
 
 //	if (argc == 2)
 //		read_map(argv[1]);
-	props.map.matrix = ft_calloc(TILE_SIZE, sizeof(sizeof(int *)));
+	props.map.rows = 10;
+	props.map.cols = 10;
+	props.map.matrix = ft_calloc(props.map.cols, sizeof(sizeof(int *)));
 	i = 0;
 	while (i < TILE_SIZE)
-		props.map.matrix[i++] = ft_calloc(TILE_SIZE, sizeof(int));
+		props.map.matrix[i++] = ft_calloc(props.map.rows, sizeof(int));
 	color.red = 255;
 	color.green = 255;
 	color.blue = 255;

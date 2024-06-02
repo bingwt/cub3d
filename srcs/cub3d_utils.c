@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/01 22:29:18 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 14:08:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_grid(t_props *props)
 	grid.green = 128;
 	grid.blue = 128;
 	props->pixel.color = rgb_to_dec(&grid);
-	gap = WIDTH / TILE_SIZE;
+	gap = props->width / props->map.rows;
 	y = 0;
 	while (y++ < props->height)
 	{
