@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/02 17:28:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 18:44:15 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ int	handle_coords(int x, int y, t_props *props)
 //	printf("x: %d, y: %d\n", x, y);
 	props->mouse.x = x;
 	props->mouse.y = y;
+	loop(props);
 	return (0);
 }
 
 void	handle_movement(int key, t_props *props)
 {
-	t_line	line;
-
 	if (key == 119)
 	{
 		printf("UP\n");
@@ -62,16 +61,7 @@ void	handle_movement(int key, t_props *props)
 		printf("RIGHT\n");
 		props->player.x++;
 	}
-	props->pixel.color = 16777215;
-	draw_background(props);
-	draw_grid(props);
-	player(props);
-	line.x0 = props->player.x;
-	line.y0 = props->player.y;
-	line.x1 = props->mouse.x;
-	line.y1 = props->mouse.y;
-	draw_bresenham(&line, props);
-	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
+	loop(props);
 }
 
 int	handle_keydown(int key, t_props *props)

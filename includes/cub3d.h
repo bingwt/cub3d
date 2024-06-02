@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 17:29:10 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/02 18:32:58 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int		ft_atoi_base(const char *str, const char *base);
 void	ft_swap(float *a, float *b);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
+void	loop(t_props *props);
 
 // MAP
 t_map	*read_map(char *file);
