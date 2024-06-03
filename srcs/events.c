@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/03 15:02:12 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 15:20:10 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	handle_movement(int key, t_props *props)
 int	handle_keydown(int key, t_props *props)
 
 {
-	printf("%d\n", key);
+//	printf("%d\n", key);
 	if (key == 102)
 	{
-		printf("Fill @ (%d, %d)\n", props->mouse.x, props->mouse.y);
-		printf("cell: %d\n", check_cell(props->mouse.x, props->mouse.y, props));
+	//	printf("Fill @ (%d, %d)\n", props->mouse.x, props->mouse.y);
+	//	printf("cell: %d\n", check_cell(props->mouse.x, props->mouse.y, props));
 		if (!check_cell(props->mouse.x, props->mouse.y, props))
 		{
 			props->map.matrix[props->mouse.cell[0]][props->mouse.cell[1]] = 1;
