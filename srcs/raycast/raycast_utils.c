@@ -6,18 +6,11 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:22:07 by btan              #+#    #+#             */
-/*   Updated: 2024/06/03 17:36:16 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 00:40:07 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_abs(int n)
-{
-	if (n < 0)
-		return (-n);
-	return (n);
-}
 
 static void	check_slope(int *axis, int *iter)
 {
@@ -97,7 +90,7 @@ void	draw_bresenham(t_line *line, t_props *props)
 	dx = line->x1 - line->x0;
 	dy = line->y1 - line->y0;
 	fill_point(line->x1, line->y1, props);
-	if (ft_abs(dy) < ft_abs(dx))
+	if (abs(dy) < abs(dx))
 	{
 		if (line->x0 > line->x1)
 		{
