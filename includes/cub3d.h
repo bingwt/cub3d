@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/03 09:12:00 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 15:13:12 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_mouse
 {
 	int	x;
 	int	y;
+	int	cell[2];
 }	t_mouse;
 
 typedef struct s_player
@@ -136,7 +137,7 @@ int	error_msg(t_error error, char *arg);
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
 void	ft_swap(float *a, float *b);
-void	check_cell(int x, int y, t_props *props);
+int		check_cell(int x, int y, t_props *props);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 void	loop(t_props *props);
@@ -155,6 +156,9 @@ int		rgb_to_dec(t_color *color);
 
 //RAYCAST
 void	draw_bresenham(t_line *line, t_props *props);
+
+//WALL
+void	fill_cell(t_props *props);
 
 // PLAYER
 void	fill_point(int x, int y, t_props *props);

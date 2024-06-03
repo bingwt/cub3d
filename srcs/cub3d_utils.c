@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/03 11:01:30 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 15:12:51 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_swap(float *a, float *b)
 	*b = temp;
 }
 
-void	check_cell(int x, int y, t_props *props)
+int	check_cell(int x, int y, t_props *props)
 {
 	int	col;
 	int	row;
@@ -65,7 +65,10 @@ void	check_cell(int x, int y, t_props *props)
 		if (x > col)
 			i++;
 	}
-	col = i - 1;
+	if (col > 0)
+		col = i - 1;
+	else
+		col = i;
 	i = 0;
 	while (row < y)
 	{
@@ -73,23 +76,38 @@ void	check_cell(int x, int y, t_props *props)
 		if (y > row)
 			i++;
 	}
-	row = i - 1;
-	printf("matrix[%d][%d]\n", row, col);
-	printf("cell: %d\n", props->map.matrix[row][col]);
+	if (row > 0)
+		row = i - 1;
+	else
+		row = i;
+//	printf("matrix[%d][%d]\n", row, col);
+//	printf("cell: %d\n", props->map.matrix[row][col]);
+	props->mouse.cell[0] = row;
+	props->mouse.cell[1] = col;
+	return (props->map.matrix[row][col]);
 }
 
 void	draw_background(t_props *props)
 {
-	int	x;
-	int	y;
+	t_color	cell;
+	int		x;
+	int		y;
 
+	cell.red = 0;
+	cell.green = 0;
+	cell.blue = 128;
 	y = 0;
-	printf("%d\n", props->pixel.color);
 	while (y++ < props->height)
 	{
 		x = 0;
 		while (x < props->width)
+		{
+			if (check_cell(x, y, props))
+				props->pixel.color = rgb_to_dec(&cell);
+			else
+				props->pixel.color = 16777215;
 			draw_pixel(++x, y, props);
+		}
 	}
 }
 

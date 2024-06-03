@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/03 11:02:50 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 15:02:12 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,17 @@ int	handle_keydown(int key, t_props *props)
 	if (key == 102)
 	{
 		printf("Fill @ (%d, %d)\n", props->mouse.x, props->mouse.y);
-		check_cell(props->mouse.x, props->mouse.y, props);
+		printf("cell: %d\n", check_cell(props->mouse.x, props->mouse.y, props));
+		if (!check_cell(props->mouse.x, props->mouse.y, props))
+		{
+			props->map.matrix[props->mouse.cell[0]][props->mouse.cell[1]] = 1;
+			fill_cell(props);
+		}
 	}
 	else if (key == 97  || key == 100 || key == 115 || key == 119)
 		handle_movement(key, props);
+	else if (key == 99)
+		check_cell(props->mouse.x, props->mouse.y, props);
 	else if (key == 112)
 		printf("Player @ (%d, %d)\n", props->player.x, props->player.y);
 	else if (key == 65307)
