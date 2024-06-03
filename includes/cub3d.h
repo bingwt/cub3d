@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/03 15:21:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 01:54:15 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 # define CUB3D_H
 
 # ifndef WIDTH
-#  define WIDTH 512
+#  define WIDTH 256
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 512
+#  define HEIGHT 256
 # endif
 
 # ifndef TILE
-#  define TILE 8
+#  define TILE 16
 # endif
 
 # ifndef TILE_SIZE
@@ -156,6 +156,7 @@ int		rgb_to_dec(t_color *color);
 
 //RAYCAST
 void	draw_bresenham(t_line *line, t_props *props);
+void	draw_dda(t_line *line, t_props *props);
 
 //WALL
 void	fill_cell(t_props *props);
