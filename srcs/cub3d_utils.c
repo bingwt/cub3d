@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/02 18:46:34 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 11:01:30 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,34 @@ void	ft_swap(float *a, float *b)
 	temp = *a;
 	*a = *b;
 	*b = temp;
+}
+
+void	check_cell(int x, int y, t_props *props)
+{
+	int	col;
+	int	row;
+	int	i;
+
+	col = 0;
+	row = 0;
+	i = 0;
+	while (col < x)
+	{
+		col = props->map.bounds[i];
+		if (x > col)
+			i++;
+	}
+	col = i - 1;
+	i = 0;
+	while (row < y)
+	{
+		row = props->map.bounds[i];
+		if (y > row)
+			i++;
+	}
+	row = i - 1;
+	printf("matrix[%d][%d]\n", row, col);
+	printf("cell: %d\n", props->map.matrix[row][col]);
 }
 
 void	draw_background(t_props *props)

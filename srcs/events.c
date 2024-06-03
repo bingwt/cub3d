@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/02 18:44:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 11:02:50 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,24 @@ void	handle_movement(int key, t_props *props)
 	if (key == 119)
 	{
 		printf("UP\n");
-		props->player.y--;
+		props->player.y = props->player.y - (1 * props->player.speed);
 	}
 	else if (key == 115)
 	{
 		printf("DOWN\n");
-		props->player.y++;
+		props->player.y = props->player.y + (1 * props->player.speed);
 	}
 	else if (key == 97)
 	{
 		printf("LEFT\n");
-		props->player.x--;
+		props->player.x = props->player.x - (1 * props->player.speed);
 	}
 	else if (key == 100)
 	{
 		printf("RIGHT\n");
-		props->player.x++;
+		props->player.x = props->player.x + (1 * props->player.speed);
 	}
+	printf("x: %d, y: %d\n", props->player.x, props->player.y);
 	loop(props);
 }
 
@@ -69,7 +70,10 @@ int	handle_keydown(int key, t_props *props)
 {
 	printf("%d\n", key);
 	if (key == 102)
+	{
 		printf("Fill @ (%d, %d)\n", props->mouse.x, props->mouse.y);
+		check_cell(props->mouse.x, props->mouse.y, props);
+	}
 	else if (key == 97  || key == 100 || key == 115 || key == 119)
 		handle_movement(key, props);
 	else if (key == 112)

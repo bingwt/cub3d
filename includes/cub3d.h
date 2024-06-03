@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 18:32:58 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 09:12:00 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define CUB3D_H
 
 # ifndef WIDTH
-#  define WIDTH 1024
+#  define WIDTH 512
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 1024
+#  define HEIGHT 512
 # endif
 
 # ifndef TILE
@@ -88,6 +88,7 @@ typedef struct s_map
 	int			rows;
 	int			cols;
 	int			start;
+	int			*bounds;
 	int			**matrix;
 	t_assets	*assets;
 }	t_map;
@@ -135,6 +136,7 @@ int	error_msg(t_error error, char *arg);
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
 void	ft_swap(float *a, float *b);
+void	check_cell(int x, int y, t_props *props);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 void	loop(t_props *props);

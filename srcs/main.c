@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/02 18:46:01 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/03 09:57:17 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,33 @@ void	init_window(t_props *props)
 void	init_player(t_props *props)
 {
 	props->player.size = 10;
-	props->player.speed = 1;
-	props->player.x = 64;
-	props->player.y = 64;
+	props->player.speed = 5;
+	props->player.x = 32;
+	props->player.y = 32;
 	props->mouse.x = 64;
 	props->mouse.y = 64;
+	check_cell(props->player.x, props->player.y, props);
 }
 
 //int	main(int argc, char **argv)
 int	main(void)
 {
 	int		i;
+	int		bound;
 	t_color color;
 	t_props	props;
 
 //	if (argc == 2)
 //		read_map(argv[1]);
+	props.map.bounds = ft_calloc(TILE + 1, sizeof(int));
+	i = 0;
+	bound = 0;
+	while (bound <= WIDTH)
+	{
+		props.map.bounds[i] = bound;
+		bound += WIDTH / TILE;
+		i++;
+	}
 	props.map.rows = TILE;
 	props.map.cols = TILE;
 	props.map.matrix = ft_calloc(props.map.rows, sizeof(int *));
