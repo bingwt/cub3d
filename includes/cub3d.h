@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/04 01:54:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 22:48:26 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ typedef	struct s_texture
 	char	*path;
 }	t_texture;
 
+typedef struct s_vec2
+{
+	int	x;
+	int	y;
+}	t_vec2;
+
 typedef struct s_color
 {
 	int	red;
@@ -102,10 +108,10 @@ typedef struct s_mouse
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	size;
-	int	speed;
+	int		size;
+	int		speed;
+	t_vec2	pos;
+	t_vec2	los;
 }	t_player;
 
 typedef struct s_prop

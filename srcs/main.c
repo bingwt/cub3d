@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/03 09:57:17 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 23:04:26 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ void	init_player(t_props *props)
 {
 	props->player.size = 10;
 	props->player.speed = 5;
-	props->player.x = 32;
-	props->player.y = 32;
+	props->player.pos.x = 128;
+	props->player.pos.y = 192;
+	props->player.los.x = 0;
+	props->player.los.y = 0;
 	props->mouse.x = 64;
 	props->mouse.y = 64;
-	check_cell(props->player.x, props->player.y, props);
+	check_cell(props->player.pos.x, props->player.pos.y, props);
 }
 
 //int	main(int argc, char **argv)

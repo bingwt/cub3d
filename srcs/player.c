@@ -46,11 +46,11 @@ void	player(t_props *props)
 	while (y++ < props->height)
 	{
 		x = 0;
-		if ((x == props->player.x) && (y == props->player.y))
+		if ((x == props->player.pos.x) && (y == props->player.pos.y))
 			props->pixel.color = rgb_to_dec(&color);
 		while (x < props->width)
 		{
-			if ((x == props->player.x) && (y == props->player.y))
+			if ((x == props->player.pos.x) && (y == props->player.pos.y))
 			{
 				draw_pixel(x, y, props);
 				fill_point(x, y,  props);
