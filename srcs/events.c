@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/04 23:01:05 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 23:46:48 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	handle_movement(int key, t_props *props)
 		props->player.los.x = props->player.los.x + (1 * props->player.speed);
 	}
 //	printf("x: %d, y: %d\n", props->player.pos.x, props->player.pos.y);
-	loop(props);
+//	loop(props);
 }
 
 int	handle_keydown(int key, t_props *props)
 
 {
-//	printf("%d\n", key);
+	//printf("%d\n", key);
 	if (key == 102)
 	{
 	//	printf("Fill @ (%d, %d)\n", props->mouse.x, props->mouse.y);
@@ -84,6 +84,16 @@ int	handle_keydown(int key, t_props *props)
 		printf("Player @ (%d, %d)\n", props->player.pos.x, props->player.pos.y);
 	else if (key == 65307)
 		handle_close(props);
+	else if (key == 65361)
+		props->player.los.x -= 10;
+	else if (key == 65363)
+	{
+		printf("x: %d, y: %d\n", props->player.los.x, props->player.los.y);
+		//props->player.angle++;
+		if (props->player.los.x < WIDTH)
+			props->player.los.x += 10;
+	}
+	loop(props);
 	return (0);
 }
 

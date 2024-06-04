@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/06/04 01:31:41 by btan             ###   ########.fr        #
+#    Updated: 2024/06/04 23:26:57 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
 
-LIBS = -lXext -lX11
+LIBS = -lXext -lX11 -lm
 
 SRCS = srcs/cub3d_errors.c \
 	   srcs/cub3d_utils.c \
@@ -28,6 +28,7 @@ SRCS = srcs/cub3d_errors.c \
 	   srcs/raycast/raycast_utils.c \
 	   srcs/raycast/dda.c \
 	   srcs/player.c \
+	   srcs/matrix/matrix_math.c \
 	   srcs/main.c
 
 OBJECTS = $(SOURCES:.c=.o)

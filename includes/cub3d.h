@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/04 22:48:26 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 23:31:25 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_player
 {
 	int		size;
 	int		speed;
+	int		angle;
 	t_vec2	pos;
 	t_vec2	los;
 }	t_player;
@@ -170,5 +171,13 @@ void	fill_cell(t_props *props);
 // PLAYER
 void	fill_point(int x, int y, t_props *props);
 void	player(t_props *props);
+
+// MATRIX
+t_vec2	*matrix_to_vec2(float **matrix);
+float	**vec2_to_matrix(t_vec2 *vec);
+float	**matrix_mult(float **a, float **b);
+void	free_matrix(float **matrix);
+void	rotate(float ***matrix, float degrees);
+void	test_rotate(t_props *props);
 
 #endif
