@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/03 09:57:17 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 16:12:02 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	init_window(t_props *props)
 	props->width = WIDTH;
 	props->height = HEIGHT;
 	props->tile_size = TILE_SIZE;
-	props->window = mlx_new_window(props->mlx, props->width, \
-	props->height, "cub3d");
+	props->window = mlx_new_window(props->mlx, props->width * 4, \
+	props->height * 4, "cub3d");
 	props->image = mlx_new_image(props->mlx, props->width, props->height);
 }
 

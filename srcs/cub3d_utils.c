@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/04 01:51:30 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/04 16:18:53 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	check_cell(int x, int y, t_props *props)
 	col = 0;
 	row = 0;
 	i = 0;
+	if (x > WIDTH || x > HEIGHT)
+		return 0;
 	while (col < x)
 	{
 		col = props->map.bounds[i];
