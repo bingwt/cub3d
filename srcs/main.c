@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/04 23:04:26 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/08 02:31:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ int	main(void)
 	i = 0;
 	while (i < props.map.cols)
 		props.map.matrix[i++] = ft_calloc(props.map.cols, sizeof(int));
+	for (int row = 0; row < TILE; row++)
+	{
+		for (int col = 0; col < TILE; col++)
+		{
+			if (row == 0 || col == 0 || col == TILE - 1 || row == TILE - 1)
+				props.map.matrix[row][col] = 1;
+		}
+	}
 	color.red = 255;
 	color.green = 255;
 	color.blue = 255;
