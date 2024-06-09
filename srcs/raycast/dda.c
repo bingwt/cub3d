@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:13:19 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 16:55:13 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 17:33:12 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,31 @@ void	draw_dda(t_line *line, t_props *props)
 	t_color	color;
 	t_vec2	delta;
 	int		steps;
-	int		i;
 
 	color.red = 0;
 	color.green = 0;
 	color.blue = 128;
 	props->pixel.color = rgb_to_dec(&color);
-	i = 0;
-	while (i < WIDTH)
-	{
-		delta.x = line->x1 - line->x0 + i;
-		delta.y = line->y1 - line->y0;
-		steps = fabs(delta.y);
-		if (fabs(delta.x) > fabs(delta.y))
-			steps = fabs(delta.x);
-		dda_player(delta, steps, props);
-		i++;
-	}
+	delta.x = line->x1 - line->x0;
+	delta.y = line->y1 - line->y0;
+	steps = fabs(delta.y);
+	if (fabs(delta.x) > fabs(delta.y))
+		steps = fabs(delta.x);
+	dda_player(delta, steps, props);
+}
+
+void	draw_ray(t_vec2 *player, t_props *props)
+{
+	t_vec2	*dir;
+	t_line	line;
+
+	dir = ft_calloc(1, sizeof(t_vec2));
+	dir->y = -1;
+	rotate(dir, props->player.angle);
+	line.x0 = player->x;
+	line.y0 = player->y;
+	vec2_scale(dir, 100);
+	line.x1 = player->x + dir->x;
+	line.y1 = player->y + dir->y;
+	draw_dda(&line, props);
 }

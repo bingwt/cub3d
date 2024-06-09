@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 17:05:39 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 17:30:02 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void	rotate(t_vec2 *vec, float angle);
 //RAYCAST
 void	draw_bresenham(t_line *line, t_props *props);
 void	draw_dda(t_line *line, t_props *props);
+void	draw_ray(t_vec2 *player, t_props *props);
 
 //WALL
 void	fill_cell(t_props *props);
