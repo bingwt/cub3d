@@ -6,23 +6,26 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:13:19 by btan              #+#    #+#             */
-/*   Updated: 2024/06/04 23:04:03 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 15:07:59 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	dda_player(int dx, int dy, int steps, t_props *props)
+void	dda_player(t_vec2 delta, int steps, t_props *props)
 {
 	float	inc[2];
 	float	point[2];
+	t_vec2	mouse;
 	int		i;
 
-	inc[0] = dx / (float) steps;
-	inc[1] = dy / (float) steps;
+	inc[0] = delta.x / (float) steps;
+	inc[1] = delta.y / (float) steps;
 	point[0] = props->player.pos.x;
 	point[1] = props->player.pos.y;
-	fill_point(props->mouse.x, props->mouse.y, props);
+	mouse.x = props->mouse.x;
+	mouse.y = props->mouse.y;
+	fill_point(mouse, props);
 	i = 0;
 	while (i <= steps)
 	{
@@ -38,8 +41,7 @@ void	dda_player(int dx, int dy, int steps, t_props *props)
 void	draw_dda(t_line *line, t_props *props)
 {
 	t_color	color;
-	int		dx;
-	int		dy;
+	t_vec2	delta;
 	int		steps;
 	int		i;
 
@@ -50,12 +52,12 @@ void	draw_dda(t_line *line, t_props *props)
 	i = 0;
 	while (i < WIDTH)
 	{
-		dx = line->x1 - line->x0 + i;
-		dy = line->y1 - line->y0;
-		steps = abs(dy);
-		if (abs(dx) > abs(dy))
-			steps = abs(dx);
-		dda_player(dx, dy, steps, props);
+		delta.x = line->x1 - line->x0 + i;
+		delta.y = line->y1 - line->y0;
+		steps = fabs(delta.y);
+		if (fabs(delta.x) > fabs(delta.y))
+			steps = fabs(delta.x);
+		dda_player(delta, steps, props);
 		i++;
 	}
 }

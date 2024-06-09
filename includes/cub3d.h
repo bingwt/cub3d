@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 14:46:07 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 16:32:21 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef	struct s_texture
 
 typedef struct s_vec2
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 }	t_vec2;
 
 typedef struct s_color
@@ -110,6 +110,7 @@ typedef struct s_player
 {
 	int		size;
 	int		speed;
+	float	angle;
 	t_vec2	pos;
 	t_vec2	los;
 }	t_player;
@@ -160,6 +161,10 @@ t_color	*hex_to_rgb(char *hex);
 t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
 
+//VECTORS
+t_vec2	vec2_add(t_vec2 a, t_vec2 b);
+t_vec2	vec2_scale(t_vec2 vec, float scale);
+
 //MATRIX
 // t_vec2	*matrix_to_vec2(float **matrix);
 // float	**vec2_to_matrix(t_vec2 *vec);
@@ -178,7 +183,7 @@ void	draw_dda(t_line *line, t_props *props);
 void	fill_cell(t_props *props);
 
 // PLAYER
-void	fill_point(int x, int y, t_props *props);
+void	fill_point(t_vec2, t_props *props);
 void	player(t_props *props);
 
 #endif

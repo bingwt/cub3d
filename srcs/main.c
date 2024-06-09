@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/08 02:31:14 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 14:57:40 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_player(t_props *props)
 {
 	props->player.size = 10;
 	props->player.speed = 5;
+	props->player.angle = 0;
 	props->player.pos.x = 128;
 	props->player.pos.y = 192;
 	props->player.los.x = 0;
