@@ -6,56 +6,56 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:59:41 by btan              #+#    #+#             */
-/*   Updated: 2024/06/02 17:01:25 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 17:30:29 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fill_point(int x, int y, t_props *props)
+void	fill_point(t_vec2 point, t_props *props)
 {
-	int	fill;
-	int	end_x;
-	int	end_y;
-	int	start_x;
+	int		fill;
+	t_vec2	end;
+	float	start_x;
 
 	fill = 10;
-	end_x = x + (fill / 2);
-	end_y = y + (fill / 2);
-	start_x = x - (fill / 2);
-	y = y - (fill / 2);
-	while (y++ <= end_y)
+	end.x = point.x + (fill / 2);
+	end.y = point.y + (fill / 2);
+	start_x = point.x - (fill / 2);
+	point.y = point.y - (fill / 2);
+	while (point.y++ <= end.y)
 	{
-		x = start_x;
-		while (x <= end_x)
-			draw_pixel(x++, y, props);
+		point.x = start_x;
+		while (point.x <= end.x)
+		{
+			draw_pixel(point.x++, point.y, props);
+		}
 	}
 }
 
 void	player(t_props *props)
 {
 	t_color color;
-	int	x;
-	int	y;
+	t_vec2	pos;
 
 	color.red = 0;
 	color.green = 128;
 	color.blue = 0;
 	props->pixel.color = rgb_to_dec(&color);
-	y = 0;
-	while (y++ < props->height)
+	pos.y = 0;
+	while (pos.y++ < props->height)
 	{
-		x = 0;
-		if ((x == props->player.pos.x) && (y == props->player.pos.y))
+		pos.x = 0;
+		if ((pos.x == props->player.pos->x) && (pos.y == props->player.pos->y))
 			props->pixel.color = rgb_to_dec(&color);
-		while (x < props->width)
+		while (pos.x < props->width)
 		{
-			if ((x == props->player.pos.x) && (y == props->player.pos.y))
+			if ((pos.x == props->player.pos->x) && (pos.y == props->player.pos->y))
 			{
-				draw_pixel(x, y, props);
-				fill_point(x, y,  props);
+				draw_pixel(pos.x, pos.y, props);
+				fill_point(pos, props);
 			}
-			x++;
+			pos.x++;
 		}
 	}
 }
