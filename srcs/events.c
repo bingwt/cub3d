@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 17:00:17 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 17:06:32 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,12 @@ void	handle_movement(int key, t_props *props)
 	else if (key == 65505)
 	{
 		props->player.speed += 1;
-		printf("speed: %d\n", props->player.speed);
 	}
 	else if (key == 65507)
 	{
 		props->player.speed -= 1;
-		printf("speed: %d\n", props->player.speed);
 	}
+	rotate(dir, props->player.angle);
 	vec2_scale(dir, props->player.speed);
 	vec2_add(props->player.pos, dir);
 	free(dir);
