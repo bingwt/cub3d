@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:59:41 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 16:13:51 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 16:55:13 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	player(t_props *props)
 	while (pos.y++ < props->height)
 	{
 		pos.x = 0;
-		if ((pos.x == props->player.pos.x) && (pos.y == props->player.pos.y))
+		if ((pos.x == props->player.pos->x) && (pos.y == props->player.pos->y))
 			props->pixel.color = rgb_to_dec(&color);
 		while (pos.x < props->width)
 		{
-			if ((pos.x == props->player.pos.x) && (pos.y == props->player.pos.y))
+			if ((pos.x == props->player.pos->x) && (pos.y == props->player.pos->y))
 			{
 				draw_pixel(pos.x, pos.y, props);
 				fill_point(pos, props);

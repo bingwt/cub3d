@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:13:19 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 15:07:59 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 16:55:13 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	dda_player(t_vec2 delta, int steps, t_props *props)
 
 	inc[0] = delta.x / (float) steps;
 	inc[1] = delta.y / (float) steps;
-	point[0] = props->player.pos.x;
-	point[1] = props->player.pos.y;
+	point[0] = props->player.pos->x;
+	point[1] = props->player.pos->y;
 	mouse.x = props->mouse.x;
 	mouse.y = props->mouse.y;
 	fill_point(mouse, props);

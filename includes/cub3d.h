@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 16:32:21 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 16:56:19 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_player
 	int		size;
 	int		speed;
 	float	angle;
-	t_vec2	pos;
+	t_vec2	*pos;
 	t_vec2	los;
 }	t_player;
 
@@ -162,8 +162,8 @@ t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
 
 //VECTORS
-t_vec2	vec2_add(t_vec2 a, t_vec2 b);
-t_vec2	vec2_scale(t_vec2 vec, float scale);
+void	vec2_add(t_vec2 *a, t_vec2 *b);
+void	vec2_scale(t_vec2 *vec, float scale);
 
 //MATRIX
 // t_vec2	*matrix_to_vec2(float **matrix);

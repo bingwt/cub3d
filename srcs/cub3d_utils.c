@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 15:12:28 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 16:55:13 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ void	loop(t_props *props)
 	draw_background(props);
 	draw_grid(props);
 	player(props);
-	line.x0 = props->player.pos.x;
-	line.y0 = props->player.pos.y;
+	line.x0 = props->player.pos->x;
+	line.y0 = props->player.pos->y;
 	line.x1 = props->player.los.x;
 	line.y1 = props->player.los.y;
 	(void) line;
