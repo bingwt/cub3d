@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:13:19 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 17:33:12 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 18:00:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,23 @@ void	draw_ray(t_vec2 *player, t_props *props)
 {
 	t_vec2	*dir;
 	t_line	line;
+	float	step;
+	int		i;
 
-	dir = ft_calloc(1, sizeof(t_vec2));
-	dir->y = -1;
-	rotate(dir, props->player.angle);
-	line.x0 = player->x;
-	line.y0 = player->y;
-	vec2_scale(dir, 100);
-	line.x1 = player->x + dir->x;
-	line.y1 = player->y + dir->y;
-	draw_dda(&line, props);
+	step = props->player.fov / WIDTH;
+	i = 0;
+	while (i < WIDTH)
+	{
+		dir = ft_calloc(1, sizeof(t_vec2));
+		dir->y = -1;
+		rotate(dir, props->player.angle - (props->player.fov / 2) + (i * step));
+		line.x0 = player->x;
+		line.y0 = player->y;
+		vec2_scale(dir, WIDTH * HEIGHT);
+		line.x1 = player->x + dir->x;
+		line.y1 = player->y + dir->y;
+		draw_dda(&line, props);
+		free(dir);
+		i++;
+	}
 }

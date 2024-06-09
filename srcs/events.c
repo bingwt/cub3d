@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 17:16:22 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 17:59:47 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,21 @@ int	handle_keydown(int key, t_props *props)
 
 {
 	printf("%d\n", key);
-	if (key == 102)
+	if (key == 61)
+	{
+		props->player.fov += 10;
+		if (props->player.fov > 360)
+			props->player.fov = 360;
+		printf("fov: %f\n", props->player.fov);
+	}
+	else if (key == 45)
+	{
+		props->player.fov -= 10;
+		if (props->player.fov < 0)
+			props->player.fov = 0;
+		printf("fov: %f\n", props->player.fov);
+	}
+	else if (key == 102)
 	{
 	//	printf("Fill @ (%d, %d)\n", props->mouse.x, props->mouse.y);
 	//	printf("cell: %d\n", check_cell(props->mouse.x, props->mouse.y, props));
