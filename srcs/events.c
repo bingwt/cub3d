@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 17:06:32 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 17:16:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,15 @@ int	handle_keydown(int key, t_props *props)
 	else if (key == 65361)
 	{
 		props->player.angle = props->player.angle - 10;
+		if (props->player.angle < 0)
+			props->player.angle = props->player.angle + 360;
 		printf("angle: %f\n", props->player.angle);
 	}
 	else if (key == 65363)
 	{
 		props->player.angle = props->player.angle + 10;
+		if (props->player.angle > 360)
+			props->player.angle = props->player.angle - 360;
 		printf("angle: %f\n", props->player.angle);
 	}
 	loop(props);
