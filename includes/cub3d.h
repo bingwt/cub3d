@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/04 22:48:26 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/09 14:46:07 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,16 @@ void	draw_pixel(int x, int y, t_props *props);
 t_color	*hex_to_rgb(char *hex);
 t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
+
+//MATRIX
+// t_vec2	*matrix_to_vec2(float **matrix);
+// float	**vec2_to_matrix(t_vec2 *vec);
+// float	**matrix_mult(float **a, float **b);
+// void	free_matrix(float **matrix);
+
+//ROTATION
+float	deg_to_rad(float deg);
+t_vec2	rotate(t_vec2 vec, float angle);
 
 //RAYCAST
 void	draw_bresenham(t_line *line, t_props *props);
