@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/11 16:01:29 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/11 16:35:24 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ void	init_player(t_props *props)
 	props->mouse.x = 64;
 	props->mouse.y = 64;
 	check_cell(props->player.pos->x, props->player.pos->y, props);
-}
-
-void	*load_img(char *file, t_props *props)
-{
-	void	*img;
-	int		width;
-	int		height;
-
-	img = mlx_xpm_file_to_image(props->mlx, file, &width, &height);
-	return (img);
 }
 
 //int	main(int argc, char **argv)
@@ -91,9 +81,9 @@ int	main(void)
 	int	gun_height;
 	gun = mlx_xpm_file_to_image(props.mlx, "gun1.xpm", &gun_width, &gun_height);
 	mlx_put_image_to_window(props.mlx, props.window, gun, WIDTH * 2.1, HEIGHT * 2.2);
-	void	*squidward;
+	t_img	squidward;
 	squidward = load_img("squidward.xpm", &props);
-	mlx_put_image_to_window(props.mlx, props.window, squidward, WIDTH * 2.8, HEIGHT * 2);
+	mlx_put_image_to_window(props.mlx, props.window, squidward.ptr, WIDTH * 2.8, HEIGHT * 2);
 	init_player(&props);
 	props.pixel.color = rgb_to_dec(&color);
 	draw_background(&props);

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 17:51:01 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/11 16:34:41 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,15 @@ typedef struct s_assets
 
 typedef struct s_image
 {
-	int	pixel_bits;
-	int	line_bytes;
-	int	endian;
+	void	*mlx;
+	void	*ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		pixel_bits;
+	int		line_bytes;
+	int		line_len;
+	int		endian;
 }	t_img;
 
 typedef struct s_map
@@ -187,5 +193,8 @@ void	fill_cell(t_props *props);
 // PLAYER
 void	fill_point(t_vec2, t_props *props);
 void	player(t_props *props);
+
+// IMAGES
+t_img	load_img(char *file, t_props *props);
 
 #endif
