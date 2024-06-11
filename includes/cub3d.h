@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 17:51:01 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/11 17:12:53 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 16
+#  define TILE_SIZE 64
 # endif
 
 # include <math.h>
