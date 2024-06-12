@@ -29,12 +29,21 @@
 #  define TILE_SIZE 16
 # endif
 
+# define NO_MASK 1
+# define SO_MASK 2
+# define EA_MASK 4
+# define WE_MASK 8
+# define F_MASK 16
+# define C_MASK 32
+# define ALL_MASK 63
+
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <mlx.h>
 # include "libft.h"
+# include <stdbool.h>
 
 typedef enum e_error
 {
@@ -48,12 +57,6 @@ typedef enum e_error
 	INVALID_TEXTURE,
 	INVALID_COLOR
 }	t_error;
-
-typedef	struct s_texture
-{
-	char	*id;
-	char	*path;
-}	t_texture;
 
 typedef struct s_vec2
 {
@@ -75,13 +78,6 @@ typedef struct s_pixel
 	t_color	*step;
 }	t_pixel;
 
-typedef struct s_assets
-{
-	t_texture	*texture;
-	t_color		floor;
-	t_color		ceiling;
-}	t_assets;
-
 typedef struct s_image
 {
 	int	pixel_bits;
@@ -92,11 +88,13 @@ typedef struct s_image
 typedef struct s_map
 {
 	int			rows;
-	int			cols;
-	int			start;
-	int			*bounds;
 	int			**matrix;
-	t_assets	*assets;
+	char		*no;
+	char		*so;
+	char		*ea;
+	char		*we;
+	t_color		floor;
+	t_color		ceiling;
 }	t_map;
 
 typedef struct s_mouse
