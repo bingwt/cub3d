@@ -137,9 +137,6 @@ typedef struct s_line
 	float	y1;
 }	t_line;
 
-// ERRORS
-int	error_msg(t_error error, char *arg);
-
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
 void	ft_swap(float *a, float *b);
@@ -147,9 +144,6 @@ int		check_cell(int x, int y, t_props *props);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 void	loop(t_props *props);
-
-// MAP
-t_map	*read_map(char *file);
 
 // EVENTS
 void	handle_events(t_props *props);
@@ -185,5 +179,22 @@ void	fill_cell(t_props *props);
 // PLAYER
 void	fill_point(t_vec2, t_props *props);
 void	player(t_props *props);
+
+// CHECK_EXT
+bool	ends_with_xpm(char *file);
+bool	ends_with_cub(char *file);
+
+// CUB
+t_map	process_cub(char *file);
+
+// SCENE
+t_map	set_scene(int fd);
+
+// ASSIGN_SCENE
+void	assign_textures(t_map *map, char ***lines);
+void	assign_rgbs(t_map *map, char ***lines);
+
+// RGB
+bool	valid_rgbs(char ***lines);
 
 #endif

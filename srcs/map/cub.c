@@ -19,4 +19,5 @@ t_map	process_cub(char *file)
 		close(fd);
 		exit(1);
 	}
+	return (map);
 }
