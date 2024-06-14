@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rgb.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 18:06:45 by xlow              #+#    #+#             */
+/*   Updated: 2024/06/14 18:07:19 by xlow             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static bool	is_number(char *input)
@@ -9,12 +21,12 @@ static bool	is_number(char *input)
 	{
 		if (ft_isdigit(input[i]) == 0)
 			return (false);
-			i++;
+		i++;
 	}
 	return (true);
 }
 
-static bool is_rgb_range(char **input)
+static bool	is_rgb_range(char **input)
 {
 	int	i;
 

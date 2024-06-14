@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 18:06:58 by xlow              #+#    #+#             */
+/*   Updated: 2024/06/14 18:31:17 by xlow             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	mask_check(int mask, char *identifier)
@@ -55,17 +67,17 @@ static char	***verify_scene(char **scene)
 	while (++i < 6)
 		lines[i] = ft_split(scene[i], ' ');
 	while (--i >= 0)
+	{
 		if (ft_squarelen(lines[i]) != 2)
-			{
-				printf("Error\nScene description has extra or missing elements\n");
-				ft_free_cubed(&lines);
-				return (NULL);
-			}
-	if (!valid_lines(lines))
+		{
+			printf("Error\nScene description has extra or missing elements\n");
+			ft_free_cubed(&lines);
+		}
+	}
+	if (lines && !valid_lines(lines))
 	{
 		printf("Error\nScene description format is incorrect\n");
 		ft_free_cubed(&lines);
-		return (NULL);
 	}
 	return (lines);
 }

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 17:51:01 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/14 18:04:01 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void	fill_cell(t_props *props);
 void	fill_point(t_vec2, t_props *props);
 void	player(t_props *props);
 
-// CHECK_EXT
+// CHECK_FILE
 bool	ends_with_xpm(char *file);
 bool	ends_with_cub(char *file);
 
