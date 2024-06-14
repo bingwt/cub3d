@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 19:54:03 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/14 20:08:42 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,5 +200,8 @@ bool	valid_rgbs(char ***lines);
 
 // GNL_SKIP_NL
 char	*gnl_skip_nl(int fd);
+
+// FREE_MAP
+void	free_map(t_map map);
 
 #endif

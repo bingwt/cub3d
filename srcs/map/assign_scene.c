@@ -45,6 +45,7 @@ void	assign_rgbs(t_map *map, char ***lines)
 			map->floor.red = ft_atoi(rgb[0]);
 			map->floor.green = ft_atoi(rgb[1]);
 			map->floor.blue = ft_atoi(rgb[2]);
+			ft_free_split(&rgb);
 		}
 		else if (!ft_strcmp(lines[i][0], "C"))
 		{
@@ -52,6 +53,7 @@ void	assign_rgbs(t_map *map, char ***lines)
 			map->ceiling.red = ft_atoi(rgb[0]);
 			map->ceiling.green = ft_atoi(rgb[1]);
 			map->ceiling.blue = ft_atoi(rgb[2]);
+			ft_free_split(&rgb);
 		}
 		i++;
 	}

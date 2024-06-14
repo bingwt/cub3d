@@ -31,5 +31,6 @@ t_map	process_cub(char *file)
 		close(fd);
 		exit(1);
 	}
+	map = set_map(fd);
 	return (map);
 }
