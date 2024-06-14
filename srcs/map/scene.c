@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:06:58 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 18:31:17 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/14 19:42:34 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	valid_lines(char ***lines)
 	while (i < 6)
 	{
 		if (ft_strcmp(lines[i][0], "C") && ft_strcmp(lines[i][0], "F")
-			&& !ends_with_xpm(lines[i][1]))
+			&& (!ends_with_xpm(lines[i][1]) || !check_perms(lines[i][1])))
 			return (false);
 		mask = mask_check(mask, lines[i][0]);
 		if (mask == -1)
@@ -76,7 +76,7 @@ static char	***verify_scene(char **scene)
 	}
 	if (lines && !valid_lines(lines))
 	{
-		printf("Error\nScene description format is incorrect\n");
+		printf("Error\nCheck scene description format and permissions\n");
 		ft_free_cubed(&lines);
 	}
 	return (lines);

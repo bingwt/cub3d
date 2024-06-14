@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 18:04:01 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/14 19:42:05 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void	player(t_props *props);
 // CHECK_FILE
 bool	ends_with_xpm(char *file);
 bool	ends_with_cub(char *file);
+bool	check_perms(char *file);
 
 // CUB
 t_map	process_cub(char *file);
