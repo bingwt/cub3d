@@ -94,14 +94,9 @@ static char	**get_scene(int fd)
 		return (NULL);
 	while (i < 6)
 	{
-		str = get_next_line(fd);
+		str = gnl_skip_nl(fd);
 		if (!str)
 			break ;
-		else if (!ft_strcmp(str, "\n"))
-		{
-			free(str);
-			continue ;
-		}
 		str[ft_strlen(str) - 1] = '\0';
 		scene[i++] = str;
 	}

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 19:42:05 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/14 19:54:03 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,5 +197,8 @@ void	assign_rgbs(t_map *map, char ***lines);
 
 // RGB
 bool	valid_rgbs(char ***lines);
+
+// GNL_SKIP_NL
+char	*gnl_skip_nl(int fd);
 
 #endif
