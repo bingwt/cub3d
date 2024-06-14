@@ -57,13 +57,13 @@ static char	***verify_scene(char **scene)
 	while (--i >= 0)
 		if (ft_squarelen(lines[i]) != 2)
 			{
-				printf("Error\nScene description has extra or missing elements");
+				printf("Error\nScene description has extra or missing elements\n");
 				ft_free_cubed(&lines);
 				return (NULL);
 			}
 	if (!valid_lines(lines))
 	{
-		printf("Error\nScene description format is incorrect");
+		printf("Error\nScene description format is incorrect\n");
 		ft_free_cubed(&lines);
 		return (NULL);
 	}

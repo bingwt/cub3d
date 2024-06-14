@@ -23,7 +23,7 @@ static bool is_rgb_range(char **input)
 	{
 		if (!is_number(input[i]))
 			return (false);
-		if (ft_atoi(input[i]) > 255)
+		if (ft_atoi(input[i]) > 255 || ft_atoi(input[i]) < 0)
 			return (false);
 		i++;
 	}
@@ -48,7 +48,7 @@ bool	valid_rgbs(char ***lines)
 	if (ft_squarelen(c) != 3 || ft_squarelen(f) != 3
 		|| !is_rgb_range(c) || !is_rgb_range(f))
 	{
-		printf("Error\nInvalid floor or ceiling input.");
+		printf("Error\nInvalid floor or ceiling input\n");
 		return (false);
 	}
 	ft_free_split(&c);
