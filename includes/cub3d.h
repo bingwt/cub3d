@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 17:51:01 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/16 14:46:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define CUB3D_H
 
 # ifndef WIDTH
-#  define WIDTH 256
+#  define WIDTH 1024
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 256
+#  define HEIGHT 1024
 # endif
 
 # ifndef TILE
@@ -123,6 +123,8 @@ typedef struct s_prop
 	void		*image;
 	int			width;
 	int			height;
+	int			mini_width;
+	int			mini_height;
 	int			tile_size;
 	t_pixel		pixel;
 	t_img		img;

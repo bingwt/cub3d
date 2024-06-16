@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 17:30:11 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/16 14:45:40 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ void	draw_background(t_props *props)
 	cell.green = 0;
 	cell.blue = 128;
 	y = 0;
-	while (y++ < props->height)
+	while (y++ < props->mini_height)
 	{
 		x = 0;
-		while (x < props->width)
+		while (x < props->mini_width)
 		{
 			if (check_cell(x, y, props))
 				props->pixel.color = rgb_to_dec(&cell);
@@ -123,17 +123,17 @@ void	draw_grid(t_props *props)
 	grid.green = 128;
 	grid.blue = 128;
 	props->pixel.color = rgb_to_dec(&grid);
-	gap_x = props->width / props->map.cols;
-	gap_y = props->height / props->map.rows;
+	gap_x = props->mini_width / props->map.cols;
+	gap_y = props->mini_height / props->map.rows;
 	y = 0;
-	while (y++ < props->height)
+	while (y++ < props->mini_height)
 	{
 		x = 0;
 		if (!(x % gap_x) || !(y % gap_y))
 		{
 			props->pixel.color = rgb_to_dec(&grid);
 		}
-		while (x < props->width)
+		while (x < props->mini_width)
 		{
 			if (!(x % gap_x) || !(y % gap_y))
 				draw_pixel(x, y, props);

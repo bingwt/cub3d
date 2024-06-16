@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/09 17:51:11 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/16 14:57:06 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	init_window(t_props *props)
 	props->mlx = mlx_init();
 	props->width = WIDTH;
 	props->height = HEIGHT;
+	props->mini_width = 256;
+	props->mini_height = 256;
 	props->tile_size = TILE_SIZE;
 	props->window = mlx_new_window(props->mlx, props->width, \
 	props->height, "cub3d");
@@ -52,10 +54,10 @@ int	main(void)
 	props.map.bounds = ft_calloc(TILE + 1, sizeof(int));
 	i = 0;
 	bound = 0;
-	while (bound <= WIDTH)
+	while (bound <= 256)
 	{
 		props.map.bounds[i] = bound;
-		bound += WIDTH / TILE;
+		bound += 256 / TILE;
 		i++;
 	}
 	props.map.rows = TILE;
