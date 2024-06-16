@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/16 14:45:40 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/16 20:15:47 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,10 +142,27 @@ void	draw_grid(t_props *props)
 	}
 }
 
+void	clear_display(t_props *props)
+{
+	int	x;
+	int	y;
+
+	props->pixel.color = 0;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+			draw_pixel(x++, y, props);
+		y++;
+	}
+}
+
 void	loop(t_props *props)
 {
 	t_line	line;
 
+	clear_display(props);
 	props->pixel.color = 16777215;
 	draw_background(props);
 	draw_grid(props);
