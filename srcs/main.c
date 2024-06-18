@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/16 14:57:06 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:24:27 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_player(t_props *props)
 	props->player.size = 10;
 	props->player.speed = 5;
 	props->player.angle = 0;
-	props->player.fov = 60;
+	props->player.fov = 0;
 	props->player.pos = ft_calloc(1, sizeof(t_vec2));
 	props->player.pos->x = 128;
 	props->player.pos->y = 192;

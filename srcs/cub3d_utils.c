@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/16 20:15:47 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:19:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,6 @@ void	loop(t_props *props)
 	(void) line;
 //	draw_bresenham(&line, props);
 	// draw_dda(&line, props);
-	draw_ray(props->player.pos, props);
+	draw_rays(props->player.pos, props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }
