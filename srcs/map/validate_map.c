@@ -1,0 +1,84 @@
+#include "cub3d.h"
+
+static bool	char_check(char *next, char *line)
+{
+	int	i;
+	static int	j = 0;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'N'
+			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
+		{
+			printf("Error\nIncorrect character found in map content\n");
+			return (false);
+		}
+		if (line[i] == 'N' || line[i] == 'S'
+			|| line[i] == 'E' || line[i] == 'W')
+			j++;
+		i++;
+	}
+	if (!next && j != 1)
+	{
+		printf("Error\nIncorrect player spawns allocated\n");
+		return (false);
+	}
+	return (true);
+}
+/*
+static void	flood_fill(char **error, char **content, int x, int y)
+{
+	if (x < 0 || y < 0 || !content[y][x])
+	{
+		*error = "Error\nMap is not correctly surrounded by walls\n";
+		printf("%s", *error);
+		return ;
+	}
+	if (content[y][x] == '1' || content[y][x] == '2')
+		return ;
+	content[y][x] = '2';
+	flood_fill(error, content, x, y);
+	flood_fill(error, content, x, y);
+	flood_fill(error, content, x, y);
+	flood_fill(error, content, x, y);
+}
+
+static bool check_boundaries(char **content)
+{
+	int		x;
+	int		y;
+	char	*error;
+
+	x = 0;
+	y = 0;
+	error = NULL;
+	while (content[y])
+	{
+		while (content[y][x])
+		{
+			if (content[y][x] != '0' && content[y][x] != '1')
+				break ;
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+	flood_fill(&error, content, x, y);
+	if (error)
+		return (false);
+	return (true);
+}
+*/
+bool	valid_map(char **content)
+{
+	int	i;
+
+	i = -1;
+	while (content[++i])
+		if (!char_check(content[i + 1], content[i]))
+			return (false);
+//	if (!check_boundaries(content))
+//		return (false);
+	return (true);
+}

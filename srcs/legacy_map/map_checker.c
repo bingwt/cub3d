@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/04/30 21:36:21 by xlow             ###   ########.fr       */
+/*   Created: 2024/05/03 14:36:10 by btan              #+#    #+#             */
+/*   Updated: 2024/05/03 16:54:42 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3d.h"
 
-# include <math.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "mlx.h"
-# include "libft/libft.h"
-
-typedef struct s_mlx
+int	main(int argc, char **argv)
 {
-	void	*mlx_ptr;
-	void	*window_ptr;
-	void	*img_ptr;
-	void	*img_addr;
-}	t_mlx;
-
-#endif
+	if (argc == 2)
+		read_map(argv[1]);
+	return (0);
+}

@@ -1,0 +1,6 @@
+mlx
+*.o
+*.a
+cub3d
+path_to_the*
+a.out

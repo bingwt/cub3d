@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/04/30 21:32:27 by xlow             ###   ########.fr       */
+/*   Created: 2024/06/14 18:06:22 by xlow              #+#    #+#             */
+/*   Updated: 2024/06/14 19:42:42 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+bool	ends_with_xpm(char *file)
 {
-	t_mlx	mlx;
+	if (!ft_strrchr(file, '.') || ft_strcmp(ft_strrchr(file, '.'), ".xpm"))
+		return (false);
+	return (true);
+}
 
-	mlx.mlx_ptr = mlx_init();
-	mlx.window_ptr = mlx_new_window(mlx.mlx_ptr, 1000, 1000, "cub3D");
-	mlx.img_ptr = mlx_new_image(mlx.mlx_ptr, 1000, 1000);
-	mlx_loop(mlx.mlx_ptr);
-	return (0);
+bool	ends_with_cub(char *file)
+{
+	if (!ft_strrchr(file, '.') || ft_strcmp(ft_strrchr(file, '.'), ".cub"))
+		return (false);
+	return (true);
+}
+
+bool	check_perms(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (false);
+	close(fd);
+	return (true);
 }

@@ -1,24 +1,49 @@
-NAME = cub3D
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
+#    Updated: 2024/06/09 16:30:20 by btan             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-INCLUDES = .
+NAME = cub3d
+
+INCLUDES = includes
 
 CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
 
-LIBS = -lXext -lX11
+LIBS = -lXext -lX11 -lm
 
-SOURCES = main.c
+SRCS = srcs/cub3d_errors.c \
+	   srcs/cub3d_utils.c \
+	   srcs/events.c \
+	   srcs/vectors.c \
+	   srcs/rotation.c \
+	   srcs/raycast/pixel.c \
+	   srcs/raycast/wall.c \
+	   srcs/raycast/raycast_utils.c \
+	   srcs/raycast/dda.c \
+	   srcs/player.c \
+	   srcs/main.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) libft/libft.a $(INCLUDES)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) libft/libft.a $(LIBS)
+$(NAME): $(SRCS) $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a $(INCLUDES)
+	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) libft/libft.a mlx/libmlx_Linux.a $(LIBS)
 
 libft/libft.a:
 	make -C libft
+
+mlx/libmlx_Linux.a:
+	make -C mlx
 
 clean:
 	make clean -C libft
@@ -30,5 +55,11 @@ fclean: clean
 
 re: fclean all
 
+map:
+	cc map_checker.c map_utils.c cub3d_errors.c libft/libft.a -g -o validator
+
 debug: CFLAGS += -g
 debug: re
+
+debug-noflag: CFLAGS = -I$(INCLUDES) -g
+debug-noflag: re
