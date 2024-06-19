@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 17:59:47 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:17:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	handle_coords(int x, int y, t_props *props)
 //	printf("x: %d, y: %d\n", x, y);
 	props->mouse.x = x;
 	props->mouse.y = y;
-	loop(props);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 17:30:11 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:19:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ void	draw_background(t_props *props)
 	cell.green = 0;
 	cell.blue = 128;
 	y = 0;
-	while (y++ < props->height)
+	while (y++ < props->mini_height)
 	{
 		x = 0;
-		while (x < props->width)
+		while (x < props->mini_width)
 		{
 			if (check_cell(x, y, props))
 				props->pixel.color = rgb_to_dec(&cell);
@@ -123,17 +123,17 @@ void	draw_grid(t_props *props)
 	grid.green = 128;
 	grid.blue = 128;
 	props->pixel.color = rgb_to_dec(&grid);
-	gap_x = props->width / props->map.cols;
-	gap_y = props->height / props->map.rows;
+	gap_x = props->mini_width / props->map.cols;
+	gap_y = props->mini_height / props->map.rows;
 	y = 0;
-	while (y++ < props->height)
+	while (y++ < props->mini_height)
 	{
 		x = 0;
 		if (!(x % gap_x) || !(y % gap_y))
 		{
 			props->pixel.color = rgb_to_dec(&grid);
 		}
-		while (x < props->width)
+		while (x < props->mini_width)
 		{
 			if (!(x % gap_x) || !(y % gap_y))
 				draw_pixel(x, y, props);
@@ -142,10 +142,27 @@ void	draw_grid(t_props *props)
 	}
 }
 
+void	clear_display(t_props *props)
+{
+	int	x;
+	int	y;
+
+	props->pixel.color = 0;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+			draw_pixel(x++, y, props);
+		y++;
+	}
+}
+
 void	loop(t_props *props)
 {
 	t_line	line;
 
+	clear_display(props);
 	props->pixel.color = 16777215;
 	draw_background(props);
 	draw_grid(props);
@@ -157,6 +174,6 @@ void	loop(t_props *props)
 	(void) line;
 //	draw_bresenham(&line, props);
 	// draw_dda(&line, props);
-	draw_ray(props->player.pos, props);
+	draw_rays(props->player.pos, props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

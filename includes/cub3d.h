@@ -14,11 +14,11 @@
 # define CUB3D_H
 
 # ifndef WIDTH
-#  define WIDTH 256
+#  define WIDTH 1024
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 256
+#  define HEIGHT 1024
 # endif
 
 # ifndef TILE
@@ -122,6 +122,8 @@ typedef struct s_prop
 	void		*image;
 	int			width;
 	int			height;
+	int			mini_width;
+	int			mini_height;
 	int			tile_size;
 	t_pixel		pixel;
 	t_img		img;
@@ -172,7 +174,7 @@ void	rotate(t_vec2 *vec, float angle);
 //RAYCAST
 void	draw_bresenham(t_line *line, t_props *props);
 void	draw_dda(t_line *line, t_props *props);
-void	draw_ray(t_vec2 *player, t_props *props);
+void	draw_rays(t_vec2 *player, t_props *props);
 
 //WALL
 void	fill_cell(t_props *props);

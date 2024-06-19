@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/10 14:11:32 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:24:27 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	init_window(t_props *props)
 	props->mlx = mlx_init();
 	props->width = WIDTH;
 	props->height = HEIGHT;
+	props->mini_width = 256;
+	props->mini_height = 256;
 	props->tile_size = TILE_SIZE;
 	props->window = mlx_new_window(props->mlx, props->width * 6, \
 	props->height * 4, "cub3d");
@@ -28,7 +30,7 @@ void	init_player(t_props *props)
 	props->player.size = 10;
 	props->player.speed = 5;
 	props->player.angle = 0;
-	props->player.fov = 60;
+	props->player.fov = 0;
 	props->player.pos = ft_calloc(1, sizeof(t_vec2));
 	props->player.pos->x = 128;
 	props->player.pos->y = 192;
@@ -53,10 +55,10 @@ int	main(void)
 	props.map.bounds = ft_calloc(TILE + 1, sizeof(int));
 	i = 0;
 	bound = 0;
-	while (bound <= WIDTH)
+	while (bound <= 256)
 	{
 		props.map.bounds[i] = bound;
-		bound += WIDTH / TILE;
+		bound += 256 / TILE;
 		i++;
 	}
 	props.map.rows = TILE;
