@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:13:19 by btan              #+#    #+#             */
-/*   Updated: 2024/06/19 18:47:06 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/19 21:06:38 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,21 +96,27 @@ void	draw_ray(t_line *line, int ray, t_props *props)
 		steps = fabs(delta.x);
 	if (dda_player(delta, steps, intercept, props))
 	{
-		printf("x: %f, y: %f\n", line->x1, line->y1);
+	//	printf("x: %f, y: %f\n", line->x1, line->y1);
 		intercept->x0 = line->x0;
 		intercept->y0 = line->y0;
-		printf("dist: %d\n", (int) calc_dist(intercept));
-		int	h = HEIGHT / (int) calc_dist(intercept);
-		printf("height: %d\n", h);
+	//	printf("dist: %d\n", (int) calc_dist(intercept));
+		int	h = HEIGHT*64 / (int) calc_dist(intercept);
+	//	printf("height: %d\n", h);
 		props->pixel.color = 16711680;
-		draw_pixel(ray, h, props);
-//		t_line	*vert;
-//		vert = ft_calloc(1, sizeof(t_line));
-//		vert->x0 = ray;
-//		vert->x1 = ray;
-//		vert->y0 = (HEIGHT / 2) - (h / 2);
-//		vert->y1 = (HEIGHT / 2) - (h / 2);
-//		draw_dda(vert, props);
+		draw_pixel(ray, HEIGHT / 2, props);
+		t_line	*vert;
+		vert = ft_calloc(1, sizeof(t_line));
+		vert->x0 = ray;
+		vert->x1 = ray;
+		vert->y0 = (HEIGHT / 2) - (h / 2);
+		vert->y1 = (HEIGHT / 2) + (h / 2);
+	//	printf("x0: %f, x1: %f\n", vert->x0, vert->x1);
+	//	printf("y0: %f, y1: %f\n\n", vert->y0, vert->y1);
+		while (vert->y0 < vert->y1)
+		{
+			draw_pixel(ray, (int) vert->y0, props);
+			vert->y0++;
+		}
 	}
 }
 
