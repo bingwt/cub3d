@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:06:32 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 18:06:33 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/19 18:33:37 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ t_map	process_cub(char *file)
 		close(fd);
 		exit(1);
 	}
-	map = set_map(fd);
+	map = set_map(map, fd);
 	return (map);
 }

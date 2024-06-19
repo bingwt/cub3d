@@ -3,6 +3,7 @@
 int	main(int argc, char **argv)
 {
 	t_map	map;
+	(void)argc;
 
 	map = process_cub(argv[1]);
 	printf("%s\n%s\n%s\n%s\n", map.no, map.so, map.ea, map.we);

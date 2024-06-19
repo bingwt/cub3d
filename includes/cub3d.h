@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 20:08:42 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/19 21:00:16 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ typedef struct s_image
 
 typedef struct s_map
 {
-	int			rows;
+	int			width;
+	int			height;
 	int			**matrix;
 	char		*no;
 	char		*so;
@@ -203,5 +204,18 @@ char	*gnl_skip_nl(int fd);
 
 // FREE_MAP
 void	free_map(t_map map);
+
+// MAP
+t_map	set_map(t_map map, int fd);
+
+// VALIDATE_MAP
+bool	valid_map(char **content);
+
+// NORMALISE_MAP
+int		longest_width(char **content);
+char	**normalise_map(char **content);
+
+// CONVERT_MAP
+int	**convert_map(char **content);
 
 #endif
