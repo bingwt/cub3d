@@ -20,8 +20,8 @@ void	init_window(t_props *props)
 	props->mini_width = 256;
 	props->mini_height = 256;
 	props->tile_size = TILE_SIZE;
-	props->window = mlx_new_window(props->mlx, props->width, \
-	props->height, "cub3d");
+	props->window = mlx_new_window(props->mlx, props->width * 6, \
+	props->height * 4, "cub3d");
 	props->image = mlx_new_image(props->mlx, props->width, props->height);
 }
 
@@ -48,6 +48,7 @@ int	main(void)
 	int		bound;
 	t_color color;
 	t_props	props;
+	void	*gun;
 
 //	if (argc == 2)
 //		read_map(argv[1]);
@@ -78,6 +79,10 @@ int	main(void)
 	color.green = 255;
 	color.blue = 255;
 	init_window(&props);
+	int	gun_width;
+	int	gun_height;
+	gun = mlx_xpm_file_to_image(props.mlx, "gun1.xpm", &gun_width, &gun_height);
+	mlx_put_image_to_window(props.mlx, props.window, gun, WIDTH * 2.1, HEIGHT * 2.2);
 	init_player(&props);
 	props.pixel.color = rgb_to_dec(&color);
 	draw_background(&props);

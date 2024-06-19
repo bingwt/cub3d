@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/18 17:19:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/19 21:00:16 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,21 @@
 #  define TILE_SIZE 16
 # endif
 
+# define NO_MASK 1
+# define SO_MASK 2
+# define EA_MASK 4
+# define WE_MASK 8
+# define F_MASK 16
+# define C_MASK 32
+# define ALL_MASK 63
+
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <mlx.h>
 # include "libft.h"
+# include <stdbool.h>
 
 typedef enum e_error
 {
@@ -48,12 +57,6 @@ typedef enum e_error
 	INVALID_TEXTURE,
 	INVALID_COLOR
 }	t_error;
-
-typedef	struct s_texture
-{
-	char	*id;
-	char	*path;
-}	t_texture;
 
 typedef struct s_vec2
 {
@@ -75,13 +78,6 @@ typedef struct s_pixel
 	t_color	*step;
 }	t_pixel;
 
-typedef struct s_assets
-{
-	t_texture	*texture;
-	t_color		floor;
-	t_color		ceiling;
-}	t_assets;
-
 typedef struct s_image
 {
 	int	pixel_bits;
@@ -91,12 +87,15 @@ typedef struct s_image
 
 typedef struct s_map
 {
-	int			rows;
-	int			cols;
-	int			start;
-	int			*bounds;
+	int			width;
+	int			height;
 	int			**matrix;
-	t_assets	*assets;
+	char		*no;
+	char		*so;
+	char		*ea;
+	char		*we;
+	t_color		floor;
+	t_color		ceiling;
 }	t_map;
 
 typedef struct s_mouse
@@ -141,9 +140,6 @@ typedef struct s_line
 	float	y1;
 }	t_line;
 
-// ERRORS
-int	error_msg(t_error error, char *arg);
-
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
 void	ft_swap(float *a, float *b);
@@ -151,9 +147,6 @@ int		check_cell(int x, int y, t_props *props);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 void	loop(t_props *props);
-
-// MAP
-t_map	*read_map(char *file);
 
 // EVENTS
 void	handle_events(t_props *props);
@@ -189,5 +182,42 @@ void	fill_cell(t_props *props);
 // PLAYER
 void	fill_point(t_vec2, t_props *props);
 void	player(t_props *props);
+
+// CHECK_FILE
+bool	ends_with_xpm(char *file);
+bool	ends_with_cub(char *file);
+bool	check_perms(char *file);
+
+// CUB
+t_map	process_cub(char *file);
+
+// SCENE
+t_map	set_scene(int fd);
+
+// ASSIGN_SCENE
+void	assign_textures(t_map *map, char ***lines);
+void	assign_rgbs(t_map *map, char ***lines);
+
+// RGB
+bool	valid_rgbs(char ***lines);
+
+// GNL_SKIP_NL
+char	*gnl_skip_nl(int fd);
+
+// FREE_MAP
+void	free_map(t_map map);
+
+// MAP
+t_map	set_map(t_map map, int fd);
+
+// VALIDATE_MAP
+bool	valid_map(char **content);
+
+// NORMALISE_MAP
+int		longest_width(char **content);
+char	**normalise_map(char **content);
+
+// CONVERT_MAP
+int	**convert_map(char **content);
 
 #endif
