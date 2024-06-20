@@ -26,22 +26,25 @@ static bool	char_check(char *next, char *line)
 	}
 	return (true);
 }
-/*
+
 static void	flood_fill(char **error, char **content, int x, int y)
 {
-	if (x < 0 || y < 0 || !content[y][x])
+	if (*error)
+		return ;
+	if (x < 0 || y < 0 || !content[y] || !content[y][x])
 	{
-		*error = "Error\nMap is not correctly surrounded by walls\n";
+		*error = "Error\nPlayer is not correctly surrounded by walls\n";
 		printf("%s", *error);
+		content = NULL;
 		return ;
 	}
 	if (content[y][x] == '1' || content[y][x] == '2')
 		return ;
 	content[y][x] = '2';
-	flood_fill(error, content, x, y);
-	flood_fill(error, content, x, y);
-	flood_fill(error, content, x, y);
-	flood_fill(error, content, x, y);
+	flood_fill(error, content, x + 1, y);
+	flood_fill(error, content, x - 1, y);
+	flood_fill(error, content, x, y + 1);
+	flood_fill(error, content, x, y - 1);
 }
 
 static bool check_boundaries(char **content)
@@ -61,6 +64,8 @@ static bool check_boundaries(char **content)
 				break ;
 			x++;
 		}
+		if (content[y][x] && content[y][x] != '0' && content[y][x] != '1')
+			break;
 		x = 0;
 		y++;
 	}
@@ -69,7 +74,7 @@ static bool check_boundaries(char **content)
 		return (false);
 	return (true);
 }
-*/
+
 bool	valid_map(char **content)
 {
 	int	i;
@@ -78,7 +83,7 @@ bool	valid_map(char **content)
 	while (content[++i])
 		if (!char_check(content[i + 1], content[i]))
 			return (false);
-//	if (!check_boundaries(content))
-//		return (false);
+	if (!check_boundaries(content))
+		return (false);
 	return (true);
 }
