@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:13:19 by btan              #+#    #+#             */
-/*   Updated: 2024/06/19 21:06:38 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/20 20:49:55 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,17 @@ void	draw_ray(t_line *line, int ray, t_props *props)
 	//	printf("dist: %d\n", (int) calc_dist(intercept));
 		int	h = HEIGHT*64 / (int) calc_dist(intercept);
 	//	printf("height: %d\n", h);
-		props->pixel.color = 16711680;
+		color.red = 255 - (int) calc_dist(intercept);
+		if (color.red < 0)
+			color.red = 0;
+		color.green = 255 - (int) calc_dist(intercept);
+		if (color.green < 0)
+			color.green = 0;
+		color.blue = 255 - (int) calc_dist(intercept);
+		if (color.blue < 0)
+			color.blue = 0;
+		printf("%d\n", color.blue);
+		props->pixel.color = rgb_to_dec(&color);
 		draw_pixel(ray, HEIGHT / 2, props);
 		t_line	*vert;
 		vert = ft_calloc(1, sizeof(t_line));
