@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/19 21:00:16 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/20 16:38:00 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ typedef struct s_image
 
 typedef struct s_map
 {
+	int			rows;
+	int			cols;
 	int			width;
 	int			height;
+	int			*bounds;
 	int			**matrix;
 	char		*no;
 	char		*so;
