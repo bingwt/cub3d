@@ -50,6 +50,11 @@ static char	**get_map(int fd)
 	content = NULL;
 	lines = NULL;
 	str = gnl_skip_nl(fd);
+	if (!str)
+	{
+		printf("Error\nNo map content provided\n");
+		return (NULL);
+	}
 	lines = map_loop(str, fd);
 	if (lines)
 	{
@@ -66,12 +71,18 @@ t_map	set_map(t_map map, int fd)
 	
 	i = -1;
 	content = get_map(fd);
+	if (!content)
+	{
+		free_texture_paths(map);
+		exit(1);
+	}
 	while (content[++i])
 		replace_spaces(&content[i]);
 	if (!valid_map(content))
 	{
 		ft_free_split(&content);
-		return (map);
+		free_texture_paths(map);
+		exit(1);
 	}
 	content = normalise_map(content);
 	map.width = longest_width(content);

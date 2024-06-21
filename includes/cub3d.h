@@ -210,6 +210,7 @@ bool	valid_rgbs(char ***lines);
 char	*gnl_skip_nl(int fd);
 
 // FREE_MAP
+void	free_texture_paths(t_map map);
 void	free_map(t_map map);
 
 // MAP
