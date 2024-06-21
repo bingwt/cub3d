@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/18 17:17:22 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/21 19:06:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ int	handle_coords(int x, int y, t_props *props)
 //	printf("x: %d, y: %d\n", x, y);
 	props->mouse.x = x;
 	props->mouse.y = y;
+	if (props->mouse.l_btn)
+	{
+		if (props->mouse.hold - x > 0)
+			props->player.angle = props->player.angle - 1;
+		else
+			props->player.angle = props->player.angle + 1;
+		printf("angle: %f\n", props->player.angle);
+		if (props->player.angle < 0)
+			props->player.angle = props->player.angle + 360;
+		loop(props);
+	}
 	return (0);
 }
 
@@ -137,10 +148,26 @@ int	handle_keydown(int key, t_props *props)
 	return (0);
 }
 
+int	handle_button(int btn, int x, int y, t_props *props)
+{
+	(void) y;
+	printf("%d\n", btn);
+	if (btn == 1 && !props->mouse.l_btn)
+	{
+		props->mouse.l_btn = 1;
+		props->mouse.hold = x;
+	}
+	else if (btn == 1 && props->mouse.l_btn)
+		props->mouse.l_btn = 0;
+	return (0);
+}
+
 void	handle_events(t_props *props)
 {
 	mlx_hook(props->window, 2, 1L << 0, handle_keydown, props);
-	//mlx_hook(props->window, 4, 1L << 2, handle_button, props);
+//	mlx_mouse_hook(props->window, handle_button, &props);
+	mlx_hook(props->window, 4, 1L << 2, handle_button, props);
+	mlx_hook(props->window, 5, 1L << 3, handle_button, props);
 	mlx_hook(props->window, 17, 0L, handle_close, props);
 	mlx_hook(props->window, 6, 1L << 6, handle_coords, props);
 }

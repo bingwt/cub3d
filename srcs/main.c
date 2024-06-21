@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/18 17:24:27 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/21 19:03:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	init_window(t_props *props)
 	props->mini_width = 256;
 	props->mini_height = 256;
 	props->tile_size = TILE_SIZE;
-	props->window = mlx_new_window(props->mlx, props->width * 6, \
-	props->height * 4, "cub3d");
+	props->window = mlx_new_window(props->mlx, props->width, \
+	props->height, "cub3d");
 	props->image = mlx_new_image(props->mlx, props->width, props->height);
 }
 
@@ -38,6 +38,7 @@ void	init_player(t_props *props)
 	props->player.los.y = 0;
 	props->mouse.x = 64;
 	props->mouse.y = 64;
+	props->mouse.l_btn = 0;
 	check_cell(props->player.pos->x, props->player.pos->y, props);
 }
 

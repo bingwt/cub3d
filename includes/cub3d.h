@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/20 16:38:00 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/21 18:19:52 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_mouse
 	int	x;
 	int	y;
 	int	cell[2];
+	int	l_btn;
+	int	hold;
 }	t_mouse;
 
 typedef struct s_player
