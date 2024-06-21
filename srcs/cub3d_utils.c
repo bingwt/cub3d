@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/18 17:19:43 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/21 22:14:39 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	draw_background(t_props *props)
 				props->pixel.color = rgb_to_dec(&cell);
 			else
 				props->pixel.color = 16777215;
-			draw_pixel(++x, y, props);
+			draw_pixel(x++, y, props);
 		}
 	}
 }
