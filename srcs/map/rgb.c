@@ -61,6 +61,8 @@ bool	valid_rgbs(char ***lines)
 		|| !is_rgb_range(c) || !is_rgb_range(f))
 	{
 		printf("Error\nInvalid floor or ceiling input\n");
+		ft_free_split(&c);
+		ft_free_split(&f);
 		return (false);
 	}
 	ft_free_split(&c);

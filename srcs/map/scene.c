@@ -66,7 +66,7 @@ static char	***verify_scene(char **scene)
 		return (NULL);
 	while (++i < 6)
 		lines[i] = ft_split(scene[i], ' ');
-	while (--i >= 0)
+	while (lines && --i >= 0)
 	{
 		if (ft_squarelen(lines[i]) != 2)
 		{
@@ -117,7 +117,10 @@ t_map	set_scene(int fd)
 	lines = verify_scene(scene);
 	ft_free_split(&scene);
 	if (!lines || !valid_rgbs(lines))
+	{
+		ft_free_cubed(&lines);
 		return (map);
+	}
 	assign_textures(&map, lines);
 	assign_rgbs(&map, lines);
 	ft_free_cubed(&lines);
