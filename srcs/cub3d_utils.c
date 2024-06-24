@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/24 16:03:46 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/24 16:44:37 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,17 +163,18 @@ void	loop(t_props *props)
 	t_line	line;
 
 	clear_display(props);
-	props->pixel.color = 16777215;
-	draw_background(props);
-	draw_grid(props);
-	player(props);
-	line.x0 = props->player.pos->x;
-	line.y0 = props->player.pos->y;
-	line.x1 = props->player.los.x;
-	line.y1 = props->player.los.y;
-	(void) line;
+	// props->pixel.color = 16777215;
+	// draw_background(props);
+	// draw_grid(props);
+	// player(props);
+	// line.x0 = props->player.pos->x;
+	// line.y0 = props->player.pos->y;
+	// line.x1 = props->player.los.x;
+	// line.y1 = props->player.los.y;
+	// (void) line;
 //	draw_bresenham(&line, props);
 	// draw_dda(&line, props);
-	draw_rays(props->player.pos, props);
+	// draw_rays(props->player.pos, props);
+	draw_ceiling_floor(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/24 16:35:14 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/24 16:43:57 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,23 @@ void	init_player(t_props *props)
 	props->mouse.x = 64;
 	props->mouse.y = 64;
 	props->mouse.l_btn = 0;
-	check_cell(props->player.pos->x, props->player.pos->y, props);
+	// check_cell(props->player.pos->x, props->player.pos->y, props);
 }
 
 //int	main(int argc, char **argv)
 int	main(void)
 {
-	t_color color;
 	t_props	props;
 
 	props.map = process_cub("./maps/squidward.cub");
-	// color.red = 255;
-	// color.green = 255;
-	// color.blue = 255;
 	init_window(&props);
-	// init_player(&props);
+	init_player(&props);
 	// props.pixel.color = rgb_to_dec(&color);
 	// draw_background(&props);
 	// draw_grid(&props);
 	// player(&props);
 	// loop(&props);
-	draw_ceiling_floor('c', &props);
-	draw_ceiling_floor('f', &props);
+	draw_ceiling_floor(&props);
 	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
 	handle_events(&props);
 	mlx_loop(props.mlx);

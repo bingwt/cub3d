@@ -3,8 +3,8 @@ SO ./squidward.xpm
 EA ./squidward.xpm
 WE ./squidward.xpm
 
-F 220,100,0
-C 225,30,0
+F 255,211,137
+C 163,211,195
 
 
         1111111111111111111111111
