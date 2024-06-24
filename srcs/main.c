@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/24 16:43:57 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/24 20:31:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,35 @@ void	init_player(t_props *props)
 	// check_cell(props->player.pos->x, props->player.pos->y, props);
 }
 
+void	print_map(t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (map->matrix[y][x] > 1)
+				printf("P");
+			else
+				printf("%d", map->matrix[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+}
+
 //int	main(int argc, char **argv)
 int	main(void)
 {
 	t_props	props;
 
 	props.map = process_cub("./maps/squidward.cub");
+	print_map(&props.map);
 	init_window(&props);
 	init_player(&props);
 	// props.pixel.color = rgb_to_dec(&color);
