@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/24 16:05:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/24 16:34:15 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,10 +158,15 @@ void	handle_events(t_props *props);
 
 // PIXEL
 void	draw_pixel(int x, int y, t_props *props);
+void	color_pixel(int x, int y, int color, t_props *props);
 t_color	*hex_to_rgb(char *hex);
 t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
+int		hex_to_dec(char *hex);
 
+// PRIMITIVES
+void 	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
+void    draw_ceiling_floor(char type, t_props *props);
 //VECTORS
 void	vec2_add(t_vec2 *a, t_vec2 *b);
 void	vec2_scale(t_vec2 *vec, float scale);
