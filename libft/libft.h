@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:53:32 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/21 18:12:32 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/24 20:49:46 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,6 @@ int			ft_squarelen(char **square);
 int			ft_cubelen(char ***cube);
 char		*ft_strjoin_strs(char **strs);
 char		*ft_strip(char *s, char c);
+char		**ft_splitdup(char **content);
 
 #endif

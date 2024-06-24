@@ -52,6 +52,7 @@ static bool check_boundaries(char **content)
 	int		x;
 	int		y;
 	char	*error;
+	char	**copy;
 
 	x = 0;
 	y = 0;
@@ -69,7 +70,9 @@ static bool check_boundaries(char **content)
 		x = 0;
 		y++;
 	}
-	flood_fill(&error, content, x, y);
+	copy = ft_splitdup(content);
+	flood_fill(&error, copy, x, y);
+	ft_free_split(&copy);
 	if (error)
 		return (false);
 	return (true);
