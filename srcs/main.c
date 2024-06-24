@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/21 19:03:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/24 15:59:39 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,51 +45,20 @@ void	init_player(t_props *props)
 //int	main(int argc, char **argv)
 int	main(void)
 {
-	int		i;
-	int		bound;
 	t_color color;
 	t_props	props;
-	void	*gun;
 
-//	if (argc == 2)
-//		read_map(argv[1]);
-	props.map.bounds = ft_calloc(TILE + 1, sizeof(int));
-	i = 0;
-	bound = 0;
-	while (bound <= 256)
-	{
-		props.map.bounds[i] = bound;
-		bound += 256 / TILE;
-		i++;
-	}
-	props.map.rows = TILE;
-	props.map.cols = TILE;
-	props.map.matrix = ft_calloc(props.map.rows, sizeof(int *));
-	i = 0;
-	while (i < props.map.cols)
-		props.map.matrix[i++] = ft_calloc(props.map.cols, sizeof(int));
-	for (int row = 0; row < TILE; row++)
-	{
-		for (int col = 0; col < TILE; col++)
-		{
-			if (row == 0 || col == 0 || col == TILE - 1 || row == TILE - 1)
-				props.map.matrix[row][col] = 1;
-		}
-	}
-	color.red = 255;
-	color.green = 255;
-	color.blue = 255;
+	props.map = process_cub("./maps/squidward.cub");
+	// color.red = 255;
+	// color.green = 255;
+	// color.blue = 255;
 	init_window(&props);
-	int	gun_width;
-	int	gun_height;
-	gun = mlx_xpm_file_to_image(props.mlx, "gun1.xpm", &gun_width, &gun_height);
-	mlx_put_image_to_window(props.mlx, props.window, gun, WIDTH * 2.1, HEIGHT * 2.2);
-	init_player(&props);
-	props.pixel.color = rgb_to_dec(&color);
-	draw_background(&props);
-	draw_grid(&props);
-	player(&props);
-	loop(&props);
+	// init_player(&props);
+	// props.pixel.color = rgb_to_dec(&color);
+	// draw_background(&props);
+	// draw_grid(&props);
+	// player(&props);
+	// loop(&props);
 	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
 	handle_events(&props);
 	mlx_loop(props.mlx);

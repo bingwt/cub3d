@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/06/09 16:30:20 by btan             ###   ########.fr        #
+#    Updated: 2024/06/24 15:52:31 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,17 @@ LIBS = -lXext -lX11 -lm
 
 SRCS = srcs/cub3d_errors.c \
 	   srcs/cub3d_utils.c \
+	   srcs/map/assign_scene.c \
+	   srcs/map/check_file.c \
+	   srcs/map/convert_map.c \
+	   srcs/map/cub.c \
+	   srcs/map/free_map.c \
+	   srcs/map/gnl_skip_nl.c \
+	   srcs/map/map.c \
+	   srcs/map/normalise_map.c \
+	   srcs/map/rgb.c \
+	   srcs/map/scene.c \
+	   srcs/map/validate_map.c \
 	   srcs/events.c \
 	   srcs/vectors.c \
 	   srcs/rotation.c \
