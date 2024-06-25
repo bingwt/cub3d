@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/25 17:13:13 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/25 18:44:54 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,17 @@ void	handle_movement(int key, t_props *props)
 	dir = ft_calloc(1, sizeof(t_vec2));
 	if (key == 119)
 	{
-		dir->x = props->player.position.cell.x;
-		dir->y = props->player.position.cell.y - 1;
-		goto_cell(*dir, props);
-		// dir->x = 0;
-		// dir->y = -1;
+		if (props->player.position.relative.y < 0)
+		{
+			dir->x = props->player.position.cell.x;
+			dir->y = props->player.position.cell.y - 1;
+			goto_cell(*dir, props);
+			props->player.position.relative.y = 1;
+			return ;
+		}
+		dir->x = 0;
+		dir->y = -0.1;
+		vec2_add(&props->player.position.relative, dir);
 	}
 	else if (key == 115)
 	{

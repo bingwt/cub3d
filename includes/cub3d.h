@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/25 17:13:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/25 18:36:35 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ int		check_cell(int x, int y, t_props *props);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 void	loop(t_props *props);
+
+// WORLD
 void	print_map(t_map *map, t_props *props);
 int		goto_cell(t_vec2 cell, t_props *props);
 int		fill_front(t_props *props);
