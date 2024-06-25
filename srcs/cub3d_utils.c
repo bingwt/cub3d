@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/24 16:44:37 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/25 21:29:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,9 @@ int	check_cell(int x, int y, t_props *props)
 
 void	draw_background(t_props *props)
 {
-	t_color	cell;
 	int		x;
 	int		y;
 
-	cell.red = 0;
-	cell.green = 0;
-	cell.blue = 128;
 	y = 0;
 	while (y++ < props->mini_height)
 	{
@@ -160,7 +156,7 @@ void	clear_display(t_props *props)
 
 void	loop(t_props *props)
 {
-	t_line	line;
+	// t_line	line;
 
 	clear_display(props);
 	// props->pixel.color = 16777215;

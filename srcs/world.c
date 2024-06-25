@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/06/25 17:16:27 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/25 21:31:01 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ int	fill_front(t_props *props)
 	x = props->player.position.cell.x;
 	y = props->player.position.cell.y - 1;
 	if (!props->map.matrix[y][x])
+	{
 		props->map.matrix[y][x] = 1;
 		return (0);
+	}
 	return (1);
 }
 
@@ -78,8 +80,10 @@ int	cell_action(t_action action, t_props *props)
 
 	x = props->player.position.cell.x;
 	y = props->player.position.cell.y - 1;
-	if (props->map.matrix[y][x] != action)
+	if (props->map.matrix[y][x] != (int) action)
+	{
 		props->map.matrix[y][x] = action;
 		return (0);
+	}
 	return (1);
 }
