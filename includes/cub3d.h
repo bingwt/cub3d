@@ -6,12 +6,22 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/24 16:44:16 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/25 16:57:04 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define RED "\x1B[31m"
+# define GREEN "\x1B[32m"
+# define YELLOW "\x1B[33m"
+# define BLUE "\x1B[34m"
+# define MAGENTA "\x1B[35m"
+# define CYAN "\x1B[36m"
+# define WHITE "\x1B[37m"
+# define BLACK "\x1b[30m"
+# define RESET "\x1B[0m"
 
 # ifndef WIDTH
 #  define WIDTH 1024
@@ -110,12 +120,19 @@ typedef struct s_mouse
 	int	hold;
 }	t_mouse;
 
+typedef struct s_pos
+{
+	t_vec2	cell;
+	t_vec2	relative;
+}	t_pos;
+
 typedef struct s_player
 {
 	int		size;
 	int		speed;
 	float	angle;
 	float	fov;
+	t_pos	position;
 	t_vec2	*pos;
 	t_vec2	los;
 }	t_player;
@@ -152,6 +169,8 @@ int		check_cell(int x, int y, t_props *props);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 void	loop(t_props *props);
+void	print_map(t_map *map, t_props *props);
+int		goto_cell(t_vec2 cell, t_props *props);
 
 // EVENTS
 void	handle_events(t_props *props);

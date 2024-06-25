@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/24 16:45:17 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/25 16:59:53 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,35 @@ void	handle_movement(int key, t_props *props)
 	dir = ft_calloc(1, sizeof(t_vec2));
 	if (key == 119)
 	{
-		dir->x = 0;
-		dir->y = -1;
+		dir->x = props->player.position.cell.x;
+		dir->y = props->player.position.cell.y - 1;
+		goto_cell(*dir, props);
+		// dir->x = 0;
+		// dir->y = -1;
 	}
 	else if (key == 115)
 	{
-		dir->x = 0;
-		dir->y = 1;
+		dir->x = props->player.position.cell.x;
+		dir->y = props->player.position.cell.y + 1;
+		goto_cell(*dir, props);
+		// dir->x = 0;
+		// dir->y = 1;
 	}
 	else if (key == 97)
 	{
-		dir->x = -1;
-		dir->y = 0;
+		dir->x = props->player.position.cell.x - 1;
+		dir->y = props->player.position.cell.y;
+		goto_cell(*dir, props);
+		// dir->x = -1;
+		// dir->y = 0;
 	}
 	else if (key == 100)
 	{
-		dir->x = 1;
-		dir->y = 0;
+		dir->x = props->player.position.cell.x + 1;
+		dir->y = props->player.position.cell.y;
+		goto_cell(*dir, props);
+		// dir->x = 1;
+		// dir->y = 0;
 	}
 	else if (key == 65505)
 	{
@@ -87,7 +99,8 @@ void	handle_movement(int key, t_props *props)
 	vec2_scale(dir, props->player.speed);
 	vec2_add(props->player.pos, dir);
 	free(dir);
-	printf("x: %f, y: %f\n", props->player.pos->x, props->player.pos->y);
+	// printf("x: %f, y: %f\n", props->player.pos->x, props->player.pos->y);
+	print_map(&props->map, props);
 	loop(props);
 }
 
