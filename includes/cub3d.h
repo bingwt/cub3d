@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/25 16:57:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/25 17:13:42 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ typedef enum e_error
 	INVALID_TEXTURE,
 	INVALID_COLOR
 }	t_error;
+
+typedef enum e_action
+{
+	CLEAR,
+	WALL
+}	t_action;
 
 typedef struct s_vec2
 {
@@ -171,6 +177,8 @@ void	draw_grid(t_props *props);
 void	loop(t_props *props);
 void	print_map(t_map *map, t_props *props);
 int		goto_cell(t_vec2 cell, t_props *props);
+int		fill_front(t_props *props);
+int		cell_action(t_action action, t_props *props);
 
 // EVENTS
 void	handle_events(t_props *props);
