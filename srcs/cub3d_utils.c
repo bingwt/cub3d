@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/26 19:44:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/27 19:05:47 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,28 +154,34 @@ void	clear_display(t_props *props)
 	}
 }
 
-void	cast_ray(t_vec2 point, t_props *props)
+t_action	check_chunk(t_vec2 chunk, t_props *props)
 {
-	int	**map;
-	t_vec2	start;
-	t_vec2	end;
-	t_vec2	block;
+	int			**map;
+	t_action	type;
 
 	map = props->map.matrix;
-	start = point;
+	type = (t_action) map[(int) chunk.y][(int) chunk.x];
+	return (type);
+}
+
+int	cast_ray(t_vec2 point, t_props *props)
+{
+	int	**map;
+	t_vec2	end;
+	t_vec2	chunk;
+
+	map = props->map.matrix;
 	end.x = 0;
 	end.y = -1;
-	vec2_add(&start, &end);
-	block = props->player.position.cell;
-	if (start.y < 1)
-		vec2_add(&block, &end);
-	if (map[(int) block.y][(int) block.x])
-		return ;
-	else
-		cast_ray(block, props);
-	printf("vec[%f][%f]\n", start.x, start.y);
-	printf("cell[%d][%d] -> ", (int) block.x, (int) block.y);
-	printf("%d\n", map[(int) block.y][(int) block.x]);
+	chunk = props->player.position.cell;
+	vec2_add(&point, &end);
+	while (check_chunk(chunk, props) != WALL)
+	{
+		vec2_add(&chunk, &end);
+	}
+	printf("end[%f][%f]\n", point.x, point.y);
+	printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+	return (1);
 }
 void	loop(t_props *props)
 {

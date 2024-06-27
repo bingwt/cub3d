@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 01:13:19 by btan              #+#    #+#             */
-/*   Updated: 2024/06/26 16:44:07 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/27 16:52:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ int	dda_player(t_vec2 delta, int steps, t_line *intercept, t_props *props)
 	return (0);
 }
 
-void	draw_dda(t_line *line, t_props *props)
-{
-	t_color	color;
-	t_vec2	delta;
-	int		steps;
+// void	draw_dda(t_line *line, t_props *props)
+// {
+// 	t_color	color;
+// 	t_vec2	delta;
+// 	int		steps;
 
-	color.red = 0;
-	color.green = 0;
-	color.blue = 128;
-	props->pixel.color = rgb_to_dec(&color);
-	delta.x = line->x1 - line->x0;
-	delta.y = line->y1 - line->y0;
-	steps = fabs(delta.y);
-	if (fabs(delta.x) > fabs(delta.y))
-		steps = fabs(delta.x);
-	//dda_player(delta, steps, props);
-}
+// 	color.red = 0;
+// 	color.green = 0;
+// 	color.blue = 128;
+// 	props->pixel.color = rgb_to_dec(&color);
+// 	delta.x = line->x1 - line->x0;
+// 	delta.y = line->y1 - line->y0;
+// 	steps = fabs(delta.y);
+// 	if (fabs(delta.x) > fabs(delta.y))
+// 		steps = fabs(delta.x);
+// 	dda_player(delta, steps, props);
+// }
 
 float	calc_dist(t_line *line)
 {
