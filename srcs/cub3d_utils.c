@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/27 19:05:47 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/27 22:34:29 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,39 @@ int	cast_ray(t_vec2 point, t_props *props)
 	printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
 	return (1);
 }
+
+int	cast_rays(t_vec2 point, t_props *props)
+{
+	int	i;
+	int	step;
+	int	**map;
+	t_vec2	dir;
+	t_vec2	chunk;
+
+	i = 0;
+	step = props->player.fov / WIDTH;
+	map = props->map.matrix;
+	while (i < WIDTH)
+	{
+		chunk = props->player.position.cell;
+		dir.x = 0;
+		dir.y = -1;
+		rotate(&dir, props->player.angle - (props->player.fov / 2) + (i * step));
+		vec2_add(&point, &dir);
+		while (check_chunk(chunk, props) != WALL)
+		{
+			vec2_add(&chunk, &dir);
+			// props->map.matrix[(int) chunk.y][(int) chunk.x] = 3;
+		}
+		printf("Ray: %d\n", i);
+		printf("dir[%f][%f]\n", point.x, point.y);
+		printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+		print_map(&props->map, props);
+		i++;
+	}
+	return (1);
+}
+
 void	loop(t_props *props)
 {
 	// t_line	line;
@@ -201,6 +234,6 @@ void	loop(t_props *props)
 	// draw_dda(&line, props);
 	// draw_rays(props->player.pos, props);
 	draw_ceiling_floor(props);
-	cast_ray(props->player.position.relative, props);
+	cast_rays(props->player.position.relative, props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

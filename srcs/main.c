@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/25 17:16:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/27 21:28:09 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_player(t_props *props)
 	props->player.size = 10;
 	props->player.speed = 5;
 	props->player.angle = 0;
-	props->player.fov = 0;
+	props->player.fov = 60;
 	props->player.position.relative.x = 0.5;
 	props->player.position.relative.y = 0.5;
 	props->player.pos = ft_calloc(1, sizeof(t_vec2));
@@ -52,7 +52,7 @@ int	main(void)
 	props.map = process_cub("./maps/squidward.cub");
 	init_window(&props);
 	init_player(&props);
-	print_map(&props.map, &props);
+	// print_map(&props.map, &props);
 	// props.pixel.color = rgb_to_dec(&color);
 	// draw_background(&props);
 	// draw_grid(&props);

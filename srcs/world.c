@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/06/25 21:31:01 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/27 22:34:19 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	print_map(t_map *map, t_props *props)
 		{
 			if (map->matrix[y][x] > 1)
 			{
+				if (map->matrix[y][x] == 8)
+				{
+					printf(CYAN"*" RESET);
+					return ;
+				}
 				props->player.position.cell.x = x;
 				props->player.position.cell.y = y;
 				printf(YELLOW "P" RESET);
