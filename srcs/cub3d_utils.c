@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/28 15:03:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/28 15:58:55 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,11 @@ int	cast_ray(t_vec2 point, t_props *props)
 	t_vec2	chunk;
 	int		i;
 	float	distance;
+	t_vec2	player;
 
+	player = props->player.position.cell;
+	vec2_add(&player, &props->player.position.relative);
+	printf("Player @ coord[%f][%f]\n\n", player.x, player.y);
 	map = props->map.matrix;
 	end.x = 0;
 	end.y = -1;
@@ -190,8 +194,8 @@ int	cast_ray(t_vec2 point, t_props *props)
 	while (check_chunk(chunk, props) != WALL)
 	{
 		vec2_add(&chunk, &end);
-		printf("No: %d\n", i);
-		printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+		// printf("No: %d\n", i);
+		// printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
 		i++;
 	}
 	point.y += 1;
@@ -221,35 +225,133 @@ int	cast_ray(t_vec2 point, t_props *props)
 
 int	cast_rays(t_vec2 point, t_props *props)
 {
-	int	i;
-	int	step;
 	int	**map;
-	t_vec2	dir;
+	t_vec2	end;
 	t_vec2	chunk;
+	int		i;
+	float	distance;
+	t_vec2	player;
 
-	i = 0;
-	step = props->player.fov / WIDTH;
+	player = props->player.position.cell;
+	vec2_add(&player, &props->player.position.relative);
+	printf("Player @ coord[%f][%f]\n\n", player.x, player.y);
 	map = props->map.matrix;
-	while (i < WIDTH)
+	end.x = 0;
+	end.y = -1;
+	chunk = props->player.position.cell;
+	i = 1;
+	rotate(&end, props->player.angle - (props->player.fov / 2));
+	while (check_chunk(chunk, props) != WALL)
 	{
-		chunk = props->player.position.cell;
-		dir.x = 0;
-		dir.y = -1;
-		rotate(&dir, props->player.angle - (props->player.fov / 2) + (i * step));
-		vec2_add(&point, &dir);
-		while (check_chunk(chunk, props) != WALL)
-		{
-			vec2_add(&chunk, &dir);
-			// props->map.matrix[(int) chunk.y][(int) chunk.x] = 3;
-		}
-		printf("Ray: %d\n", i);
-		printf("dir[%f][%f]\n", point.x, point.y);
-		printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
-		print_map(&props->map, props);
+		vec2_add(&chunk, &end);
+		// printf("No: %d\n", i);
+		// printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
 		i++;
+	}
+	point.y += 1;
+	vec2_scale(&end, i);
+	vec2_add(&point, &end);
+	float offset = (1 - props->player.position.relative.y);
+	printf("offset: %f\n", offset);
+	distance = dist(props->player.position.relative, point) - offset;
+	printf("dist: %f\n", distance);
+	printf("end[%f][%f]\n", point.x, point.y);
+	printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+	float	h = HEIGHT / distance;
+	printf("height: %d\n", (int) h);
+	color_pixel(WIDTH / 2, HEIGHT / 2, hex_to_dec("ffffff"), props);
+	t_line	vert;
+	vert.x0 = WIDTH / 2;
+	vert.x1 = WIDTH / 2;
+	vert.y0 = (HEIGHT / 2) - (h / 2);
+	vert.y1 = (HEIGHT / 2) + (h / 2);
+	while (vert.y0 < vert.y1)
+	{
+		color_pixel(WIDTH / 2, (int) vert.y0, hex_to_dec("ffffff"), props);
+		vert.y0++;
 	}
 	return (1);
 }
+// {{
+// 	int	i;
+// 	int	step;
+// 	int	**map;
+// 	t_vec2	dir;
+// 	t_vec2	chunk;
+
+// 	i = 0;
+// 	step = props->player.fov / WIDTH;
+// 	map = props->map.matrix;
+// 	while (i < WIDTH)
+// 	{
+// 		chunk = props->player.position.cell;
+// 		dir.x = 0;
+// 		dir.y = -1;
+// 		rotate(&dir, props->player.angle - (props->player.fov / 2) + (i * step));
+// 		vec2_add(&point, &dir);
+// 		while (check_chunk(chunk, props) != WALL)
+// 		{
+// 			vec2_add(&chunk, &dir);
+// 			// props->map.matrix[(int) chunk.y][(int) chunk.x] = 3;
+// 		}
+// 		printf("Ray: %d\n", i);
+// 		printf("dir[%f][%f]\n", point.x, point.y);
+// 		printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+// 		print_map(&props->map, props);
+// 		i++;
+// 	}
+// 	return (1);
+// }
+// 	map = props->map.matrix;
+// 	while (i < WIDTH)
+// 	{
+// 		chunk = props->player.position.cell;
+// 		dir.x = 0;
+// 		dir.y = -1;
+// 		rotate(&dir, props->player.angle - (props->player.fov / 2) + (i * step));
+// 		vec2_add(&point, &dir);
+// 		while (check_chunk(chunk, props) != WALL)
+// 		{
+// 			vec2_add(&chunk, &dir);
+// 			// props->map.matrix[(int) chunk.y][(int) chunk.x] = 3;
+// 		}
+// 		printf("Ray: %d\n", i);
+// 		printf("dir[%f][%f]\n", point.x, point.y);
+// 		printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+// 		print_map(&props->map, props);{
+// 	int	i;
+// 	int	step;
+// 	int	**map;
+// 	t_vec2	dir;
+// 	t_vec2	chunk;
+
+// 	i = 0;
+// 	step = props->player.fov / WIDTH;
+// 	map = props->map.matrix;
+// 	while (i < WIDTH)
+// 	{
+// 		chunk = props->player.position.cell;
+// 		dir.x = 0;
+// 		dir.y = -1;
+// 		rotate(&dir, props->player.angle - (props->player.fov / 2) + (i * step));
+// 		vec2_add(&point, &dir);
+// 		while (check_chunk(chunk, props) != WALL)
+// 		{
+// 			vec2_add(&chunk, &dir);
+// 			// props->map.matrix[(int) chunk.y][(int) chunk.x] = 3;
+// 		}
+// 		printf("Ray: %d\n", i);
+// 		printf("dir[%f][%f]\n", point.x, point.y);
+// 		printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+// 		print_map(&props->map, props);
+// 		i++;
+// 	}
+// 	return (1);
+// }
+// 		i++;
+// 	}
+// 	return (1);
+// }
 
 void	loop(t_props *props)
 {
@@ -269,6 +371,6 @@ void	loop(t_props *props)
 	// draw_dda(&line, props);
 	// draw_rays(props->player.pos, props);
 	draw_ceiling_floor(props);
-	cast_ray(props->player.position.relative, props);
+	cast_rays(props->player.position.relative, props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

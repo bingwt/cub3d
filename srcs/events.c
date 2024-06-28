@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/25 21:35:49 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/28 15:46:32 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	handle_movement(int key, t_props *props)
 	dir = ft_calloc(1, sizeof(t_vec2));
 	if (key == 119)
 	{
-		if (props->player.position.relative.y < 0)
+		if (props->player.position.relative.y <= 0)
 		{
 			dir->x = props->player.position.cell.x;
 			dir->y = props->player.position.cell.y - 1;
@@ -71,7 +71,7 @@ void	handle_movement(int key, t_props *props)
 	}
 	else if (key == 115)
 	{
-		if (props->player.position.relative.y > 1)
+		if (props->player.position.relative.y >= 1)
 		{
 			dir->x = props->player.position.cell.x;
 			dir->y = props->player.position.cell.y + 1;
@@ -85,7 +85,7 @@ void	handle_movement(int key, t_props *props)
 	}
 	else if (key == 97)
 	{
-		if (props->player.position.relative.x < 0)
+		if (props->player.position.relative.x <= 0)
 		{
 			dir->x = props->player.position.cell.x - 1;
 			dir->y = props->player.position.cell.y;
@@ -99,7 +99,7 @@ void	handle_movement(int key, t_props *props)
 	}
 	else if (key == 100)
 	{
-		if (props->player.position.relative.x > 1)
+		if (props->player.position.relative.x >= 1)
 		{
 			dir->x = props->player.position.cell.x + 1;
 			dir->y = props->player.position.cell.y;
