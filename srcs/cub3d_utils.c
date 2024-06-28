@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/28 15:58:55 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/28 16:28:37 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,10 @@ t_action	check_chunk(t_vec2 chunk, t_props *props)
 	t_action	type;
 
 	map = props->map.matrix;
+	if ((int) chunk.x < 0 || (int) chunk.x > 0)
+		return (WALL);
+	if ((int) chunk.y < 0 || (int) chunk.y > 0)
+		return (WALL);
 	type = (t_action) map[(int) chunk.y][(int) chunk.x];
 	return (type);
 }
@@ -234,8 +238,10 @@ int	cast_rays(t_vec2 point, t_props *props)
 
 	player = props->player.position.cell;
 	vec2_add(&player, &props->player.position.relative);
-	printf("Player @ coord[%f][%f]\n\n", player.x, player.y);
+	printf("Player @ coord[%f][%f]\n", player.x, player.y);
+	printf("Player @ cell[%d][%d]\n", (int) player.x, (int) player.y);
 	map = props->map.matrix;
+	printf("Player -> %d\n\n", map[(int) player.y][(int) player.x]);
 	end.x = 0;
 	end.y = -1;
 	chunk = props->player.position.cell;
