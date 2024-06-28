@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/06/27 22:34:29 by btan             ###   ########.fr       */
+/*   Updated: 2024/06/28 15:03:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,23 +164,58 @@ t_action	check_chunk(t_vec2 chunk, t_props *props)
 	return (type);
 }
 
+float	dist(t_vec2 a, t_vec2 b)
+{
+	float	x;
+	float	y;
+
+	x = b.x - a.x;
+	y = b.y - a.y;
+	return (sqrt(pow(x, 2) + pow(y, 2)));
+}
+
 int	cast_ray(t_vec2 point, t_props *props)
 {
 	int	**map;
 	t_vec2	end;
 	t_vec2	chunk;
+	int		i;
+	float	distance;
 
 	map = props->map.matrix;
 	end.x = 0;
 	end.y = -1;
 	chunk = props->player.position.cell;
-	vec2_add(&point, &end);
+	i = 1;
 	while (check_chunk(chunk, props) != WALL)
 	{
 		vec2_add(&chunk, &end);
+		printf("No: %d\n", i);
+		printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+		i++;
 	}
+	point.y += 1;
+	vec2_scale(&end, i);
+	vec2_add(&point, &end);
+	float offset = (1 - props->player.position.relative.y);
+	printf("offset: %f\n", offset);
+	distance = dist(props->player.position.relative, point) - offset;
+	printf("dist: %f\n", distance);
 	printf("end[%f][%f]\n", point.x, point.y);
 	printf("chunk[%d][%d]-> %d\n\n", (int) chunk.x, (int) chunk.y, (int) check_chunk(chunk, props));
+	float	h = HEIGHT / distance;
+	printf("height: %d\n", (int) h);
+	color_pixel(WIDTH / 2, HEIGHT / 2, hex_to_dec("ffffff"), props);
+	t_line	vert;
+	vert.x0 = WIDTH / 2;
+	vert.x1 = WIDTH / 2;
+	vert.y0 = (HEIGHT / 2) - (h / 2);
+	vert.y1 = (HEIGHT / 2) + (h / 2);
+	while (vert.y0 < vert.y1)
+	{
+		color_pixel(WIDTH / 2, (int) vert.y0, hex_to_dec("ffffff"), props);
+		vert.y0++;
+	}
 	return (1);
 }
 
@@ -234,6 +269,6 @@ void	loop(t_props *props)
 	// draw_dda(&line, props);
 	// draw_rays(props->player.pos, props);
 	draw_ceiling_floor(props);
-	cast_rays(props->player.position.relative, props);
+	cast_ray(props->player.position.relative, props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }
