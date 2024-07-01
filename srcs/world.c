@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/06/27 22:34:19 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/01 15:36:01 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	print_map(t_map *map, t_props *props)
 					printf(CYAN"*" RESET);
 					return ;
 				}
-				props->player.position.cell.x = x;
-				props->player.position.cell.y = y;
+				props->player.pos.chunk.x = x;
+				props->player.pos.chunk.y = y;
 				printf(YELLOW "P" RESET);
 			}
 			else if (map->matrix[y][x])
@@ -43,8 +43,8 @@ void	print_map(t_map *map, t_props *props)
 		printf("\n");
 		y++;
 	}
-	printf("Player @ cell[x: %d][y: %d]\n", (int) props->player.position.cell.x, (int) props->player.position.cell.y);
-	printf("Player @ rela[x: %f][y: %f]\n\n", props->player.position.relative.x, props->player.position.relative.y);
+	printf("Player @ cell[x: %d][y: %d]\n", (int) props->player.pos.chunk.x, (int) props->player.pos.chunk.y);
+	printf("Player @ rela[x: %f][y: %f]\n\n", props->player.pos.relative.x, props->player.pos.relative.y);
 }
 
 int	goto_cell(t_vec2 cell, t_props *props)
@@ -52,11 +52,11 @@ int	goto_cell(t_vec2 cell, t_props *props)
 	int	x;
 	int	y;
 
-	x = props->player.position.cell.x;
-	y = props->player.position.cell.y;
+	x = props->player.pos.chunk.x;
+	y = props->player.pos.chunk.y;
 	if (!props->map.matrix[(int) cell.y][(int) cell.x])
 	{
-		props->map.matrix[(int) cell.y][(int) cell.x] = 270;
+		props->map.matrix[(int) cell.y][(int) cell.x] = props->map.matrix[y][x];
 		props->map.matrix[y][x] = 0;
 		return (0);
 	}
@@ -68,8 +68,8 @@ int	fill_front(t_props *props)
 	int	x;
 	int	y;
 
-	x = props->player.position.cell.x;
-	y = props->player.position.cell.y - 1;
+	x = props->player.pos.chunk.x;
+	y = props->player.pos.chunk.y - 1;
 	if (!props->map.matrix[y][x])
 	{
 		props->map.matrix[y][x] = 1;
@@ -83,12 +83,24 @@ int	cell_action(t_action action, t_props *props)
 	int	x;
 	int	y;
 
-	x = props->player.position.cell.x;
-	y = props->player.position.cell.y - 1;
+	x = props->player.pos.chunk.x;
+	y = props->player.pos.chunk.y - 1;
 	if (props->map.matrix[y][x] != (int) action)
 	{
 		props->map.matrix[y][x] = action;
 		return (0);
 	}
 	return (1);
+}
+
+int	check_chunk(t_vec2 pos, t_props *props)
+{
+	int			**map;
+
+	map = props->map.matrix;
+	if ((int) pos.x < 0 || (int) pos.x > props->map.width - 1)
+		return (WALL);
+	if ((int) pos.y < 0 || (int) pos.y > props->map.height - 1)
+		return (WALL);
+	return (map[(int) pos.y][(int) pos.x]);
 }

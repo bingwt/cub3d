@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/27 21:24:09 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/01 15:34:19 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,9 @@ typedef struct s_mouse
 
 typedef struct s_pos
 {
-	t_vec2	cell;
+	t_vec2	chunk;
 	t_vec2	relative;
+	t_vec2	exact;
 }	t_pos;
 
 typedef struct s_player
@@ -138,9 +139,7 @@ typedef struct s_player
 	int		speed;
 	float	angle;
 	float	fov;
-	t_pos	position;
-	t_vec2	*pos;
-	t_vec2	los;
+	t_pos	pos;
 }	t_player;
 
 typedef struct s_prop
@@ -181,6 +180,7 @@ void	print_map(t_map *map, t_props *props);
 int		goto_cell(t_vec2 cell, t_props *props);
 int		fill_front(t_props *props);
 int		cell_action(t_action action, t_props *props);
+int		check_chunk(t_vec2 pos, t_props *props);
 
 // EVENTS
 void	handle_events(t_props *props);
@@ -211,16 +211,10 @@ float	deg_to_rad(float deg);
 void	rotate(t_vec2 *vec, float angle);
 
 //RAYCAST
-void	draw_bresenham(t_line *line, t_props *props);
-void	draw_dda(t_line *line, t_props *props);
-void	draw_rays(t_vec2 *player, t_props *props);
+void	dda(t_vec2 a, t_vec2 b);
 
 //WALL
 void	fill_cell(t_props *props);
-
-// PLAYER
-void	fill_point(t_vec2, t_props *props);
-void	player(t_props *props);
 
 // CHECK_FILE
 bool	ends_with_xpm(char *file);

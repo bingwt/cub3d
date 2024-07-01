@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/06/28 15:46:32 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/01 15:37:30 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	handle_close(t_props *props)
 	mlx_destroy_image(props->mlx, props->image);
 	mlx_destroy_window(props->mlx, props->window);
 	mlx_destroy_display(props->mlx);
-	free(props->player.pos);
 	free(props->mlx);
 	i = 0;
 	while (i < props->map.rows)
@@ -57,59 +56,59 @@ void	handle_movement(int key, t_props *props)
 	dir = ft_calloc(1, sizeof(t_vec2));
 	if (key == 119)
 	{
-		if (props->player.position.relative.y <= 0)
+		if (props->player.pos.relative.y <= 0)
 		{
-			dir->x = props->player.position.cell.x;
-			dir->y = props->player.position.cell.y - 1;
-			goto_cell(*dir, props);
-			props->player.position.relative.y = 1;
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y - 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 1;
 			return ;
 		}
 		dir->x = 0;
 		dir->y = -0.1;
-		vec2_add(&props->player.position.relative, dir);
+		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 115)
 	{
-		if (props->player.position.relative.y >= 1)
+		if (props->player.pos.relative.y >= 1)
 		{
-			dir->x = props->player.position.cell.x;
-			dir->y = props->player.position.cell.y + 1;
-			goto_cell(*dir, props);
-			props->player.position.relative.y = 0;
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y + 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 0;
 			return ;
 		}
 		dir->x = 0;
 		dir->y = 0.1;
-		vec2_add(&props->player.position.relative, dir);
+		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 97)
 	{
-		if (props->player.position.relative.x <= 0)
+		if (props->player.pos.relative.x <= 0)
 		{
-			dir->x = props->player.position.cell.x - 1;
-			dir->y = props->player.position.cell.y;
-			goto_cell(*dir, props);
-			props->player.position.relative.x = 1;
+			dir->x = props->player.pos.chunk.x - 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 1;
 			return ;
 		}
 		dir->x = -0.1;
 		dir->y = 0;
-		vec2_add(&props->player.position.relative, dir);
+		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 100)
 	{
-		if (props->player.position.relative.x >= 1)
+		if (props->player.pos.relative.x >= 1)
 		{
-			dir->x = props->player.position.cell.x + 1;
-			dir->y = props->player.position.cell.y;
-			goto_cell(*dir, props);
-			props->player.position.relative.x = 0;
+			dir->x = props->player.pos.chunk.x + 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 0;
 			return ;
 		}
 		dir->x = 0.1;
 		dir->y = 0;
-		vec2_add(&props->player.position.relative, dir);
+		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 65505)
 	{
@@ -119,9 +118,8 @@ void	handle_movement(int key, t_props *props)
 	{
 		props->player.speed -= 1;
 	}
-	rotate(dir, props->player.angle);
-	vec2_scale(dir, props->player.speed);
-	vec2_add(props->player.pos, dir);
+	// rotate(dir, props->player.angle);
+	// vec2_scale(dir, props->player.speed);
 	free(dir);
 	// printf("x: %f, y: %f\n", props->player.pos->x, props->player.pos->y);
 	print_map(&props->map, props);
@@ -165,8 +163,6 @@ int	handle_keydown(int key, t_props *props)
 		// 	props->map.matrix[props->mouse.cell[0]][props->mouse.cell[1]] = 0;
 		cell_action(CLEAR, props);
 	}
-	else if (key == 112)
-		printf("Player @ (%f, %f)\n", props->player.pos->x, props->player.pos->y);
 	else if (key == 65307)
 		handle_close(props);
 	else if (key == 65361)

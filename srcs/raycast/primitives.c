@@ -6,19 +6,11 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:18:40 by btan              #+#    #+#             */
-/*   Updated: 2024/06/24 16:44:22 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/01 15:07:45 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-	// for (int y = 0; y < HEIGHT / 2; y++)
-	// {
-	// 	for (int x = 0; x < HEIGHT; x++)
-	// 	{
-	// 		color_pixel(x, y, hex_to_dec("ffffff"), &props);
-	// 	}
-	// }
 
 void fill_area(t_vec2 start, t_vec2 end, int color, t_props *props)
 {
