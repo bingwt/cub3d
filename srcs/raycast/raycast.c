@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/03 14:39:26 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/03 14:44:50 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,19 @@ int dda_line(t_vec2 start, t_vec2 end, t_props *props)
 	return (0);
 }
 
-t_vec2	cast_ray(t_vec2 pos, t_vec2 dir, t_props *props)
+t_vec2	cast_ray(t_vec2 pos, t_props *props)
 {
+	t_vec2	dir;
 	t_vec2	end;
 
+	dir.x = 0;
+	dir.y = -1;
+	rotate(&dir, props->player.angle);
 	end = pos;
 	vec2_add(&end, &dir);
 	if (dda_line(pos, end, props))
 		return (pos);
-	return (cast_ray(end, dir, props));
+	return (cast_ray(end, props));
 }
 
 void	cast_rays(t_props *props)
@@ -71,6 +75,6 @@ void	cast_rays(t_props *props)
 	dir.x = 0;
 	dir.y = -1;
 	
-	end = cast_ray(pos, dir, props);
+	end = cast_ray(pos, props);
 	printf("end: %f, %f\n", end.x, end.y);
 }

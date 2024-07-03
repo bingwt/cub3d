@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/03 14:34:05 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/03 14:44:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,14 @@ int	main(void)
 	props.map = process_cub("./maps/squidward.cub");
 	print_map(&props.map, &props);
 	test_check_chunk(&props);
-	// init_window(&props);
+	init_window(&props);
 	init_player(&props);
 	player_start_pos(&props);
-	cast_rays(&props);
+	// cast_rays(&props);
 	// test_dda(&props);
-	// draw_ceiling_floor(&props);
-	// mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
-	// handle_events(&props);
-	// mlx_loop(props.mlx);
+	draw_ceiling_floor(&props);
+	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
+	handle_events(&props);
+	mlx_loop(props.mlx);
 	return (0);
 }
