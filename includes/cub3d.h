@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/01 15:34:19 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/01 19:17:59 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # define RESET "\x1B[0m"
 
 # ifndef WIDTH
-#  define WIDTH 128
+#  define WIDTH 96
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 128
+#  define HEIGHT 96
 # endif
 
 # ifndef TILE
@@ -131,6 +131,7 @@ typedef struct s_pos
 	t_vec2	chunk;
 	t_vec2	relative;
 	t_vec2	exact;
+	t_vec2	dir;
 }	t_pos;
 
 typedef struct s_player
@@ -211,7 +212,7 @@ float	deg_to_rad(float deg);
 void	rotate(t_vec2 *vec, float angle);
 
 //RAYCAST
-void	dda(t_vec2 a, t_vec2 b);
+void	cast_rays(t_props *props);
 
 //WALL
 void	fill_cell(t_props *props);

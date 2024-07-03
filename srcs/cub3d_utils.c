@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/01 15:31:48 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/01 18:41:38 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,8 @@ void	loop(t_props *props)
 	clear_display(props);
 	draw_ceiling_floor(props);
 	print_map(&props->map, props);
+	printf("player pos: %f, %f\n", props->player.pos.exact.x, props->player.pos.exact.y);
+	// cast_ray(props->player.pos.exact, props->player.pos.dir, props);
+	cast_rays(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

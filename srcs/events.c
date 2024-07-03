@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/01 15:37:30 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/01 18:06:17 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	handle_movement(int key, t_props *props)
 	dir = ft_calloc(1, sizeof(t_vec2));
 	if (key == 119)
 	{
-		if (props->player.pos.relative.y <= 0)
+		if (props->player.pos.relative.y < 0)
 		{
 			dir->x = props->player.pos.chunk.x;
 			dir->y = props->player.pos.chunk.y - 1;
@@ -70,7 +70,7 @@ void	handle_movement(int key, t_props *props)
 	}
 	else if (key == 115)
 	{
-		if (props->player.pos.relative.y >= 1)
+		if (props->player.pos.relative.y > 1)
 		{
 			dir->x = props->player.pos.chunk.x;
 			dir->y = props->player.pos.chunk.y + 1;
@@ -84,7 +84,7 @@ void	handle_movement(int key, t_props *props)
 	}
 	else if (key == 97)
 	{
-		if (props->player.pos.relative.x <= 0)
+		if (props->player.pos.relative.x < 0)
 		{
 			dir->x = props->player.pos.chunk.x - 1;
 			dir->y = props->player.pos.chunk.y;
@@ -98,7 +98,7 @@ void	handle_movement(int key, t_props *props)
 	}
 	else if (key == 100)
 	{
-		if (props->player.pos.relative.x >= 1)
+		if (props->player.pos.relative.x > 1)
 		{
 			dir->x = props->player.pos.chunk.x + 1;
 			dir->y = props->player.pos.chunk.y;
@@ -123,6 +123,8 @@ void	handle_movement(int key, t_props *props)
 	free(dir);
 	// printf("x: %f, y: %f\n", props->player.pos->x, props->player.pos->y);
 	print_map(&props->map, props);
+	props->player.pos.exact.x = props->player.pos.chunk.x + props->player.pos.relative.x;
+	props->player.pos.exact.y = props->player.pos.chunk.y + props->player.pos.relative.y;
 	loop(props);
 }
 

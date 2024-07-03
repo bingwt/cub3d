@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/01 15:31:58 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/03 14:34:05 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,33 @@ void	init_player(t_props *props)
 	// check_cell(props->player.pos->x, props->player.pos->y, props);
 }
 
+void	player_start_pos(t_props *props)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < props->map.height)
+	{
+		x = 0;
+		while (x < props->map.width)
+		{
+			if (props->map.matrix[y][x] > 1)
+			{
+				props->player.pos.chunk.x = x;
+				props->player.pos.chunk.y = y;
+				props->player.pos.exact.x = x + props->player.pos.relative.x;
+				props->player.pos.exact.y = y + props->player.pos.relative.y;
+				props->player.pos.dir.x = 0;
+				props->player.pos.dir.y = -1;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 void	test_check_chunk(t_props *props)
 {
 	t_vec2	pos;
@@ -56,6 +83,22 @@ void	test_check_chunk(t_props *props)
 	printf("check_chunk: %d\n", check_chunk(pos, props));
 }
 
+void	test_dda(t_props *props)
+{
+	t_vec2	a;
+	t_vec2	b;
+
+	a.x = props->player.pos.exact.x;
+	a.y = props->player.pos.exact.y;
+	printf("a.x: %f\n", a.x);
+	printf("a.y: %f\n", a.y);
+	b.x = 3;
+	b.y = 0;
+	printf("b.x: %f\n", b.x);
+	printf("b.y: %f\n", b.y);
+	// dda(a, b, props);
+}
+
 //int	main(int argc, char **argv)
 int	main(void)
 {
@@ -64,11 +107,14 @@ int	main(void)
 	props.map = process_cub("./maps/squidward.cub");
 	print_map(&props.map, &props);
 	test_check_chunk(&props);
-	init_window(&props);
+	// init_window(&props);
 	init_player(&props);
-	draw_ceiling_floor(&props);
-	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
-	handle_events(&props);
-	mlx_loop(props.mlx);
+	player_start_pos(&props);
+	cast_rays(&props);
+	// test_dda(&props);
+	// draw_ceiling_floor(&props);
+	// mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
+	// handle_events(&props);
+	// mlx_loop(props.mlx);
 	return (0);
 }
