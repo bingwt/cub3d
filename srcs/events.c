@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/01 18:06:17 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/03 15:11:33 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	handle_movement(int key, t_props *props)
 		}
 		dir->x = 0;
 		dir->y = -0.1;
+		rotate(dir, props->player.angle);
 		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 115)
@@ -80,6 +81,7 @@ void	handle_movement(int key, t_props *props)
 		}
 		dir->x = 0;
 		dir->y = 0.1;
+		rotate(dir, props->player.angle);
 		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 97)
@@ -94,6 +96,7 @@ void	handle_movement(int key, t_props *props)
 		}
 		dir->x = -0.1;
 		dir->y = 0;
+		rotate(dir, props->player.angle);
 		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 100)
@@ -108,6 +111,7 @@ void	handle_movement(int key, t_props *props)
 		}
 		dir->x = 0.1;
 		dir->y = 0;
+		rotate(dir, props->player.angle);
 		vec2_add(&props->player.pos.relative, dir);
 	}
 	else if (key == 65505)

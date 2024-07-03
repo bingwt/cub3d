@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/01 19:17:59 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/03 19:34:05 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # define RESET "\x1B[0m"
 
 # ifndef WIDTH
-#  define WIDTH 96
+#  define WIDTH 256
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 96
+#  define HEIGHT 256
 # endif
 
 # ifndef TILE
