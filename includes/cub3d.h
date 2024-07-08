@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/03 19:34:05 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/08 00:27:21 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # define RESET "\x1B[0m"
 
 # ifndef WIDTH
-#  define WIDTH 256
+#  define WIDTH 1024
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 256
+#  define HEIGHT 1024
 # endif
 
 # ifndef TILE
@@ -96,10 +96,22 @@ typedef struct s_pixel
 
 typedef struct s_image
 {
-	int	pixel_bits;
-	int	line_bytes;
-	int	endian;
+	void	*mlx;
+	void	*ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		pixel_bits;
+	int		line_bytes;
+	int		line_len;
+	int		endian;
 }	t_img;
+
+typedef struct s_texture
+{
+	char	id;
+	t_img	img;
+}	t_texture;
 
 typedef struct s_map
 {
@@ -138,10 +150,23 @@ typedef struct s_player
 {
 	int		size;
 	int		speed;
-	float	angle;
+	int		angle;
 	float	fov;
 	t_pos	pos;
 }	t_player;
+
+typedef struct s_ray {
+	t_vec2	map;
+	t_vec2	delta;
+	t_vec2	step;
+	t_vec2	grid;
+	int		hit;
+	char	grid_side;
+	char	wall_face;
+	float	wall_dist;
+	float	hit_pos;
+	int		texture_slice;
+}	t_ray;
 
 typedef struct s_prop
 {
@@ -158,6 +183,7 @@ typedef struct s_prop
 	t_map		map;
 	t_mouse		mouse;
 	t_player	player;
+	t_texture	textures[4];
 }	t_props;
 
 typedef struct s_line
@@ -182,6 +208,13 @@ int		goto_cell(t_vec2 cell, t_props *props);
 int		fill_front(t_props *props);
 int		cell_action(t_action action, t_props *props);
 int		check_chunk(t_vec2 pos, t_props *props);
+
+// TEXTURES
+t_img	load_img(char *file, t_props *props);
+void	load_textures(t_props *props);
+int		get_pixel_color(t_img *img, int x, int y);
+int		shade_color(int color, float factor);
+int		color_wall(char wall_face, float distance_factor);
 
 // EVENTS
 void	handle_events(t_props *props);

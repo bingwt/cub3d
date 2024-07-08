@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/03 14:44:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/08 00:17:18 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_window(t_props *props)
 void	init_player(t_props *props)
 {
 	props->player.size = 10;
-	props->player.speed = 5;
+	props->player.speed = 1;
 	props->player.angle = 0;
 	props->player.fov = 0;
 	props->player.pos.relative.x = 0.5;
@@ -99,17 +99,17 @@ void	test_dda(t_props *props)
 	// dda(a, b, props);
 }
 
-//int	main(int argc, char **argv)
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_props	props;
 
-	props.map = process_cub("./maps/squidward.cub");
+	props.map = process_cub(argv[1]);
 	print_map(&props.map, &props);
-	test_check_chunk(&props);
+	// test_check_chunk(&props);
 	init_window(&props);
 	init_player(&props);
 	player_start_pos(&props);
+	load_textures(&props);
 	// cast_rays(&props);
 	// test_dda(&props);
 	draw_ceiling_floor(&props);

@@ -6,123 +6,196 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/03 19:43:17 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/08 21:16:12 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float calc_dist(t_vec2 start, t_vec2 end)
+void	init_ray(t_ray *ray, t_props *props, int x)
 {
-	float	dist;
+	float	camera;
+	t_vec2	plane;
 
-	dist = sqrt(pow(end.x - start.x, 2) + pow(end.y - start.y, 2));
-	return (dist);
+	props->player.pos.dir.x = 0;
+	props->player.pos.dir.y = -1;
+	rotate(&props->player.pos.dir, props->player.angle);
+	plane.x = -props->player.pos.dir.y * 0.5;
+	plane.y = props->player.pos.dir.x * 0.5;
+	camera = 2 * x / (float) props->width - 1;
+	props->player.pos.dir.x = props->player.pos.dir.x + plane.x * camera;
+	props->player.pos.dir.y = props->player.pos.dir.y + plane.y * camera;
+	ray->map.x = (int)props->player.pos.exact.x;
+	ray->map.y = (int)props->player.pos.exact.y;
+	ray->delta.x = fabs(1 / props->player.pos.dir.x);
+	ray->delta.y = fabs(1 / props->player.pos.dir.y);
+	ray->hit = 0;
 }
 
-int	collision(t_vec2 pos, t_props *props)
+void	init_dda(t_ray *ray, t_props *props)
 {
-	int	x;
-	int	y;
+	ray->step.x = 1;
+	ray->step.y = 1;
+	if (props->player.pos.dir.x < 0)
+	{
+		ray->step.x = -1;
+		ray->grid.x = (props->player.pos.exact.x - ray->map.x) * ray->delta.x;
+	}
+	else
+		ray->grid.x = (ray->map.x + 1 - props->player.pos.exact.x) * ray->delta.x;
+	if (props->player.pos.dir.y < 0)
+	{
+		ray->step.y = -1;
+		ray->grid.y = (props->player.pos.exact.y - ray->map.y) * ray->delta.y;
+	}
+	else
+		ray->grid.y = (ray->map.y + 1 - props->player.pos.exact.y) * ray->delta.y;
+}
 
-	x = pos.x;
-	y = pos.y;
-	if (x < 0 || x >= props->map.width || y < 0 || y >= props->map.height)
+int	collision(t_ray *ray, t_props *props)
+{
+	if (ray->map.x < 0 || ray->map.x >= props->map.width)
 		return (1);
-	if (props->map.matrix[y][x] == 1)
+	if (ray->map.y < 0 || ray->map.y >= props->map.height)
+		return (1);
+	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 1)
 		return (1);
 	return (0);
 }
 
-int dda_line(t_vec2 start, t_vec2 end, t_props *props)
+void	dda(t_ray *ray, t_props *props)
 {
-	t_vec2	delta;
-	t_vec2	step;
-	float	steps;
-	int		i;
-
-	delta.x = end.x - start.x;
-    delta.y = end.y - start.y;
-    steps = fmaxf(fabsf(delta.x), fabsf(delta.y));    
-    step.x = delta.x / steps;
-    step.y = delta.y / steps;
-	i = 0;
-    while (i < steps)
+	while (ray->hit == 0)
 	{
-		start.x += step.x;
-		start.y += step.y;
-		if (collision(start, props))
-			return (1);
-		i++;
+		if (ray->grid.x < ray->grid.y)
+		{
+			ray->grid.x += ray->delta.x;
+			ray->map.x += ray->step.x;
+			ray->grid_side = 'x';
+			if (ray->step.x > 0)
+				ray->wall_face = 'W';
+			else
+				ray->wall_face = 'E';
+		}
+		else
+		{
+			ray->grid.y += ray->delta.y;
+			ray->map.y += ray->step.y;
+			ray->grid_side = 'y';
+			if (ray->step.y > 0)
+				ray->wall_face = 'S';
+			else
+				ray->wall_face = 'N';
+		}
+		if (collision(ray, props))
+			ray->hit = 1;
 	}
-	return (0);
 }
 
-t_vec2	cast_ray(t_vec2 pos, t_vec2 dir, t_props *props)
+void	get_hit_pos(t_ray *ray, t_props *props)
 {
-	t_vec2	end;
+	int	texture_width;
 
-	end = pos;
-	vec2_add(&end, &dir);
-	if (dda_line(pos, end, props))
-	{
-		pos.y = (int)pos.y;
-		return (pos);
-	}
-	return (cast_ray(end, dir, props));
+	if (ray->wall_face == 'N')
+		texture_width = props->textures[0].img.width;
+	else if (ray->wall_face == 'S')
+		texture_width = props->textures[1].img.width;
+	else if (ray->wall_face == 'E')
+		texture_width = props->textures[2].img.width;
+	else if (ray->wall_face == 'W')
+		texture_width = props->textures[3].img.width;
+	if (ray->grid_side == 'x')
+		ray->wall_dist = (ray->grid.x - ray->delta.x);
+	else
+		ray->wall_dist = (ray->grid.y - ray->delta.y);
+	if (ray->grid_side == 'x')
+		ray->hit_pos = props->player.pos.exact.y + ray->wall_dist * props->player.pos.dir.y;
+	else
+		ray->hit_pos = props->player.pos.exact.x + ray->wall_dist * props->player.pos.dir.x;
+	ray->hit_pos -= floor(ray->hit_pos);
+	ray->texture_slice = (int)(ray->hit_pos * texture_width);
+	if (ray->grid_side == 'x' && props->player.pos.dir.x < 0)
+		ray->texture_slice = texture_width - ray->texture_slice - 1;
+	if (ray->grid_side == 'y' && props->player.pos.dir.y > 0)
+		ray->texture_slice = texture_width - ray->texture_slice - 1;
 }
 
-void	ray(t_props *props)
+void	draw_wall_slice(t_ray *ray, t_props *props, int x)
 {
-	t_vec2	pos;
-	t_vec2	dir;
-	t_vec2	end;
-
-	pos = props->player.pos.exact;
-	dir.x = 0;
-	dir.y = -1;
-	rotate(&dir, props->player.angle);	
-	end = cast_ray(pos, dir, props);
-	printf("end: %f, %f\n", end.x, end.y);
-}
-
-void column_ray(t_vec2 dir, int ray, t_props *props)
-{
-	t_vec2	pos;
-	t_vec2	end;
-	int		dist;
 	int		height;
-	t_line	line;
+	int		start;
+	int		end;
+	float	distance_factor;
+	t_color	color;
 
-	pos = props->player.pos.exact;
-	end = cast_ray(pos, dir, props);
-	dist = calc_dist(pos, end);
-	height = (int)(props->height / dist);
-	line.x0 = ray;
-	line.y0 = props->height / 2 - height / 2;
-	line.x1 = ray;
-	line.y1 = props->height / 2 + height / 2;
-	while (line.y0 < line.y1)
+	height = (int)(props->height / ray->wall_dist);
+	start = -height / 2 + props->height / 2;
+	if (start < 0)
+		start = 0;
+	end = height / 2 + props->height / 2;
+	if (end >= props->height)
+		end = props->height - 1;
+	distance_factor = fmin(ray->wall_dist / 10, 1.0);
+	props->pixel.color = color_wall(ray->wall_face, distance_factor);
+	while (start < end)
 	{
-		color_pixel(line.x0, line.y0, hex_to_dec("ffffff"), props);
-		line.y0++;
+		draw_pixel(x, start, props);
+		start++;
 	}
 }
 
-void cast_rays(t_props *props)
+void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 {
-	t_vec2	dir;
+	int		height;
+	int		start;
+	int		end;
+	float	distance_factor;
+	t_color	color;
 	float	step;
-	int		i;
+	float	tex_pos;
 
-	step = props->player.fov / WIDTH;
-	i = 0;
-	while (i < props->width)
+	height = (int)(props->height / ray->wall_dist);
+	start = (-height / 2) + (props->height / 2);
+	if (start < 0)
+		start = 0;
+	end = (height / 2) + (props->height / 2);
+	if (end >= props->height)
+		end = props->height - 1;
+	distance_factor = fmin(ray->wall_dist / 10, 1.0);
+	props->pixel.color = color_wall(ray->wall_face, distance_factor);
+	step = 1.0 * texture->height / height;
+	tex_pos = (start - props->height / 2 + height / 2) * step;
+	while (start < end)
 	{
-		dir.x = 0;
-		dir.y = -1;
-		rotate(&dir, props->player.angle - (props->player.fov / 2) + (i * step));
-		column_ray(dir, i, props);
-		i++;
+		// props->pixel.color = shade_color(get_pixel_color(texture, ray->texture_slice, (int)tex_pos), distance_factor);
+		props->pixel.color = get_pixel_color(texture, ray->texture_slice, (int)tex_pos);
+		draw_pixel(x, start, props);
+		tex_pos += step;
+		start++;
+	}
+}
+
+void	cast_rays(t_props *props)
+{
+	t_ray	ray;
+	int		x;
+
+	x = 0;
+	while (x < props->width)
+	{
+		init_ray(&ray, props, x);
+		init_dda(&ray, props);
+		dda(&ray, props);
+		get_hit_pos(&ray, props);
+		// draw_wall_slice(&ray, props, x);
+		if (ray.wall_face == 'N')
+			texture_wall_slice(&ray, props, x, &props->textures[0].img);
+		else if (ray.wall_face == 'S')
+			texture_wall_slice(&ray, props, x, &props->textures[1].img);
+		else if (ray.wall_face == 'E')
+			texture_wall_slice(&ray, props, x, &props->textures[2].img);
+		else if (ray.wall_face == 'W')
+			texture_wall_slice(&ray, props, x, &props->textures[3].img);
+		x++;
 	}
 }

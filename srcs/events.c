@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/03 15:11:33 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/08 00:44:03 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	handle_coords(int x, int y, t_props *props)
 			props->player.angle = props->player.angle - 1;
 		else
 			props->player.angle = props->player.angle + 1;
-		// printf("angle: %f\n", props->player.angle);
+		printf("angle: %f\n", props->player.angle);
 		if (props->player.angle < 0)
 			props->player.angle = props->player.angle + 360;
+		loop(props);
 	}
-	// loop(props);
 	return (0);
 }
 
@@ -62,55 +62,133 @@ void	handle_movement(int key, t_props *props)
 			dir->y = props->player.pos.chunk.y - 1;
 			if (!goto_cell(*dir, props))
 				props->player.pos.relative.y = 1;
-			return ;
 		}
-		dir->x = 0;
-		dir->y = -0.1;
-		rotate(dir, props->player.angle);
-		vec2_add(&props->player.pos.relative, dir);
-	}
-	else if (key == 115)
-	{
 		if (props->player.pos.relative.y > 1)
 		{
 			dir->x = props->player.pos.chunk.x;
 			dir->y = props->player.pos.chunk.y + 1;
 			if (!goto_cell(*dir, props))
 				props->player.pos.relative.y = 0;
-			return ;
 		}
-		dir->x = 0;
-		dir->y = 0.1;
-		rotate(dir, props->player.angle);
-		vec2_add(&props->player.pos.relative, dir);
-	}
-	else if (key == 97)
-	{
-		if (props->player.pos.relative.x < 0)
-		{
-			dir->x = props->player.pos.chunk.x - 1;
-			dir->y = props->player.pos.chunk.y;
-			if (!goto_cell(*dir, props))
-				props->player.pos.relative.x = 1;
-			return ;
-		}
-		dir->x = -0.1;
-		dir->y = 0;
-		rotate(dir, props->player.angle);
-		vec2_add(&props->player.pos.relative, dir);
-	}
-	else if (key == 100)
-	{
 		if (props->player.pos.relative.x > 1)
 		{
 			dir->x = props->player.pos.chunk.x + 1;
 			dir->y = props->player.pos.chunk.y;
 			if (!goto_cell(*dir, props))
 				props->player.pos.relative.x = 0;
-			return ;
+		}
+		if (props->player.pos.relative.x < 0)
+		{
+			dir->x = props->player.pos.chunk.x - 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 1;
+		}
+		dir->x = 0;
+		dir->y = -0.1;
+	}
+	else if (key == 115)
+	{
+		if (props->player.pos.relative.y < 0)
+		{
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y - 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 1;
+		}
+		if (props->player.pos.relative.y > 1)
+		{
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y + 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 0;
+		}
+		if (props->player.pos.relative.x > 1)
+		{
+			dir->x = props->player.pos.chunk.x + 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 0;
+		}
+		if (props->player.pos.relative.x < 0)
+		{
+			dir->x = props->player.pos.chunk.x - 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 1;
+		}
+		dir->x = 0;
+		dir->y = 0.1;
+	}
+	else if (key == 97)
+	{
+		if (props->player.pos.relative.y < 0)
+		{
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y - 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 1;
+		}
+		if (props->player.pos.relative.y > 1)
+		{
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y + 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 0;
+		}
+		if (props->player.pos.relative.x > 1)
+		{
+			dir->x = props->player.pos.chunk.x + 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 0;
+		}
+		if (props->player.pos.relative.x < 0)
+		{
+			dir->x = props->player.pos.chunk.x - 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 1;
+		}
+		dir->x = -0.1;
+		dir->y = 0;
+	}
+	else if (key == 100)
+	{
+		if (props->player.pos.relative.y < 0)
+		{
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y - 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 1;
+		}
+		if (props->player.pos.relative.y > 1)
+		{
+			dir->x = props->player.pos.chunk.x;
+			dir->y = props->player.pos.chunk.y + 1;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.y = 0;
+		}
+		if (props->player.pos.relative.x > 1)
+		{
+			dir->x = props->player.pos.chunk.x + 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 0;
+		}
+		if (props->player.pos.relative.x < 0)
+		{
+			dir->x = props->player.pos.chunk.x - 1;
+			dir->y = props->player.pos.chunk.y;
+			if (!goto_cell(*dir, props))
+				props->player.pos.relative.x = 1;
 		}
 		dir->x = 0.1;
 		dir->y = 0;
+	}
+	if (key == 115 || key == 119 || key == 97 || key == 100)
+	{
+		vec2_scale(dir, props->player.speed);
 		rotate(dir, props->player.angle);
 		vec2_add(&props->player.pos.relative, dir);
 	}
@@ -135,7 +213,7 @@ void	handle_movement(int key, t_props *props)
 int	handle_keydown(int key, t_props *props)
 
 {
-	printf("%d\n", key);
+	// printf("%d\n", key);
 	if (key == 61)
 	{
 		props->player.fov += 10;
@@ -183,7 +261,7 @@ int	handle_keydown(int key, t_props *props)
 		props->player.angle = props->player.angle + 10;
 		if (props->player.angle > 360)
 			props->player.angle = props->player.angle - 360;
-		printf("angle: %f\n", props->player.angle);
+		printf("angle: %d\n", props->player.angle);
 	}
 	print_map(&props->map, props);
 	loop(props);

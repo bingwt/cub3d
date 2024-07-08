@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/07/01 15:36:01 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/07 23:04:54 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,9 @@ void	print_map(t_map *map, t_props *props)
 		{
 			if (map->matrix[y][x] > 1)
 			{
-				if (map->matrix[y][x] == 8)
-				{
-					printf(CYAN"*" RESET);
-					return ;
-				}
 				props->player.pos.chunk.x = x;
 				props->player.pos.chunk.y = y;
+				
 				printf(YELLOW "P" RESET);
 			}
 			else if (map->matrix[y][x])
@@ -80,14 +76,21 @@ int	fill_front(t_props *props)
 
 int	cell_action(t_action action, t_props *props)
 {
-	int	x;
-	int	y;
+	t_vec2	dir;
 
-	x = props->player.pos.chunk.x;
-	y = props->player.pos.chunk.y - 1;
-	if (props->map.matrix[y][x] != (int) action)
+	dir.x = props->player.pos.chunk.x;
+	dir.y = props->player.pos.chunk.y;
+	if (props->player.angle >= 315 || props->player.angle < 45)
+		dir.y = props->player.pos.chunk.y - 1;
+	else if (props->player.angle >= 45 && props->player.angle < 135)
+		dir.x = props->player.pos.chunk.x + 1;
+	else if (props->player.angle >= 135 && props->player.angle < 225)
+		dir.y = props->player.pos.chunk.y + 1;
+	else
+		dir.x = props->player.pos.chunk.x - 1;
+	if (props->map.matrix[(int) dir.y][(int) dir.x] != (int) action)
 	{
-		props->map.matrix[y][x] = action;
+		props->map.matrix[(int) dir.y][(int) dir.x] = action;
 		return (0);
 	}
 	return (1);
