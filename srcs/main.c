@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/08 00:17:18 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/10 17:19:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int	main(int argc, char **argv)
 	draw_ceiling_floor(&props);
 	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
 	handle_events(&props);
+	mlx_loop_hook(props.mlx, (void *) loop, &props);
 	mlx_loop(props.mlx);
 	return (0);
 }

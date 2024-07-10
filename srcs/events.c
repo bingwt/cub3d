@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/08 00:44:03 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/10 17:18:38 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	handle_coords(int x, int y, t_props *props)
 		printf("angle: %f\n", props->player.angle);
 		if (props->player.angle < 0)
 			props->player.angle = props->player.angle + 360;
-		loop(props);
+		//loop(props);
 	}
 	return (0);
 }
@@ -207,7 +207,7 @@ void	handle_movement(int key, t_props *props)
 	print_map(&props->map, props);
 	props->player.pos.exact.x = props->player.pos.chunk.x + props->player.pos.relative.x;
 	props->player.pos.exact.y = props->player.pos.chunk.y + props->player.pos.relative.y;
-	loop(props);
+	//loop(props);
 }
 
 int	handle_keydown(int key, t_props *props)
@@ -264,7 +264,7 @@ int	handle_keydown(int key, t_props *props)
 		printf("angle: %d\n", props->player.angle);
 	}
 	print_map(&props->map, props);
-	loop(props);
+	//loop(props);
 	return (0);
 }
 
