@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/12 18:36:52 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 19:30:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,8 @@ void	load_textures(t_props *props);
 int		get_pixel_color(t_img *img, int x, int y);
 int		shade_color(int color, float factor);
 int		color_wall(char wall_face, float distance_factor);
+void	draw_wall_slice(t_ray *ray, t_props *props, int x);
+void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture);
 
 // EVENTS
 void	handle_events(t_props *props);
@@ -238,20 +240,18 @@ void    draw_ceiling_floor(t_props *props);
 void	vec2_add(t_vec2 *a, t_vec2 *b);
 void	vec2_scale(t_vec2 *vec, float scale);
 
-//MATRIX
-// t_vec2	*matrix_to_vec2(float **matrix);
-// float	**vec2_to_matrix(t_vec2 *vec);
-// float	**matrix_mult(float **a, float **b);
-// void	free_matrix(float **matrix);
-
-//ROTATION
+// ROTATION
 float	deg_to_rad(float deg);
 void	rotate(t_vec2 *vec, float angle);
+
+// DDA
+void	init_dda(t_ray *ray, t_props *props);
+void	dda(t_ray *ray, t_props *props);
 
 //RAYCAST
 void	cast_rays(t_props *props);
 
-//WALL
+// WALL
 void	fill_cell(t_props *props);
 
 // CHECK_FILE

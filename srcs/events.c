@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 18:25:57 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 19:35:25 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	handle_close(t_props *props)
 
 int	handle_coords(int x, int y, t_props *props)
 {
-//	printf("x: %d, y: %d\n", x, y);
 	props->mouse.x = x;
 	props->mouse.y = y;
 	if (props->mouse.l_btn)
@@ -49,10 +48,8 @@ int	handle_coords(int x, int y, t_props *props)
 			props->player.angle = props->player.angle - 1;
 		else
 			props->player.angle = props->player.angle + 1;
-		// printf("angle: %f\n", props->player.angle);
 		if (props->player.angle < 0)
 			props->player.angle = props->player.angle + 360;
-		//loop(props);
 	}
 	return (0);
 }
@@ -208,20 +205,14 @@ void	handle_movement(int key, t_props *props)
 	{
 		props->player.speed -= 1;
 	}
-	// rotate(dir, props->player.angle);
-	// vec2_scale(dir, props->player.speed);
 	free(dir);
-	// printf("x: %f, y: %f\n", props->player.pos->x, props->player.pos->y);
-	// print_map(&props->map, props);
 	props->player.pos.exact.x = props->player.pos.chunk.x + props->player.pos.relative.x;
 	props->player.pos.exact.y = props->player.pos.chunk.y + props->player.pos.relative.y;
-	//loop(props);
 }
 
 int	handle_keydown(int key, t_props *props)
 
 {
-	// printf("%d\n", key);
 	if (key == 61)
 	{
 		props->player.fov += 10;
@@ -238,23 +229,12 @@ int	handle_keydown(int key, t_props *props)
 	}
 	else if (key == 102)
 	{
-	//	printf("Fill @ (%d, %d)\n", props->mouse.x, props->mouse.y);
-	//	printf("cell: %d\n", check_cell(props->mouse.x, props->mouse.y, props));
 		cell_action(WALL, props);
-		// if (!check_cell(props->mouse.x, props->mouse.y, props))
-		// {
-		// 	props->map.matrix[props->mouse.cell[0]][props->mouse.cell[1]] = 1;
-		// 	fill_cell(props);
-		// }
 	}
 	else if (key == 97  || key == 100 || key == 115 || key == 119 || key == 65505 || key == 65507)
 		handle_movement(key, props);
 	else if (key == 99)
-	{
-		// if(check_cell(props->mouse.x, props->mouse.y, props))
-		// 	props->map.matrix[props->mouse.cell[0]][props->mouse.cell[1]] = 0;
 		cell_action(CLEAR, props);
-	}
 	else if (key == 65307)
 		handle_close(props);
 	else if (key == 65361)
@@ -262,7 +242,6 @@ int	handle_keydown(int key, t_props *props)
 		props->player.angle = props->player.angle - 10;
 		if (props->player.angle < 0)
 			props->player.angle = props->player.angle + 360;
-		// printf("angle: %f\n", props->player.angle);
 	}
 	else if (key == 65363)
 	{
@@ -271,8 +250,6 @@ int	handle_keydown(int key, t_props *props)
 			props->player.angle = props->player.angle - 360;
 		printf("angle: %d\n", props->player.angle);
 	}
-	// print_map(&props->map, props);
-	//loop(props);
 	return (0);
 }
 
@@ -293,7 +270,6 @@ int	handle_button(int btn, int x, int y, t_props *props)
 void	handle_events(t_props *props)
 {
 	mlx_hook(props->window, 2, 1L << 0, handle_keydown, props);
-//	mlx_mouse_hook(props->window, handle_button, &props);
 	mlx_hook(props->window, 4, 1L << 2, handle_button, props);
 	mlx_hook(props->window, 5, 1L << 3, handle_button, props);
 	mlx_hook(props->window, 17, 0L, handle_close, props);

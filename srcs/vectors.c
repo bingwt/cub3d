@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:23:12 by btan              #+#    #+#             */
-/*   Updated: 2024/06/09 16:57:44 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 19:33:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,4 @@ void	vec2_scale(t_vec2 *vec, float scale)
 	vec->x *= scale;
 	vec->y *= scale;
 }
+

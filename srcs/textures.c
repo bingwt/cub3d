@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/08 21:16:16 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 19:20:39 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,43 +51,32 @@ int	get_pixel_color(t_img *img, int x, int y)
 	return (color);
 }
 
-int	shade_color(int color, float factor)
+void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 {
-	t_color	*rgb;
-	int		shade;
+	int		height;
+	int		start;
+	int		end;
+	float	distance_factor;
+	float	step;
+	float	tex_pos;
 
-	rgb = dec_to_rgb(color);
-	rgb->red = (unsigned char) (rgb->red * (1.0 - factor));
-	rgb->green = (unsigned char) (rgb->green * (1.0 - factor));
-	rgb->blue = (unsigned char) (rgb->blue * (1.0 - factor));
-	shade = rgb_to_dec(rgb);
-	free(rgb);
-	return (shade);
-}
-
-int	color_wall(char wall_face, float distance_factor)
-{
-	t_color	color;
-
-	color.red = (unsigned char) (0 * (1.0 - distance_factor));
-	color.green = (unsigned char) (0 * (1.0 - distance_factor));
-	color.blue = (unsigned char) (0 * (1.0 - distance_factor));
-	if (wall_face == 'N')
-		color.red = (unsigned char) (200 * (1.0 - distance_factor));
-	else if (wall_face == 'E')
-		color.green = (unsigned char) (200 * (1.0 - distance_factor));
-	else if (wall_face == 'S')
-		color.blue = (unsigned char) (200 * (1.0 - distance_factor));
-	else if (wall_face == 'W')
+	height = (int)(props->height / ray->wall_dist);
+	start = (-height / 2) + (props->height / 2);
+	if (start < 0)
+		start = 0;
+	end = (height / 2) + (props->height / 2);
+	if (end >= props->height)
+		end = props->height - 1;
+	distance_factor = fmin(ray->wall_dist / 10, 1.0);
+	props->pixel.color = color_wall(ray->wall_face, distance_factor);
+	step = 1.0 * texture->height / height;
+	tex_pos = (start - props->height / 2 + height / 2) * step;
+	while (start < end)
 	{
-		color.red = (unsigned char) (200 * (1.0 - distance_factor));
-		color.green = (unsigned char) (200 * (1.0 - distance_factor));
+		props->pixel.color = get_pixel_color(texture, ray->texture_slice, (int)tex_pos);
+		if (props->pixel.color != 0)
+			draw_pixel(x, start, props);
+		tex_pos += step;
+		start++;
 	}
-	else
-	{
-		color.red = (unsigned char) (255 * (1.0 - distance_factor));
-		color.green = (unsigned char) (255 * (1.0 - distance_factor));
-		color.blue = (unsigned char) (255 * (1.0 - distance_factor));
-	}
-	return (rgb_to_dec(&color));
 }

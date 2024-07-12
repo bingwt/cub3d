@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:55:45 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 16:08:55 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 19:20:29 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,6 @@ void	color_pixel(int x, int y, int color, t_props *props)
 	offset = (line_bytes * y) + (x * (pixel_bits / 8));
 	if (x >= 0 && x < props->width && y >= 0 && y < props->height)
 		*((unsigned int *)(offset + buffer)) = color;
-}
-
-t_color	*hex_to_rgb(char *hex)
-{
-	char	*base;
-	t_color	*color;
-
-	base = "0123456789abcdef";
-	color = ft_calloc(1, sizeof(t_color));
-	color->blue = ft_atoi_base(hex + 4, base);
-	hex[4] = '\0';
-	color->green = ft_atoi_base(hex + 2, base);
-	hex[2] = '\0';
-	color->red = ft_atoi_base(hex, base);
-	return (color);
-}
-
-t_color	*dec_to_rgb(int dec)
-{
-	t_color	*color;
-
-	color = ft_calloc(1, sizeof(t_color));
-	color->blue = dec % 256;
-	dec = dec / 256;
-	color->green = dec % 256;
-	dec = dec / 256;
-	color->red = dec % 256;
-	return (color);
 }
 
 int	rgb_to_dec(t_color *color)

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/10 17:17:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 19:34:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int	check_cell(int x, int y, t_props *props)
 		row = i - 1;
 	else
 		row = i;
-//	printf("matrix[%d][%d]\n", row, col);
-//	printf("cell: %d\n", props->map.matrix[row][col]);
 	props->mouse.cell[0] = row;
 	props->mouse.cell[1] = col;
 	return (props->map.matrix[row][col]);
@@ -98,10 +96,7 @@ void	draw_background(t_props *props)
 		x = 0;
 		while (x < props->mini_width)
 		{
-			// if (check_cell(x, y, props))
-			// 	props->pixel.color = rgb_to_dec(&cell);
-			// else
-				props->pixel.color = 16777215;
+			props->pixel.color = 16777215;
 			draw_pixel(x++, y, props);
 		}
 	}
@@ -126,9 +121,7 @@ void	draw_grid(t_props *props)
 	{
 		x = 0;
 		if (!(x % gap_x) || !(y % gap_y))
-		{
 			props->pixel.color = rgb_to_dec(&grid);
-		}
 		while (x < props->mini_width)
 		{
 			if (!(x % gap_x) || !(y % gap_y))
@@ -156,13 +149,10 @@ void	clear_display(t_props *props)
 
 void	loop(t_props *props)
 {
-	// t_line	line;
-
 	clear_display(props);
 	draw_ceiling_floor(props);
 	print_map(&props->map, props);
 	printf("player pos: %f, %f\n", props->player.pos.exact.x, props->player.pos.exact.y);
-	// cast_ray(props->player.pos.exact, props->player.pos.dir, props);
 	cast_rays(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }
