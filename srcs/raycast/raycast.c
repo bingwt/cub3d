@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/08 21:16:12 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 18:16:42 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	draw_wall_slice(t_ray *ray, t_props *props, int x)
 	int		start;
 	int		end;
 	float	distance_factor;
-	t_color	color;
 
 	height = (int)(props->height / ray->wall_dist);
 	start = -height / 2 + props->height / 2;
@@ -150,7 +149,6 @@ void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 	int		start;
 	int		end;
 	float	distance_factor;
-	t_color	color;
 	float	step;
 	float	tex_pos;
 
@@ -169,7 +167,8 @@ void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 	{
 		// props->pixel.color = shade_color(get_pixel_color(texture, ray->texture_slice, (int)tex_pos), distance_factor);
 		props->pixel.color = get_pixel_color(texture, ray->texture_slice, (int)tex_pos);
-		draw_pixel(x, start, props);
+		if (props->pixel.color != 0)
+			draw_pixel(x, start, props);
 		tex_pos += step;
 		start++;
 	}

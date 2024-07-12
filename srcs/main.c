@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/10 17:19:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 18:17:10 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,23 @@ void	test_dda(t_props *props)
 
 int	main(int argc, char **argv)
 {
-	t_props	props;
+	t_props	*props;
 
-	props.map = process_cub(argv[1]);
-	print_map(&props.map, &props);
+	(void) argc;
+	props = ft_calloc(1, sizeof(t_props));
+	props->map = process_cub(argv[1]);
+	// print_map(&props.map, &props);
 	// test_check_chunk(&props);
-	init_window(&props);
-	init_player(&props);
-	player_start_pos(&props);
-	load_textures(&props);
+	init_window(props);
+	init_player(props);
+	player_start_pos(props);
+	load_textures(props);
 	// cast_rays(&props);
 	// test_dda(&props);
-	draw_ceiling_floor(&props);
-	mlx_put_image_to_window(props.mlx, props.window, props.image, 0, 0);
-	handle_events(&props);
-	mlx_loop_hook(props.mlx, (void *) loop, &props);
-	mlx_loop(props.mlx);
+	draw_ceiling_floor(props);
+	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
+	handle_events(props);
+	mlx_loop_hook(props->mlx, (void *) loop, props);
+	mlx_loop(props->mlx);
 	return (0);
 }

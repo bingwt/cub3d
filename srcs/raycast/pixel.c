@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:55:45 by btan              #+#    #+#             */
-/*   Updated: 2024/06/24 16:23:19 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 16:08:55 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	draw_pixel(int x, int y, t_props *props)
 	buffer = mlx_get_data_addr(props->image, &pixel_bits, \
 	&line_bytes, &props->img.endian);
 	offset = (line_bytes * y) + (x * (pixel_bits / 8));
+	if ((props->pixel.color >> 24 & 0xFF) == 1)
+		return ;
 	if (x >= 0 && x < props->width && y >= 0 && y < props->height)
 		*((unsigned int *)(offset + buffer)) = props->pixel.color;
 }

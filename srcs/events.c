@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/10 17:18:38 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 18:25:57 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,25 @@ int	handle_close(t_props *props)
 {
 	int	i;
 
+	i = 0;
+	while (i < 4)
+		mlx_destroy_image(props->mlx, props->textures[i++].img.ptr);
+	free(props->map.no);
+	free(props->map.ea);
+	free(props->map.so);
+	free(props->map.we);
 	mlx_destroy_image(props->mlx, props->image);
 	mlx_destroy_window(props->mlx, props->window);
 	mlx_destroy_display(props->mlx);
 	free(props->mlx);
 	i = 0;
-	while (i < props->map.rows)
+	while (i < props->map.height)
 	{
 		free(props->map.matrix[i]);
 		i++;
 	}
 	free(props->map.matrix);
+	free(props);
 	exit(0);
 }
 
@@ -41,7 +49,7 @@ int	handle_coords(int x, int y, t_props *props)
 			props->player.angle = props->player.angle - 1;
 		else
 			props->player.angle = props->player.angle + 1;
-		printf("angle: %f\n", props->player.angle);
+		// printf("angle: %f\n", props->player.angle);
 		if (props->player.angle < 0)
 			props->player.angle = props->player.angle + 360;
 		//loop(props);
@@ -204,7 +212,7 @@ void	handle_movement(int key, t_props *props)
 	// vec2_scale(dir, props->player.speed);
 	free(dir);
 	// printf("x: %f, y: %f\n", props->player.pos->x, props->player.pos->y);
-	print_map(&props->map, props);
+	// print_map(&props->map, props);
 	props->player.pos.exact.x = props->player.pos.chunk.x + props->player.pos.relative.x;
 	props->player.pos.exact.y = props->player.pos.chunk.y + props->player.pos.relative.y;
 	//loop(props);
@@ -254,7 +262,7 @@ int	handle_keydown(int key, t_props *props)
 		props->player.angle = props->player.angle - 10;
 		if (props->player.angle < 0)
 			props->player.angle = props->player.angle + 360;
-		printf("angle: %f\n", props->player.angle);
+		// printf("angle: %f\n", props->player.angle);
 	}
 	else if (key == 65363)
 	{
@@ -263,7 +271,7 @@ int	handle_keydown(int key, t_props *props)
 			props->player.angle = props->player.angle - 360;
 		printf("angle: %d\n", props->player.angle);
 	}
-	print_map(&props->map, props);
+	// print_map(&props->map, props);
 	//loop(props);
 	return (0);
 }
