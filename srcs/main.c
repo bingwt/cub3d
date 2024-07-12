@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/12 18:17:10 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 18:36:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ int	main(int argc, char **argv)
 {
 	t_props	*props;
 
-	(void) argc;
+	if (argc != 2)
+		return (error_msg(INVALID_ARGS, NULL));
 	props = ft_calloc(1, sizeof(t_props));
 	props->map = process_cub(argv[1]);
 	// print_map(&props.map, &props);

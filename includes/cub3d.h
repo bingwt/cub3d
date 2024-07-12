@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/08 00:27:21 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 18:36:52 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 
 typedef enum e_error
 {
+	INVALID_ARGS,
 	FILE_NOT_FOUND,
 	INVALID_EXT,
 	INVALID_CHAR,
@@ -201,6 +202,9 @@ int		check_cell(int x, int y, t_props *props);
 void	draw_background(t_props *props);
 void	draw_grid(t_props *props);
 void	loop(t_props *props);
+
+// ERRORS
+int		error_msg(t_error error, char *arg);
 
 // WORLD
 void	print_map(t_map *map, t_props *props);

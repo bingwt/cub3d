@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:06:32 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/19 18:33:37 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/12 18:44:11 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_map	process_cub(char *file)
 	t_map	map;
 
 	if (!ends_with_cub(file))
-		exit(1);
+		exit(error_msg(INVALID_EXT, file));
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
 		perror(".cub");
-		exit(1);
+		exit(error_msg(FILE_NOT_FOUND, file));
 	}
 	map = set_scene(fd);
 	if (!map.no)
