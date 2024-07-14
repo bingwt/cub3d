@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/12 18:36:14 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:49:03 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	init_player(t_props *props)
 	props->mouse.x = 64;
 	props->mouse.y = 64;
 	props->mouse.l_btn = 0;
-	// check_cell(props->player.pos->x, props->player.pos->y, props);
 }
 
 void	player_start_pos(t_props *props)
@@ -66,39 +65,6 @@ void	player_start_pos(t_props *props)
 	}
 }
 
-void	test_check_chunk(t_props *props)
-{
-	t_vec2	pos;
-	int		width;
-	int		height;
-
-	width = props->map.width;
-	height = props->map.height;
-	pos.x = width / 2 + 0.5;
-	pos.y = height / 2 + 0.5;
-	printf("width: %d\n", width);
-	printf("height: %d\n", height);
-	printf("pos.x: %f\n", pos.x);
-	printf("pos.y: %f\n", pos.y);
-	printf("check_chunk: %d\n", check_chunk(pos, props));
-}
-
-void	test_dda(t_props *props)
-{
-	t_vec2	a;
-	t_vec2	b;
-
-	a.x = props->player.pos.exact.x;
-	a.y = props->player.pos.exact.y;
-	printf("a.x: %f\n", a.x);
-	printf("a.y: %f\n", a.y);
-	b.x = 3;
-	b.y = 0;
-	printf("b.x: %f\n", b.x);
-	printf("b.y: %f\n", b.y);
-	// dda(a, b, props);
-}
-
 int	main(int argc, char **argv)
 {
 	t_props	*props;
@@ -106,15 +72,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (error_msg(INVALID_ARGS, NULL));
 	props = ft_calloc(1, sizeof(t_props));
-	props->map = process_cub(argv[1]);
-	// print_map(&props.map, &props);
-	// test_check_chunk(&props);
+	props->map = process_cub(argv[1], props);
 	init_window(props);
 	init_player(props);
 	player_start_pos(props);
 	load_textures(props);
-	// cast_rays(&props);
-	// test_dda(&props);
 	draw_ceiling_floor(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 	handle_events(props);

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/14 20:56:49 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:49:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ bool	ends_with_cub(char *file);
 bool	check_perms(char *file);
 
 // CUB
-t_map	process_cub(char *file);
+t_map	process_cub(char *file, t_props *props);
 
 // SCENE
 t_map	set_scene(int fd);
