@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:18:40 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 19:23:03 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/15 01:09:02 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,21 @@ void	draw_ceiling_floor(t_props *props)
 	end.y = HEIGHT;
 	color = rgb_to_dec(&props->map.floor);
 	fill_area(start, end, color, props);
+}
+
+void	fill_point(t_vec2 point, int size, int color, t_props *props)
+{
+	t_vec2	end;
+	float	start_x;
+
+	end.x = point.x + (size / 2);
+	end.y = point.y + (size / 2);
+	start_x = point.x - (size / 2);
+	point.y = point.y - (size / 2);
+	while (point.y++ <= end.y)
+	{
+		point.x = start_x;
+		while (point.x <= end.x)
+			color_pixel(point.x++, point.y, color, props);
+	}
 }

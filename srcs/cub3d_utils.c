@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/14 21:41:37 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/15 00:25:34 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	loop(t_props *props)
 {
 	clear_display(props);
 	draw_ceiling_floor(props);
-	print_map(&props->map, props);
+	// print_map(&props->map, props);
 	cast_rays(props);
+	draw_minimap(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

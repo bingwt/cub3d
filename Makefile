@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/14 21:43:58 by btan             ###   ########.fr        #
+#    Updated: 2024/07/15 00:08:05 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS = srcs/cub3d_errors.c \
 	   srcs/raycast/primitives.c \
 	   srcs/raycast/dda.c \
 	   srcs/raycast/raycast.c \
+	   srcs/raycast/minimap.c \
 	   srcs/main.c
 
 OBJECTS = $(SOURCES:.c=.o)
