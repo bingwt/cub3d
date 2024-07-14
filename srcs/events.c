@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/14 21:30:21 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:35:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,11 @@ int	handle_coords(int x, int y, t_props *props)
 
 int	handle_keydown(int key, t_props *props)
 {
-	if (key == 61)
-	{
-		props->player.fov += 10;
-		if (props->player.fov > 360)
-			props->player.fov = 360;
-		printf("fov: %f\n", props->player.fov);
-	}
-	else if (key == 45)
-	{
-		props->player.fov -= 10;
-		if (props->player.fov < 0)
-			props->player.fov = 0;
-		printf("fov: %f\n", props->player.fov);
-	}
-	else if (key == 102)
-	{
-		cell_action(WALL, props);
-	}
-	else if (key == 97  || key == 100 || key == 115 || key == 119 || key == 65505 || key == 65507)
+	if (key == 97 || key == 100 || key == 115 || key == 119 || \
+		key == 65505 || key == 65507)
 		handle_movement(key, props);
+	else if (key == 102)
+		cell_action(WALL, props);
 	else if (key == 99)
 		cell_action(CLEAR, props);
 	else if (key == 65307)
@@ -91,7 +76,6 @@ int	handle_keydown(int key, t_props *props)
 		props->player.angle = props->player.angle + 10;
 		if (props->player.angle > 360)
 			props->player.angle = props->player.angle - 360;
-		printf("angle: %d\n", props->player.angle);
 	}
 	return (0);
 }
@@ -99,7 +83,6 @@ int	handle_keydown(int key, t_props *props)
 int	handle_button(int btn, int x, int y, t_props *props)
 {
 	(void) y;
-	printf("%d\n", btn);
 	if (btn == 1 && !props->mouse.l_btn)
 	{
 		props->mouse.l_btn = 1;
