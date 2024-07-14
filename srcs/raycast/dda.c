@@ -6,11 +6,22 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:29:08 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 19:29:39 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 19:20:47 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	collision(t_ray *ray, t_props *props)
+{
+	if (ray->map.x < 0 || ray->map.x >= props->map.width)
+		return (1);
+	if (ray->map.y < 0 || ray->map.y >= props->map.height)
+		return (1);
+	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 1)
+		return (1);
+	return (0);
+}
 
 void	init_dda(t_ray *ray, t_props *props)
 {

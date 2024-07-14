@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 19:29:00 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 19:20:42 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,12 @@ void	init_ray(t_ray *ray, t_props *props, int x)
 	ray->hit = 0;
 }
 
-int	collision(t_ray *ray, t_props *props)
-{
-	if (ray->map.x < 0 || ray->map.x >= props->map.width)
-		return (1);
-	if (ray->map.y < 0 || ray->map.y >= props->map.height)
-		return (1);
-	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 1)
-		return (1);
-	return (0);
-}
-
 void	get_hit_pos(t_ray *ray, t_props *props)
 {
 	int	texture_width;
 
 	texture_width = props->textures[0].img.width;
-	else if (ray->wall_face == 'S')
+	if (ray->wall_face == 'S')
 		texture_width = props->textures[1].img.width;
 	else if (ray->wall_face == 'E')
 		texture_width = props->textures[2].img.width;

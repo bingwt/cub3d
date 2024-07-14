@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/12 18:33:59 by btan             ###   ########.fr        #
+#    Updated: 2024/07/14 19:20:32 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS = srcs/cub3d_errors.c \
 	   srcs/raycast/pixel.c \
 	   srcs/raycast/primitives.c \
 	   srcs/raycast/wall.c \
+	   srcs/raycast/dda.c \
 	   srcs/raycast/raycast.c \
 	   srcs/main.c
 

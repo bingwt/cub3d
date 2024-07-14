@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 19:20:39 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 19:25:24 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,26 @@ int	get_pixel_color(t_img *img, int x, int y)
 void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 {
 	int		height;
-	int		start;
-	int		end;
-	float	distance_factor;
+	int		slice[2];
 	float	step;
 	float	tex_pos;
 
 	height = (int)(props->height / ray->wall_dist);
-	start = (-height / 2) + (props->height / 2);
-	if (start < 0)
-		start = 0;
-	end = (height / 2) + (props->height / 2);
-	if (end >= props->height)
-		end = props->height - 1;
-	distance_factor = fmin(ray->wall_dist / 10, 1.0);
-	props->pixel.color = color_wall(ray->wall_face, distance_factor);
+	slice[0] = (-height / 2) + (props->height / 2);
+	if (slice[0] < 0)
+		slice[0] = 0;
+	slice[1] = (height / 2) + (props->height / 2);
+	if (slice[1] >= props->height)
+		slice[1] = props->height - 1;
 	step = 1.0 * texture->height / height;
-	tex_pos = (start - props->height / 2 + height / 2) * step;
-	while (start < end)
+	tex_pos = (slice[0] - props->height / 2 + height / 2) * step;
+	while (slice[0] < slice[1])
 	{
-		props->pixel.color = get_pixel_color(texture, ray->texture_slice, (int)tex_pos);
+		props->pixel.color = get_pixel_color(texture, ray->texture_slice, \
+		(int)tex_pos);
 		if (props->pixel.color != 0)
-			draw_pixel(x, start, props);
+			draw_pixel(x, slice[0], props);
 		tex_pos += step;
-		start++;
+		slice[0]++;
 	}
 }
