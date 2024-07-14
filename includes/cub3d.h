@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/12 19:30:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 20:56:49 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,9 @@ int		color_wall(char wall_face, float distance_factor);
 void	draw_wall_slice(t_ray *ray, t_props *props, int x);
 void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture);
 
+// MOVEMENT
+void	handle_movement(int key, t_props *props);
+
 // EVENTS
 void	handle_events(t_props *props);
 
@@ -239,6 +242,7 @@ void    draw_ceiling_floor(t_props *props);
 //VECTORS
 void	vec2_add(t_vec2 *a, t_vec2 *b);
 void	vec2_scale(t_vec2 *vec, float scale);
+void	vec2_sub(t_vec2 *a, t_vec2 *b);
 
 // ROTATION
 float	deg_to_rad(float deg);

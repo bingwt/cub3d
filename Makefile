@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/14 19:20:32 by btan             ###   ########.fr        #
+#    Updated: 2024/07/14 20:15:51 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS = srcs/cub3d_errors.c \
 	   srcs/map/scene.c \
 	   srcs/map/validate_map.c \
 	   srcs/textures.c \
+	   srcs/movement.c \
 	   srcs/events.c \
 	   srcs/vectors.c \
 	   srcs/rotation.c \
