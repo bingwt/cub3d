@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:41:11 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 18:47:55 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:39:48 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	error_msg(t_error error, char *arg)
 {
 	printf("Error\n");
 	if (error == INVALID_ARGS)
-		printf("cub3D: invalid arguments\nUsage: ./cub3D <map.cub>");
+		printf("cub3D: invalid arguments\nUsage: ./cub3D <map.cub>\n");
 	else if (error == FILE_NOT_FOUND)
 		printf("cub3D: map path not found: %s\n", arg);
 	else if (error == INVALID_EXT)
@@ -34,6 +34,6 @@ int	error_msg(t_error error, char *arg)
 	else if (error == INVALID_TEXTURE)
 		printf("cub3D: invald texture path or texture path not found.\n");
 	else if (error == INVALID_COLOR)
-		printf("cub3D: invalid colors, must be R,G,B colors in range [0 - 255]\n");
+		printf("cub3D: invalid colors\n");
 	return (1);
 }

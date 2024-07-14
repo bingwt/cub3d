@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 19:34:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:41:37 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,41 +50,6 @@ void	ft_swap(float *a, float *b)
 	*b = temp;
 }
 
-int	check_cell(int x, int y, t_props *props)
-{
-	int	col;
-	int	row;
-	int	i;
-
-	col = 0;
-	row = 0;
-	i = 0;
-	while (col < x)
-	{
-		col = props->map.bounds[i];
-		if (x > col)
-			i++;
-	}
-	if (col > 0)
-		col = i - 1;
-	else
-		col = i;
-	i = 0;
-	while (row < y)
-	{
-		row = props->map.bounds[i];
-		if (y > row)
-			i++;
-	}
-	if (row > 0)
-		row = i - 1;
-	else
-		row = i;
-	props->mouse.cell[0] = row;
-	props->mouse.cell[1] = col;
-	return (props->map.matrix[row][col]);
-}
-
 void	draw_background(t_props *props)
 {
 	int		x;
@@ -98,35 +63,6 @@ void	draw_background(t_props *props)
 		{
 			props->pixel.color = 16777215;
 			draw_pixel(x++, y, props);
-		}
-	}
-}
-
-void	draw_grid(t_props *props)
-{
-	t_color grid;
-	int	gap_x;
-	int	gap_y;
-	int	x;
-	int	y;
-
-	grid.red = 128;
-	grid.green = 128;
-	grid.blue = 128;
-	props->pixel.color = rgb_to_dec(&grid);
-	gap_x = props->mini_width / props->map.cols;
-	gap_y = props->mini_height / props->map.rows;
-	y = 0;
-	while (y++ < props->mini_height)
-	{
-		x = 0;
-		if (!(x % gap_x) || !(y % gap_y))
-			props->pixel.color = rgb_to_dec(&grid);
-		while (x < props->mini_width)
-		{
-			if (!(x % gap_x) || !(y % gap_y))
-				draw_pixel(x, y, props);
-			x++;
 		}
 	}
 }
@@ -152,7 +88,6 @@ void	loop(t_props *props)
 	clear_display(props);
 	draw_ceiling_floor(props);
 	print_map(&props->map, props);
-	printf("player pos: %f, %f\n", props->player.pos.exact.x, props->player.pos.exact.y);
 	cast_rays(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

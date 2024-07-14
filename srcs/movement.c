@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:06:28 by btan              #+#    #+#             */
-/*   Updated: 2024/07/14 21:31:57 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:43:31 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_collision_y(t_vec2 pos, t_vec2 dir, t_props *props)
 	return (0);
 }
 
-void	check_collision(t_vec2 pos, t_vec2 dir, t_props *props)
+void	check_collision(t_vec2 dir, t_props *props)
 {
 	if (!check_collision_x(props->player.pos.exact, dir, props))
 		props->player.pos.relative.x += dir.x;
@@ -70,7 +70,7 @@ void	handle_movement(int key, t_props *props)
 	{
 		vec2_scale(&dir, props->player.speed);
 		rotate(&dir, props->player.angle);
-		check_collision(props->player.pos.exact, dir, props);
+		check_collision(dir, props);
 	}
 	else if (key == 65505 || key == 65507)
 		set_speed(key, props);

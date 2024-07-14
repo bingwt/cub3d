@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:38:55 by btan              #+#    #+#             */
-/*   Updated: 2024/07/12 19:33:13 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:41:54 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	rotate(t_vec2 *vec, float angle)
 	vec->y = new_vec->y;
 	free(new_vec);
 }
-

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/07/07 23:04:54 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/14 21:42:40 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	print_map(t_map *map, t_props *props)
 			{
 				props->player.pos.chunk.x = x;
 				props->player.pos.chunk.y = y;
-				
 				printf(YELLOW "P" RESET);
 			}
 			else if (map->matrix[y][x])
@@ -39,8 +38,6 @@ void	print_map(t_map *map, t_props *props)
 		printf("\n");
 		y++;
 	}
-	printf("Player @ cell[x: %d][y: %d]\n", (int) props->player.pos.chunk.x, (int) props->player.pos.chunk.y);
-	printf("Player @ rela[x: %f][y: %f]\n\n", props->player.pos.relative.x, props->player.pos.relative.y);
 }
 
 int	goto_cell(t_vec2 cell, t_props *props)
