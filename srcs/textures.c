@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/14 19:25:24 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 14:44:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 	float	step;
 	float	tex_pos;
 
-	height = (int)(props->height / ray->wall_dist);
+	height = (int) (props->height / ray->wall_dist);
 	slice[0] = (-height / 2) + (props->height / 2);
 	if (slice[0] < 0)
 		slice[0] = 0;
@@ -70,7 +70,7 @@ void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 	while (slice[0] < slice[1])
 	{
 		props->pixel.color = get_pixel_color(texture, ray->texture_slice, \
-		(int)tex_pos);
+		(int) tex_pos);
 		if (props->pixel.color != 0)
 			draw_pixel(x, slice[0], props);
 		tex_pos += step;

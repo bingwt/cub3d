@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:06:28 by btan              #+#    #+#             */
-/*   Updated: 2024/07/15 00:15:09 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 14:10:07 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ int	check_collision_y(t_vec2 pos, t_vec2 dir, t_props *props)
 
 void	check_collision(t_vec2 dir, t_props *props)
 {
+	if (props->player.no_clip == 1)
+	{
+		vec2_add(&props->player.pos.relative, &dir);
+		return ;
+	}
 	if (!check_collision_x(props->player.pos.exact, dir, props))
 		props->player.pos.relative.x += dir.x;
 	if (!check_collision_y(props->player.pos.exact, dir, props))

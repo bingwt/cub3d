@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/14 19:20:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 14:44:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	init_ray(t_ray *ray, t_props *props, int x)
 	camera = 2 * x / (float) props->width - 1;
 	props->player.pos.dir.x = props->player.pos.dir.x + plane.x * camera;
 	props->player.pos.dir.y = props->player.pos.dir.y + plane.y * camera;
-	ray->map.x = (int)props->player.pos.exact.x;
-	ray->map.y = (int)props->player.pos.exact.y;
+	ray->map.x = (int) props->player.pos.exact.x;
+	ray->map.y = (int) props->player.pos.exact.y;
 	ray->delta.x = fabs(1 / props->player.pos.dir.x);
 	ray->delta.y = fabs(1 / props->player.pos.dir.y);
 	ray->hit = 0;

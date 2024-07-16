@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/15 01:09:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 14:37:13 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,9 @@ typedef struct s_player
 	int		size;
 	int		speed;
 	int		angle;
-	float	fov;
+	int		mouse_movement;
+	int		minimap;
+	int		no_clip;
 	t_pos	pos;
 }	t_player;
 
