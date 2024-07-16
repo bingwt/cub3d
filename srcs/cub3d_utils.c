@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/16 14:41:19 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 19:11:15 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,14 @@ void	ft_swap(float *a, float *b)
 	*b = temp;
 }
 
-void	draw_background(t_props *props)
+void	handle_toggles(int key, t_props *props)
 {
-	int		x;
-	int		y;
-
-	y = 0;
-	while (y++ < props->mini_height)
-	{
-		x = 0;
-		while (x < props->mini_width)
-		{
-			props->pixel.color = 16777215;
-			draw_pixel(x++, y, props);
-		}
-	}
+	if (key == 108)
+		props->player.mouse_movement = -props->player.mouse_movement;
+	else if (key == 109)
+		props->player.minimap = -props->player.minimap;
+	else if (key == 110)
+		props->player.no_clip = -props->player.no_clip;
 }
 
 void	clear_display(t_props *props)

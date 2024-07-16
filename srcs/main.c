@@ -6,14 +6,26 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/16 14:39:18 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 18:49:07 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_window(t_props *props)
+char	*init_title(char *file)
 {
+	char	**path;
+	char	*title;
+
+	path = ft_split(file, '/');
+	title = ft_strjoin("cub3d - ", path[ft_squarelen(path) - 1]);
+	ft_free_split(&path);
+	return (title);
+}
+
+void	init_window(char *file, t_props *props)
+{
+	props->title = init_title(file);
 	props->mlx = mlx_init();
 	props->width = WIDTH;
 	props->height = HEIGHT;
@@ -21,7 +33,7 @@ void	init_window(t_props *props)
 	props->mini_height = 256;
 	props->tile_size = TILE_SIZE;
 	props->window = mlx_new_window(props->mlx, props->width, \
-	props->height, "cub3d");
+	props->height, props->title);
 	props->image = mlx_new_image(props->mlx, props->width, props->height);
 }
 
@@ -75,7 +87,7 @@ int	main(int argc, char **argv)
 		return (error_msg(INVALID_ARGS, NULL));
 	props = ft_calloc(1, sizeof(t_props));
 	props->map = process_cub(argv[1], props);
-	init_window(props);
+	init_window(argv[1], props);
 	init_player(props);
 	player_start_pos(props);
 	load_textures(props);

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/16 14:42:10 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 18:59:28 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	handle_close(t_props *props)
 	int	i;
 
 	i = 0;
+	free(props->title);
 	while (i < 4)
 		mlx_destroy_image(props->mlx, props->textures[i++].img.ptr);
 	free(props->map.no);
@@ -58,7 +59,6 @@ int	handle_coords(int x, int y, t_props *props)
 
 int	handle_keydown(int key, t_props *props)
 {
-	printf("%d\n", key);
 	if (key == 97 || key == 100 || key == 115 || key == 119 || \
 		key == 65505 || key == 65507)
 		handle_movement(key, props);
@@ -66,12 +66,8 @@ int	handle_keydown(int key, t_props *props)
 		cell_action(WALL, props);
 	else if (key == 99)
 		cell_action(CLEAR, props);
-	else if (key == 108)
-		props->player.mouse_movement = -props->player.mouse_movement;
-	else if (key == 109)
-		props->player.minimap = -props->player.minimap;
-	else if (key == 110)
-		props->player.no_clip = -props->player.no_clip;
+	else if (key == 108 || key == 109 || key == 110)
+		handle_toggles(key, props);
 	else if (key == 65307)
 		handle_close(props);
 	else if (key == 65361)

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/16 14:37:13 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 19:11:32 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ typedef struct s_ray {
 
 typedef struct s_prop
 {
+	char		*title;
 	void		*mlx;
 	void		*window;
 	void		*image;
@@ -200,9 +201,7 @@ typedef struct s_line
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
 void	ft_swap(float *a, float *b);
-int		check_cell(int x, int y, t_props *props);
-void	draw_background(t_props *props);
-void	draw_grid(t_props *props);
+void	handle_toggles(int key, t_props *props);
 void	loop(t_props *props);
 
 // ERRORS
