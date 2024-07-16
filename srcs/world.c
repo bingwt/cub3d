@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/07/14 21:42:40 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/15 00:02:07 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ int	cell_action(t_action action, t_props *props)
 {
 	t_vec2	dir;
 
-	dir.x = props->player.pos.chunk.x;
-	dir.y = props->player.pos.chunk.y;
+	dir.x = (int) props->player.pos.exact.x;
+	dir.y = (int) props->player.pos.exact.y;
 	if (props->player.angle >= 315 || props->player.angle < 45)
-		dir.y = props->player.pos.chunk.y - 1;
+		dir.y = (int) props->player.pos.exact.y - 1;
 	else if (props->player.angle >= 45 && props->player.angle < 135)
-		dir.x = props->player.pos.chunk.x + 1;
+		dir.x = (int) props->player.pos.exact.x + 1;
 	else if (props->player.angle >= 135 && props->player.angle < 225)
-		dir.y = props->player.pos.chunk.y + 1;
+		dir.y = (int) props->player.pos.exact.y + 1;
 	else
 		dir.x = props->player.pos.chunk.x - 1;
 	if (props->map.matrix[(int) dir.y][(int) dir.x] != (int) action)
