@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/17 19:45:57 by xlow              #+#    #+#             */
+/*   Updated: 2024/07/17 19:47:47 by xlow             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static bool	char_check(char *next, char *line)
 {
-	int	i;
+	int			i;
 	static int	j = 0;
 
 	i = 0;
@@ -47,26 +59,23 @@ static void	flood_fill(char **error, char **content, int x, int y)
 	flood_fill(error, content, x, y - 1);
 }
 
-static bool check_boundaries(char **content)
+static bool	check_boundaries(char **content)
 {
 	int		x;
 	int		y;
 	char	*error;
 	char	**copy;
 
-	x = 0;
+	x = -1;
 	y = 0;
 	error = NULL;
 	while (content[y])
 	{
-		while (content[y][x])
-		{
+		while (content[y][++x])
 			if (content[y][x] != '0' && content[y][x] != '1')
 				break ;
-			x++;
-		}
 		if (content[y][x] && content[y][x] != '0' && content[y][x] != '1')
-			break;
+			break ;
 		x = 0;
 		y++;
 	}
