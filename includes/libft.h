@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:53:32 by xlow              #+#    #+#             */
-/*   Updated: 2024/04/07 20:23:03 by xlow             ###   ########.fr       */
+/*   Updated: 2024/06/24 21:05:48 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,6 @@ int			ft_squarelen(char **square);
 int			ft_cubelen(char ***cube);
 char		*ft_strjoin_strs(char **strs);
 char		*ft_strip(char *s, char c);
+char		**ft_splitdup(char **content);
 
 #endif

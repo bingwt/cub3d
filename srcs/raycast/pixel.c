@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:55:45 by btan              #+#    #+#             */
-/*   Updated: 2024/06/16 14:47:16 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/12 19:20:29 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,26 @@ void	draw_pixel(int x, int y, t_props *props)
 	buffer = mlx_get_data_addr(props->image, &pixel_bits, \
 	&line_bytes, &props->img.endian);
 	offset = (line_bytes * y) + (x * (pixel_bits / 8));
+	if ((props->pixel.color >> 24 & 0xFF) == 1)
+		return ;
 	if (x >= 0 && x < props->width && y >= 0 && y < props->height)
 		*((unsigned int *)(offset + buffer)) = props->pixel.color;
 }
 
-t_color	*hex_to_rgb(char *hex)
+void	color_pixel(int x, int y, int color, t_props *props)
 {
-	char	*base;
-	t_color	*color;
+	char	*buffer;
+	int		offset;
+	int		pixel_bits;
+	int		line_bytes;
 
-	base = "0123456789abcdef";
-	color = ft_calloc(1, sizeof(t_color));
-	color->blue = ft_atoi_base(hex + 4, base);
-	hex[4] = '\0';
-	color->green = ft_atoi_base(hex + 2, base);
-	hex[2] = '\0';
-	color->red = ft_atoi_base(hex, base);
-	return (color);
-}
-
-t_color	*dec_to_rgb(int dec)
-{
-	t_color	*color;
-
-	color = ft_calloc(1, sizeof(t_color));
-	color->blue = dec % 256;
-	dec = dec / 256;
-	color->green = dec % 256;
-	dec = dec / 256;
-	color->red = dec % 256;
-	return (color);
+	pixel_bits = props->img.pixel_bits;
+	line_bytes = props->img.line_bytes;
+	buffer = mlx_get_data_addr(props->image, &pixel_bits, \
+	&line_bytes, &props->img.endian);
+	offset = (line_bytes * y) + (x * (pixel_bits / 8));
+	if (x >= 0 && x < props->width && y >= 0 && y < props->height)
+		*((unsigned int *)(offset + buffer)) = color;
 }
 
 int	rgb_to_dec(t_color *color)
@@ -67,4 +57,12 @@ int	rgb_to_dec(t_color *color)
 	dec = dec + color->green * 256;
 	dec = dec + color->blue;
 	return (dec);
+}
+
+int	hex_to_dec(char *hex)
+{
+	char	*base;
+
+	base = "0123456789abcdef";
+	return (ft_atoi_base(hex, base));
 }

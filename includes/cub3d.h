@@ -6,12 +6,22 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/21 18:19:52 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/16 19:11:32 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define RED "\x1B[31m"
+# define GREEN "\x1B[32m"
+# define YELLOW "\x1B[33m"
+# define BLUE "\x1B[34m"
+# define MAGENTA "\x1B[35m"
+# define CYAN "\x1B[36m"
+# define WHITE "\x1B[37m"
+# define BLACK "\x1b[30m"
+# define RESET "\x1B[0m"
 
 # ifndef WIDTH
 #  define WIDTH 1024
@@ -47,6 +57,7 @@
 
 typedef enum e_error
 {
+	INVALID_ARGS,
 	FILE_NOT_FOUND,
 	INVALID_EXT,
 	INVALID_CHAR,
@@ -57,6 +68,12 @@ typedef enum e_error
 	INVALID_TEXTURE,
 	INVALID_COLOR
 }	t_error;
+
+typedef enum e_action
+{
+	CLEAR,
+	WALL
+}	t_action;
 
 typedef struct s_vec2
 {
@@ -80,10 +97,22 @@ typedef struct s_pixel
 
 typedef struct s_image
 {
-	int	pixel_bits;
-	int	line_bytes;
-	int	endian;
+	void	*mlx;
+	void	*ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		pixel_bits;
+	int		line_bytes;
+	int		line_len;
+	int		endian;
 }	t_img;
+
+typedef struct s_texture
+{
+	char	id;
+	t_img	img;
+}	t_texture;
 
 typedef struct s_map
 {
@@ -110,18 +139,41 @@ typedef struct s_mouse
 	int	hold;
 }	t_mouse;
 
+typedef struct s_pos
+{
+	t_vec2	chunk;
+	t_vec2	relative;
+	t_vec2	exact;
+	t_vec2	dir;
+}	t_pos;
+
 typedef struct s_player
 {
 	int		size;
 	int		speed;
-	float	angle;
-	float	fov;
-	t_vec2	*pos;
-	t_vec2	los;
+	int		angle;
+	int		mouse_movement;
+	int		minimap;
+	int		no_clip;
+	t_pos	pos;
 }	t_player;
+
+typedef struct s_ray {
+	t_vec2	map;
+	t_vec2	delta;
+	t_vec2	step;
+	t_vec2	grid;
+	int		hit;
+	char	grid_side;
+	char	wall_face;
+	float	wall_dist;
+	float	hit_pos;
+	int		texture_slice;
+}	t_ray;
 
 typedef struct s_prop
 {
+	char		*title;
 	void		*mlx;
 	void		*window;
 	void		*image;
@@ -135,6 +187,7 @@ typedef struct s_prop
 	t_map		map;
 	t_mouse		mouse;
 	t_player	player;
+	t_texture	textures[4];
 }	t_props;
 
 typedef struct s_line
@@ -148,45 +201,64 @@ typedef struct s_line
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
 void	ft_swap(float *a, float *b);
-int		check_cell(int x, int y, t_props *props);
-void	draw_background(t_props *props);
-void	draw_grid(t_props *props);
+void	handle_toggles(int key, t_props *props);
 void	loop(t_props *props);
+
+// ERRORS
+int		error_msg(t_error error, char *arg);
+
+// WORLD
+void	print_map(t_map *map, t_props *props);
+int		goto_cell(t_vec2 cell, t_props *props);
+int		fill_front(t_props *props);
+int		cell_action(t_action action, t_props *props);
+int		check_chunk(t_vec2 pos, t_props *props);
+
+// TEXTURES
+t_img	load_img(char *file, t_props *props);
+void	load_textures(t_props *props);
+int		get_pixel_color(t_img *img, int x, int y);
+int		shade_color(int color, float factor);
+int		color_wall(char wall_face, float distance_factor);
+void	draw_wall_slice(t_ray *ray, t_props *props, int x);
+void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture);
+
+// MOVEMENT
+void	handle_movement(int key, t_props *props);
 
 // EVENTS
 void	handle_events(t_props *props);
 
 // PIXEL
 void	draw_pixel(int x, int y, t_props *props);
+void	color_pixel(int x, int y, int color, t_props *props);
 t_color	*hex_to_rgb(char *hex);
 t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
+int		hex_to_dec(char *hex);
 
+// PRIMITIVES
+void 	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
+void    draw_ceiling_floor(t_props *props);
+void	fill_point(t_vec2 point, int size, int color, t_props *props);
 //VECTORS
 void	vec2_add(t_vec2 *a, t_vec2 *b);
 void	vec2_scale(t_vec2 *vec, float scale);
+void	vec2_sub(t_vec2 *a, t_vec2 *b);
 
-//MATRIX
-// t_vec2	*matrix_to_vec2(float **matrix);
-// float	**vec2_to_matrix(t_vec2 *vec);
-// float	**matrix_mult(float **a, float **b);
-// void	free_matrix(float **matrix);
-
-//ROTATION
+// ROTATION
 float	deg_to_rad(float deg);
 void	rotate(t_vec2 *vec, float angle);
 
+// DDA
+void	init_dda(t_ray *ray, t_props *props);
+void	dda(t_ray *ray, t_props *props);
+
 //RAYCAST
-void	draw_bresenham(t_line *line, t_props *props);
-void	draw_dda(t_line *line, t_props *props);
-void	draw_rays(t_vec2 *player, t_props *props);
+void	cast_rays(t_props *props);
 
-//WALL
+// WALL
 void	fill_cell(t_props *props);
-
-// PLAYER
-void	fill_point(t_vec2, t_props *props);
-void	player(t_props *props);
 
 // CHECK_FILE
 bool	ends_with_xpm(char *file);
@@ -194,7 +266,7 @@ bool	ends_with_cub(char *file);
 bool	check_perms(char *file);
 
 // CUB
-t_map	process_cub(char *file);
+t_map	process_cub(char *file, t_props *props);
 
 // SCENE
 t_map	set_scene(int fd);
@@ -225,5 +297,8 @@ char	**normalise_map(char **content);
 
 // CONVERT_MAP
 int	**convert_map(char **content);
+
+// MINIMAP
+void	draw_minimap(t_props *props);
 
 #endif

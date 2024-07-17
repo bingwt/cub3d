@@ -6,11 +6,11 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/06/09 16:30:20 by btan             ###   ########.fr        #
+#    Updated: 2024/07/15 00:08:05 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 INCLUDES = includes
 
@@ -22,14 +22,28 @@ LIBS = -lXext -lX11 -lm
 
 SRCS = srcs/cub3d_errors.c \
 	   srcs/cub3d_utils.c \
+	   srcs/world.c \
+	   srcs/map/assign_scene.c \
+	   srcs/map/check_file.c \
+	   srcs/map/convert_map.c \
+	   srcs/map/cub.c \
+	   srcs/map/free_map.c \
+	   srcs/map/gnl_skip_nl.c \
+	   srcs/map/map.c \
+	   srcs/map/normalise_map.c \
+	   srcs/map/rgb.c \
+	   srcs/map/scene.c \
+	   srcs/map/validate_map.c \
+	   srcs/textures.c \
+	   srcs/movement.c \
 	   srcs/events.c \
 	   srcs/vectors.c \
 	   srcs/rotation.c \
 	   srcs/raycast/pixel.c \
-	   srcs/raycast/wall.c \
-	   srcs/raycast/raycast_utils.c \
+	   srcs/raycast/primitives.c \
 	   srcs/raycast/dda.c \
-	   srcs/player.c \
+	   srcs/raycast/raycast.c \
+	   srcs/raycast/minimap.c \
 	   srcs/main.c
 
 OBJECTS = $(SOURCES:.c=.o)

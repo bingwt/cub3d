@@ -1,0 +1,17 @@
+NO ./squidward.xpm
+SO ./squidward.xpm
+EA ./squidward.xpm
+WE ./squidward.xpm
+
+F 128,128,128
+C 0,0,0
+
+
+1111111111111
+1000000000001
+1000000111111
+10000001
+10010001
+100N0001
+10000001
+11111111
