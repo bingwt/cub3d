@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/16 18:49:07 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/18 01:16:12 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	player_start_pos(t_props *props)
 		{
 			if (props->map.matrix[y][x] > 1)
 			{
+				props->player.angle = props->map.matrix[y][x];
 				props->player.pos.chunk.x = x;
 				props->player.pos.chunk.y = y;
 				props->player.pos.exact.x = x + props->player.pos.relative.x;
