@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/07/15 00:02:07 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/18 15:39:35 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int	cell_action(t_action action, t_props *props)
 		dir.y = (int) props->player.pos.exact.y + 1;
 	else
 		dir.x = props->player.pos.chunk.x - 1;
+	if (((int) dir.x - 1 < 0 || (int) dir.x + 1 > props->map.width) || \
+			((int) dir.y - 1 < 0 || (int) dir.y + 1 > props->map.height))
+		return (1);
 	if (props->map.matrix[(int) dir.y][(int) dir.x] != (int) action)
 	{
 		props->map.matrix[(int) dir.y][(int) dir.x] = action;
