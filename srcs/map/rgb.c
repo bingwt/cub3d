@@ -51,9 +51,9 @@ bool	valid_rgbs(char ***lines)
 	i = 0;
 	while (i < 6)
 	{
-		if (!ft_strcmp(lines[i][0], "C"))
+		if (!ft_strcmp(lines[i][0], "C") && ft_occ(lines[i][1], ',') == 3)
 			c = ft_split(lines[i][1], ',');
-		else if (!ft_strcmp(lines[i][0], "F"))
+		else if (!ft_strcmp(lines[i][0], "F") && ft_occ(lines[i][1], ',') == 3)
 			f = ft_split(lines[i][1], ',');
 		i++;
 	}
