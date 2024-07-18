@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   ft_occ.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
+/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 14:36:10 by btan              #+#    #+#             */
-/*   Updated: 2024/05/03 16:54:42 by btan             ###   ########.fr       */
+/*   Created: 2024/07/18 19:17:22 by xlow              #+#    #+#             */
+/*   Updated: 2024/07/18 19:19:53 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_occ(char *s, char c)
 {
-	if (argc == 2)
-		read_map(argv[1]);
-	return (0);
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (i);
+	while (*s)
+	{
+		if (*s == c)
+			i++;
+		s++;
+	}
+	return (i);
 }

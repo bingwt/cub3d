@@ -1,7 +1,7 @@
-NO ./north.xpm
-SO ./south.xp
-EA ./east.xpm
-WE ./west.xpm
+NO ../no.xpm
+SO ../so.xp
+EA ../ea.xpm
+WE ../we.xpm
 
 F 220,100,0
 C 225,30,0

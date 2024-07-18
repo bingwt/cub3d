@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/16 19:11:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/18 22:47:41 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	loop(t_props *props)
 {
 	clear_display(props);
 	draw_ceiling_floor(props);
-	// print_map(&props->map, props);
 	cast_rays(props);
 	if (props->player.minimap == 1)
 		draw_minimap(props);

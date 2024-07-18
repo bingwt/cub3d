@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:06:58 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 19:42:34 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/18 22:44:21 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ static char	**get_scene(int fd)
 	}
 	if (i == 6)
 		return (scene);
+	printf("Error\nIncorrect file format\n");
 	ft_free_split(&scene);
 	return (NULL);
 }

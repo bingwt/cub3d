@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:53:32 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/24 21:05:48 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/18 19:36:05 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ int			ft_cubelen(char ***cube);
 char		*ft_strjoin_strs(char **strs);
 char		*ft_strip(char *s, char c);
 char		**ft_splitdup(char **content);
+int			ft_occ(char *s, char c);
 
 #endif
