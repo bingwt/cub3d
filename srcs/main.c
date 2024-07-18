@@ -65,6 +65,7 @@ void	player_start_pos(t_props *props)
 		{
 			if (props->map.matrix[y][x] > 1)
 			{
+				props->player.angle = props->map.matrix[y][x];
 				props->player.pos.chunk.x = x;
 				props->player.pos.chunk.y = y;
 				props->player.pos.exact.x = x + props->player.pos.relative.x;

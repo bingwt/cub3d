@@ -1,14 +1,10 @@
-     NO       ./no.xpm
+NO ./maps/textures/no.xpm
+SO ./maps/textures/so.xpm
+EA ./maps/textures/ea.xpm
+WE ./maps/textures/we.xpm
 
-
-SO       ./so.xpm
-EA     ./ea.xpm
-
-
-WE    ./we.xpm
-
-F              220,100,0
-C 225,30,0
+F 128,128,128
+C 0,0,0
 
 
         1111111111111111111111111

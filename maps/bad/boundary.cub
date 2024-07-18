@@ -1,7 +1,7 @@
-NO ../no.xpm
-SO ../so.xpm
-EA ../ea.xpm
-WE ../we.xpm
+NO ./maps/textures/no.xpm
+SO ./maps/textures/so.xpm
+EA ./maps/textures/ea.xpm
+WE ./maps/textures/we.xpm
 
 F 220,100,0
 C 225,30,0

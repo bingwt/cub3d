@@ -1,7 +1,7 @@
-NO ./squidward.xpm
-SO ./squidward.xpm
-EA ./squidward.xpm
-WE ./squidward.xpm
+NO ./maps/textures/squidward.xpm
+SO ./maps/textures/squidward.xpm
+EA ./maps/textures/squidward.xpm
+WE ./maps/textures/squidward.xpm
 
 F 128,128,128
 C 0,0,0
