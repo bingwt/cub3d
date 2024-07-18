@@ -11,8 +11,12 @@ fi
 
 for test_file in "$TEST_FOLDER"/*; do
   if [ -f "$test_file" ]; then
-    echo "Running Valgrind on $test_file"
+    echo "Running Valgrind on $test_file
+"
     valgrind --leak-check=full "$PROGRAM" "$test_file"
+
+    echo "
+"
   else
     echo "No test files found in $TEST_FOLDER"
     exit 1

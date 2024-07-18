@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/16 18:49:07 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/18 22:21:53 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,13 @@ void	player_start_pos(t_props *props)
 int	main(int argc, char **argv)
 {
 	t_props	*props;
+	t_map	map;
 
 	if (argc != 2)
 		return (error_msg(INVALID_ARGS, NULL));
+	map = process_cub(argv[1]);
 	props = ft_calloc(1, sizeof(t_props));
-	props->map = process_cub(argv[1], props);
+	props->map = map;
 	init_window(argv[1], props);
 	init_player(props);
 	player_start_pos(props);
