@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:06:45 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 18:07:19 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/18 22:19:34 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ bool	valid_rgbs(char ***lines)
 	char	**c;
 	char	**f;
 
-	i = 0;
-	while (i < 6)
+	i = -1;
+	c = NULL;
+	f = NULL;
+	while (++i < 6)
 	{
-		if (!ft_strcmp(lines[i][0], "C") && ft_occ(lines[i][1], ',') == 3)
+		if (!ft_strcmp(lines[i][0], "C") && ft_occ(lines[i][1], ',') == 2)
 			c = ft_split(lines[i][1], ',');
-		else if (!ft_strcmp(lines[i][0], "F") && ft_occ(lines[i][1], ',') == 3)
+		else if (!ft_strcmp(lines[i][0], "F") && ft_occ(lines[i][1], ',') == 2)
 			f = ft_split(lines[i][1], ',');
-		i++;
 	}
 	if (ft_squarelen(c) != 3 || ft_squarelen(f) != 3
 		|| !is_rgb_range(c) || !is_rgb_range(f))
