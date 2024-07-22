@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/18 22:22:20 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/22 23:00:35 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ typedef enum e_error
 	WRONG_ORDER,
 	INVALID_ID,
 	INVALID_TEXTURE,
-	INVALID_COLOR
+	INVALID_COLOR,
+	INVALID_XPM
 }	t_error;
 
 typedef enum e_action
@@ -215,12 +216,9 @@ int		cell_action(t_action action, t_props *props);
 int		check_chunk(t_vec2 pos, t_props *props);
 
 // TEXTURES
-t_img	load_img(char *file, t_props *props);
+t_img	load_img(char *file, int i, t_props *props);
 void	load_textures(t_props *props);
 int		get_pixel_color(t_img *img, int x, int y);
-int		shade_color(int color, float factor);
-int		color_wall(char wall_face, float distance_factor);
-void	draw_wall_slice(t_ray *ray, t_props *props, int x);
 void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture);
 
 // MOVEMENT

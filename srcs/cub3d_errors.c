@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:41:11 by btan              #+#    #+#             */
-/*   Updated: 2024/07/14 21:39:48 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/22 23:00:52 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ int	error_msg(t_error error, char *arg)
 		printf("cub3D: invald texture path or texture path not found.\n");
 	else if (error == INVALID_COLOR)
 		printf("cub3D: invalid colors\n");
+	else if (error == INVALID_XPM)
+		printf("cub3D: invalid xpm\n");
 	return (1);
 }
