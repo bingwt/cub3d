@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/15 00:08:05 by btan             ###   ########.fr        #
+#    Updated: 2024/07/22 16:32:40 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,15 @@ SRCS = srcs/cub3d_errors.c \
 	   srcs/raycast/minimap.c \
 	   srcs/main.c
 
-OBJECTS = $(SOURCES:.c=.o)
+OBJECTS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRCS) $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a $(INCLUDES)
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) libft/libft.a mlx/libmlx_Linux.a $(LIBS)
+$(NAME): $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a
+	$(CC) $(CFLAGS) $^ -o $@ -Llibft -Lmlx -lft -lmlx $(LIBS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 libft/libft.a:
 	make -C libft
@@ -61,7 +64,7 @@ mlx/libmlx_Linux.a:
 
 clean:
 	make clean -C libft
-	rm -rf $(OBJECTS) $(NAME)
+	rm -rf $(OBJECTS)
 
 fclean: clean
 	make fclean -C libft
