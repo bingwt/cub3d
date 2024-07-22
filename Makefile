@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/22 16:32:40 by btan             ###   ########.fr        #
+#    Updated: 2024/07/22 16:52:42 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,11 +72,7 @@ fclean: clean
 
 re: fclean all
 
-map:
-	cc map_checker.c map_utils.c cub3d_errors.c libft/libft.a -g -o validator
-
 debug: CFLAGS += -g
 debug: re
 
-debug-noflag: CFLAGS = -I$(INCLUDES) -g
-debug-noflag: re
+.PHONY: all clean fclean re debug
