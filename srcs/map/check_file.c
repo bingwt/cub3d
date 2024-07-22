@@ -6,7 +6,7 @@
 /*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:06:22 by xlow              #+#    #+#             */
-/*   Updated: 2024/06/14 19:42:42 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/22 21:45:55 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	check_perms(char *file)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	if (fd == -1 || read(fd, 0, 0) < 0)
 		return (false);
 	close(fd);
 	return (true);
