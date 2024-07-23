@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 01:46:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 05:09:15 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,27 @@ void	init_ray(t_ray *ray, t_props *props, int x)
 	ray->hit = 0;
 }
 
+int	set_face_width(t_ray *ray, t_props *props)
+{
+	int	face_width;
+
+	face_width = props->textures[0].img.width;
+	if (ray->hit == 2)
+		face_width = props->door_tex.img.width;
+	else if (ray->wall_face == 'S')
+		face_width = props->textures[1].img.width;
+	else if (ray->wall_face == 'E')
+		face_width = props->textures[2].img.width;
+	else if (ray->wall_face == 'W')
+		face_width = props->textures[3].img.width;
+	return (face_width);
+}
+
 void	get_hit_pos(t_ray *ray, t_props *props)
 {
-	int	texture_width;
+	int	face_width;
 
-	texture_width = props->textures[0].img.width;
-	if (ray->hit == 2)
-		texture_width = props->door_tex.img.width;
-	else if (ray->wall_face == 'S')
-		texture_width = props->textures[1].img.width;
-	else if (ray->wall_face == 'E')
-		texture_width = props->textures[2].img.width;
-	else if (ray->wall_face == 'W')
-		texture_width = props->textures[3].img.width;
+	face_width = set_face_width(ray, props);
 	if (ray->grid_side == 'x')
 		ray->wall_dist = (ray->grid.x - ray->delta.x);
 	else
@@ -56,11 +64,11 @@ void	get_hit_pos(t_ray *ray, t_props *props)
 		ray->hit_pos = props->player.pos.exact.x + ray->wall_dist * \
 					props->player.pos.dir.x;
 	ray->hit_pos -= floor(ray->hit_pos);
-	ray->texture_slice = (int)(ray->hit_pos * texture_width);
+	ray->texture_slice = (int)(ray->hit_pos * face_width);
 	if (ray->grid_side == 'x' && props->player.pos.dir.x < 0)
-		ray->texture_slice = texture_width - ray->texture_slice - 1;
+		ray->texture_slice = face_width - ray->texture_slice - 1;
 	if (ray->grid_side == 'y' && props->player.pos.dir.y > 0)
-		ray->texture_slice = texture_width - ray->texture_slice - 1;
+		ray->texture_slice = face_width - ray->texture_slice - 1;
 }
 
 void	cast_rays(t_props *props)

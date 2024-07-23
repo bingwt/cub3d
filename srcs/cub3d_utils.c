@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 02:07:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 05:31:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,12 @@ void	handle_toggles(int key, t_props *props)
 		props->player.no_clip = -props->player.no_clip;
 }
 
-void	clear_display(t_props *props)
-{
-	int	x;
-	int	y;
-
-	props->pixel.color = 0;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-			draw_pixel(x++, y, props);
-		y++;
-	}
-}
-
 void	loop(t_props *props)
 {
-	clear_display(props);
 	draw_ceiling_floor(props);
 	cast_rays(props);
 	if (props->player.minimap == 1)
 		draw_minimap(props);
+	draw_hotbar(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

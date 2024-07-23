@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 01:54:57 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 05:29:35 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,14 @@ void	load_textures(t_props *props)
 	texture->id = 'E';
 	if (props->map.has_door)
 	{
-		texture = &props->door_tex;
-		texture->img = load_img(props->map.dr, 4, props);
-		texture->id = 'D';
+		props->door_tex.img = load_img(props->map.dr, 4, props);
+		props->door_tex.id = 'D';
+		texture = &props->hotbar[0];
+		texture->img = load_img("./maps/textures/hotbar_1.xpm", 5, props);
+		texture->id = '1';
+		texture = &props->hotbar[1];
+		texture->img = load_img("./maps/textures/hotbar_2.xpm", 6, props);
+		texture->id = '2';
 	}
 }
 
