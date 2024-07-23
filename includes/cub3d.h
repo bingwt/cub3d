@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/23 20:22:14 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/24 01:53:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef enum e_error
 typedef enum e_action
 {
 	CLEAR,
-	WALL
+	PLACE,
+	INTERACT
 }	t_action;
 
 typedef struct s_vec2
@@ -121,6 +122,7 @@ typedef struct s_map
 	int			cols;
 	int			width;
 	int			height;
+	int			has_door;
 	int			*bounds;
 	int			**matrix;
 	char		*no;
@@ -151,7 +153,7 @@ typedef struct s_pos
 
 typedef struct s_player
 {
-	int		size;
+	int		hand;
 	int		speed;
 	int		angle;
 	int		mouse_movement;
@@ -190,6 +192,7 @@ typedef struct s_prop
 	t_mouse		mouse;
 	t_player	player;
 	t_texture	textures[4];
+	t_texture	door_tex;
 }	t_props;
 
 typedef struct s_line
@@ -213,8 +216,7 @@ int		error_msg(t_error error, char *arg);
 void	print_map(t_map *map, t_props *props);
 int		goto_cell(t_vec2 cell, t_props *props);
 int		fill_front(t_props *props);
-int		cell_action(t_action action, t_props *props);
-int		check_chunk(t_vec2 pos, t_props *props);
+void	cell_action(t_action action, t_props *props);
 
 // TEXTURES
 t_img	load_img(char *file, int i, t_props *props);
@@ -231,8 +233,6 @@ void	handle_events(t_props *props);
 // PIXEL
 void	draw_pixel(int x, int y, t_props *props);
 void	color_pixel(int x, int y, int color, t_props *props);
-t_color	*hex_to_rgb(char *hex);
-t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
 int		hex_to_dec(char *hex);
 
@@ -255,9 +255,6 @@ void	dda(t_ray *ray, t_props *props);
 
 //RAYCAST
 void	cast_rays(t_props *props);
-
-// WALL
-void	fill_cell(t_props *props);
 
 // CHECK_FILE
 bool	ends_with_xpm(char *file);

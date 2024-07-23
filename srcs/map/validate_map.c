@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:45:57 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/17 19:47:47 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/24 02:03:56 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static bool	check_door(t_map *map, char *line)
 	{
 		if (line[i] == 'D')
 		{
+			map->has_door = 1;
 			map->dr = "maps/textures/door.xpm";
 			if (!check_perms(map->dr))
 			{
@@ -114,6 +115,7 @@ bool	valid_map(t_map *map, char **content)
 	int	i;
 
 	i = -1;
+	map->has_door = 0;
 	while (content[++i])
 	{
 		if (!char_check(content[i + 1], content[i])

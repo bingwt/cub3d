@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/22 23:00:44 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 01:54:57 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ void	load_textures(t_props *props)
 	texture = &props->textures[3];
 	texture->img = load_img(props->map.ea, 3, props);
 	texture->id = 'E';
+	if (props->map.has_door)
+	{
+		texture = &props->door_tex;
+		texture->img = load_img(props->map.dr, 4, props);
+		texture->id = 'D';
+	}
 }
 
 int	get_pixel_color(t_img *img, int x, int y)
