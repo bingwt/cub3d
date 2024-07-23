@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/22 23:00:35 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/23 20:22:14 by xlow             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_map
 	char		*so;
 	char		*ea;
 	char		*we;
+	char		*dr;
 	t_color		floor;
 	t_color		ceiling;
 }	t_map;
@@ -287,7 +288,7 @@ void	free_map(t_map map);
 t_map	set_map(t_map map, int fd);
 
 // VALIDATE_MAP
-bool	valid_map(char **content);
+bool	valid_map(t_map *map, char **content);
 
 // NORMALISE_MAP
 int		longest_width(char **content);
