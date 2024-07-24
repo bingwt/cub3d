@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 11:31:47 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 16:41:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	handle_close(t_props *props)
 		mlx_destroy_image(props->mlx, props->textures[i++].img.ptr);
 	if (props->map.has_door)
 		mlx_destroy_image(props->mlx, props->door_tex.img.ptr);
-	mlx_destroy_image(props->mlx, props->hotbar[0].img.ptr);
-	mlx_destroy_image(props->mlx, props->hotbar[1].img.ptr);
+	i = 0;
+	while (i < 4)
+		mlx_destroy_image(props->mlx, props->hud[i++].img.ptr);
 	free(props->map.no);
 	free(props->map.ea);
 	free(props->map.so);

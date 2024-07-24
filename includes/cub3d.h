@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/24 13:42:37 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 16:40:44 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,15 +196,8 @@ typedef struct s_prop
 	t_texture	door_tex;
 	t_texture	hotbar[2];
 	t_texture	sprite[5];
+	t_texture	hud[4];
 }	t_props;
-
-typedef struct s_line
-{
-	float	x0;
-	float	y0;
-	float	x1;
-	float	y1;
-}	t_line;
 
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
