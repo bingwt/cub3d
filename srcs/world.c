@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:16:02 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 05:16:27 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 11:22:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ void	interact(t_action action, t_props *props)
 	if (((int) dir.x - 1 < 0 || (int) dir.x + 1 > props->map.width) || \
 			((int) dir.y - 1 < 0 || (int) dir.y + 1 > props->map.height))
 		return ;
-	if (action == PLACE && props->map.has_door)
+	if (action == PLACE)
 	{
+		if (props->player.hand == 2 && !props->map.has_door)
+			return ;
 		if (props->map.matrix[(int) dir.y][(int) dir.x] != props->player.hand)
 			props->map.matrix[(int) dir.y][(int) dir.x] = props->player.hand;
 	}

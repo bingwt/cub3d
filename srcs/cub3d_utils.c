@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 05:31:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 11:20:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	ft_swap(float *a, float *b)
 
 void	handle_toggles(int key, t_props *props)
 {
-	if (key == 108)
+	if (key == 104)
+		props->player.hotbar = -props->player.hotbar;
+	else if (key == 108)
 		props->player.mouse_movement = -props->player.mouse_movement;
 	else if (key == 109)
 		props->player.minimap = -props->player.minimap;
@@ -66,6 +68,7 @@ void	loop(t_props *props)
 	cast_rays(props);
 	if (props->player.minimap == 1)
 		draw_minimap(props);
-	draw_hotbar(props);
+	if (props->player.hotbar == 1)
+		draw_hotbar(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

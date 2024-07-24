@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 05:24:12 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 11:31:47 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	handle_close(t_props *props)
 	free(props->title);
 	while (i < 4)
 		mlx_destroy_image(props->mlx, props->textures[i++].img.ptr);
-	mlx_destroy_image(props->mlx, props->door_tex.img.ptr);
+	if (props->map.has_door)
+		mlx_destroy_image(props->mlx, props->door_tex.img.ptr);
+	mlx_destroy_image(props->mlx, props->hotbar[0].img.ptr);
+	mlx_destroy_image(props->mlx, props->hotbar[1].img.ptr);
 	free(props->map.no);
 	free(props->map.ea);
 	free(props->map.so);
@@ -31,10 +34,7 @@ int	handle_close(t_props *props)
 	free(props->mlx);
 	i = 0;
 	while (i < props->map.height)
-	{
-		free(props->map.matrix[i]);
-		i++;
-	}
+		free(props->map.matrix[i++]);
 	free(props->map.matrix);
 	free(props);
 	exit(0);
@@ -67,7 +67,7 @@ int	handle_keydown(int key, t_props *props)
 		hotbar_select(key, props);
 	else if (key == 99 || key == 101 || key == 102)
 		interact_key(key, props);
-	else if (key == 108 || key == 109 || key == 110)
+	else if (key == 104 || key == 108 || key == 109 || key == 110)
 		handle_toggles(key, props);
 	else if (key == 65307)
 		handle_close(props);
