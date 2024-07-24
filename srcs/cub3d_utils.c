@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 11:20:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 11:36:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_swap(float *a, float *b)
 
 void	handle_toggles(int key, t_props *props)
 {
+	if (!BONUS)
+		return ;
 	if (key == 104)
 		props->player.hotbar = -props->player.hotbar;
 	else if (key == 108)

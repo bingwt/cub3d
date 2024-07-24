@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/24 11:18:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 11:39:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,9 @@
 #  define TILE_SIZE 16
 # endif
 
-# define NO_MASK 1
-# define SO_MASK 2
-# define EA_MASK 4
-# define WE_MASK 8
-# define F_MASK 16
-# define C_MASK 32
-# define ALL_MASK 63
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 # include <math.h>
 # include <stdlib.h>
@@ -54,6 +50,17 @@
 # include <mlx.h>
 # include "libft.h"
 # include <stdbool.h>
+
+typedef enum e_mask
+{
+	NO_MASK = 1,
+	SO_MASK = 2,
+	EA_MASK = 4,
+	WE_MASK = 8,
+	F_MASK = 16,
+	C_MASK = 32,
+	ALL_MASK = 63
+}	t_mask;
 
 typedef enum e_error
 {

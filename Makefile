@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/24 05:26:47 by btan             ###   ########.fr        #
+#    Updated: 2024/07/24 11:37:27 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,9 +71,12 @@ fclean: clean
 	make fclean -C libft
 	rm -rf $(NAME)
 
+bonus: CFLAGS += -D BONUS=1
+bonus: re
+
 re: fclean all
 
 debug: CFLAGS += -g
 debug: re
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re bonus debug
