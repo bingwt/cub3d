@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/24 11:18:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 13:42:37 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ typedef struct s_prop
 	t_texture	textures[4];
 	t_texture	door_tex;
 	t_texture	hotbar[2];
+	t_texture	sprite[5];
 }	t_props;
 
 typedef struct s_line
@@ -218,7 +219,6 @@ int		error_msg(t_error error, char *arg);
 void	print_map(t_map *map, t_props *props);
 int		goto_cell(t_vec2 cell, t_props *props);
 int		fill_front(t_props *props);
-void	interact(t_action action, t_props *props);
 
 // TEXTURES
 t_img	load_img(char *file, int i, t_props *props);
@@ -242,6 +242,7 @@ int		hex_to_dec(char *hex);
 void	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
 void	draw_ceiling_floor(t_props *props);
 void	fill_point(t_vec2 point, int size, int color, t_props *props);
+void	draw_texture(t_vec2 start, int scale, t_img *texture, t_props *props);
 void	draw_hotbar(t_props *props);
 
 //VECTORS
@@ -302,7 +303,11 @@ int	**convert_map(char **content);
 void	draw_minimap(t_props *props);
 
 // INTERACTIONS
+void	interact(t_action action, t_props *props);
 void	hotbar_select(int key, t_props *props);
 void	interact_key(int key, t_props *props);
+
+// HUD
+void	draw_hud(t_props *props);
 
 #endif

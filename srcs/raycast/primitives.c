@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:18:40 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 05:33:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 13:40:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,4 @@ void	draw_texture(t_vec2 start, int scale, t_img *texture, t_props *props)
 		pos.y += step.y;
 		y++;
 	}
-}
-
-void	draw_hotbar(t_props *props)
-{
-	t_vec2	start;
-	int		hand;
-	t_img	*hotbar;
-
-	start.x = 0;
-	start.y = (HEIGHT / 4) * 3;
-	hand = props->player.hand - 1;
-	hotbar = &props->hotbar[hand].img;
-	draw_texture(start, WIDTH / 4, hotbar, props);
 }

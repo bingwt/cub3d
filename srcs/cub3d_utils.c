@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 11:20:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 13:43:28 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void	loop(t_props *props)
 	if (props->player.minimap == 1)
 		draw_minimap(props);
 	if (props->player.hotbar == 1)
-		draw_hotbar(props);
+		draw_hud(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }
