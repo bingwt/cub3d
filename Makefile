@@ -72,9 +72,12 @@ fclean: clean
 	make fclean -C libft
 	rm -rf $(NAME)
 
+bonus: CFLAGS += -D BONUS=1
+bonus: re
+
 re: fclean all
 
 debug: CFLAGS += -g
 debug: re
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re bonus debug

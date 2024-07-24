@@ -52,6 +52,8 @@ void	ft_swap(float *a, float *b)
 
 void	handle_toggles(int key, t_props *props)
 {
+	if (!BONUS)
+		return ;
 	if (key == 104)
 		props->player.hotbar = -props->player.hotbar;
 	else if (key == 108)
