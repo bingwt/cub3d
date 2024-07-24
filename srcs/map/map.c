@@ -91,7 +91,7 @@ t_map	set_map(t_map map, int fd)
 	}
 	while (content[++i])
 		replace_spaces(&content[i]);
-	if (!valid_map(content))
+	if (!valid_map(&map, content))
 	{
 		ft_free_split(&content);
 		free_texture_paths(map);

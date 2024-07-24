@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/18 22:21:53 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/24 15:48:59 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ void	init_window(char *file, t_props *props)
 
 void	init_player(t_props *props)
 {
-	props->player.size = 10;
+	props->player.hand = 1;
 	props->player.speed = 1;
 	props->player.angle = 0;
 	props->player.mouse_movement = -1;
+	props->player.hotbar = -1;
 	props->player.minimap = -1;
 	props->player.no_clip = 1;
 	props->player.pos.relative.x = 0.5;
-	props->player.pos.relative.y = 1;
+	props->player.pos.relative.y = 0.5;
 	props->mouse.x = 64;
 	props->mouse.y = 64;
 	props->mouse.l_btn = 0;
@@ -63,7 +64,7 @@ void	player_start_pos(t_props *props)
 		x = 0;
 		while (x < props->map.width)
 		{
-			if (props->map.matrix[y][x] > 1)
+			if (props->map.matrix[y][x] > 3)
 			{
 				props->player.angle = props->map.matrix[y][x];
 				props->player.pos.chunk.x = x;

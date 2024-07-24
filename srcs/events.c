@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/16 18:59:28 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 16:41:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	handle_close(t_props *props)
 	free(props->title);
 	while (i < 4)
 		mlx_destroy_image(props->mlx, props->textures[i++].img.ptr);
+	if (props->map.has_door)
+		mlx_destroy_image(props->mlx, props->door_tex.img.ptr);
+	i = 0;
+	while (i < 4)
+		mlx_destroy_image(props->mlx, props->hud[i++].img.ptr);
 	free(props->map.no);
 	free(props->map.ea);
 	free(props->map.so);
@@ -30,10 +35,7 @@ int	handle_close(t_props *props)
 	free(props->mlx);
 	i = 0;
 	while (i < props->map.height)
-	{
-		free(props->map.matrix[i]);
-		i++;
-	}
+		free(props->map.matrix[i++]);
 	free(props->map.matrix);
 	free(props);
 	exit(0);
@@ -62,11 +64,11 @@ int	handle_keydown(int key, t_props *props)
 	if (key == 97 || key == 100 || key == 115 || key == 119 || \
 		key == 65505 || key == 65507)
 		handle_movement(key, props);
-	else if (key == 102)
-		cell_action(WALL, props);
-	else if (key == 99)
-		cell_action(CLEAR, props);
-	else if (key == 108 || key == 109 || key == 110)
+	else if (key == 49 || key == 50)
+		hotbar_select(key, props);
+	else if (key == 99 || key == 101 || key == 102)
+		interact_key(key, props);
+	else if (key == 104 || key == 108 || key == 109 || key == 110)
 		handle_toggles(key, props);
 	else if (key == 65307)
 		handle_close(props);

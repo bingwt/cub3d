@@ -3,25 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:45:57 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/17 19:47:47 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/24 05:10:03 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	char_check(char *next, char *line)
+static bool	check_door(t_map *map, char *line)
 {
-	int			i;
-	static int	j = 0;
+	int	i;
 
 	i = 0;
 	while (line[i])
 	{
+		if (line[i] == 'D')
+		{
+			map->has_door = 1;
+			map->dr = "maps/textures/door.xpm";
+			if (!check_perms(map->dr))
+			{
+				printf("Error\nCheck that door texture is valid\n");
+				return (false);
+			}
+		}
+		i++;
+	}
+	return (true);
+}
+
+static bool	char_check(char *next, char *line)
+{
+	int			i;
+	static int	j;
+
+	i = -1;
+	while (line[++i])
+	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'N'
-			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
+			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W'
+			&& line[i] != 'D')
 		{
 			printf("Error\nIncorrect character found in map content\n");
 			return (false);
@@ -29,7 +52,6 @@ static bool	char_check(char *next, char *line)
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'E' || line[i] == 'W')
 			j++;
-		i++;
 	}
 	if (!next && j != 1)
 	{
@@ -87,14 +109,18 @@ static bool	check_boundaries(char **content)
 	return (true);
 }
 
-bool	valid_map(char **content)
+bool	valid_map(t_map *map, char **content)
 {
 	int	i;
 
 	i = -1;
+	map->has_door = 0;
 	while (content[++i])
-		if (!char_check(content[i + 1], content[i]))
+	{
+		if (!char_check(content[i + 1], content[i])
+			|| !check_door(map, content[i]))
 			return (false);
+	}
 	if (!check_boundaries(content))
 		return (false);
 	return (true);

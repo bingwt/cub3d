@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/22 23:00:35 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 16:40:44 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef enum e_error
 typedef enum e_action
 {
 	CLEAR,
-	WALL
+	PLACE,
+	INTERACT
 }	t_action;
 
 typedef struct s_vec2
@@ -121,12 +122,14 @@ typedef struct s_map
 	int			cols;
 	int			width;
 	int			height;
+	int			has_door;
 	int			*bounds;
 	int			**matrix;
 	char		*no;
 	char		*so;
 	char		*ea;
 	char		*we;
+	char		*dr;
 	t_color		floor;
 	t_color		ceiling;
 }	t_map;
@@ -150,10 +153,11 @@ typedef struct s_pos
 
 typedef struct s_player
 {
-	int		size;
+	int		hand;
 	int		speed;
 	int		angle;
 	int		mouse_movement;
+	int		hotbar;
 	int		minimap;
 	int		no_clip;
 	t_pos	pos;
@@ -189,15 +193,11 @@ typedef struct s_prop
 	t_mouse		mouse;
 	t_player	player;
 	t_texture	textures[4];
+	t_texture	door_tex;
+	t_texture	hotbar[2];
+	t_texture	sprite[5];
+	t_texture	hud[4];
 }	t_props;
-
-typedef struct s_line
-{
-	float	x0;
-	float	y0;
-	float	x1;
-	float	y1;
-}	t_line;
 
 // UTILS
 int		ft_atoi_base(const char *str, const char *base);
@@ -212,8 +212,6 @@ int		error_msg(t_error error, char *arg);
 void	print_map(t_map *map, t_props *props);
 int		goto_cell(t_vec2 cell, t_props *props);
 int		fill_front(t_props *props);
-int		cell_action(t_action action, t_props *props);
-int		check_chunk(t_vec2 pos, t_props *props);
 
 // TEXTURES
 t_img	load_img(char *file, int i, t_props *props);
@@ -230,15 +228,16 @@ void	handle_events(t_props *props);
 // PIXEL
 void	draw_pixel(int x, int y, t_props *props);
 void	color_pixel(int x, int y, int color, t_props *props);
-t_color	*hex_to_rgb(char *hex);
-t_color	*dec_to_rgb(int dec);
 int		rgb_to_dec(t_color *color);
 int		hex_to_dec(char *hex);
 
 // PRIMITIVES
-void 	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
-void    draw_ceiling_floor(t_props *props);
+void	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
+void	draw_ceiling_floor(t_props *props);
 void	fill_point(t_vec2 point, int size, int color, t_props *props);
+void	draw_texture(t_vec2 start, int scale, t_img *texture, t_props *props);
+void	draw_hotbar(t_props *props);
+
 //VECTORS
 void	vec2_add(t_vec2 *a, t_vec2 *b);
 void	vec2_scale(t_vec2 *vec, float scale);
@@ -252,11 +251,8 @@ void	rotate(t_vec2 *vec, float angle);
 void	init_dda(t_ray *ray, t_props *props);
 void	dda(t_ray *ray, t_props *props);
 
-//RAYCAST
+// RAYCAST
 void	cast_rays(t_props *props);
-
-// WALL
-void	fill_cell(t_props *props);
 
 // CHECK_FILE
 bool	ends_with_xpm(char *file);
@@ -287,7 +283,7 @@ void	free_map(t_map map);
 t_map	set_map(t_map map, int fd);
 
 // VALIDATE_MAP
-bool	valid_map(char **content);
+bool	valid_map(t_map *map, char **content);
 
 // NORMALISE_MAP
 int		longest_width(char **content);
@@ -298,5 +294,13 @@ int	**convert_map(char **content);
 
 // MINIMAP
 void	draw_minimap(t_props *props);
+
+// INTERACTIONS
+void	interact(t_action action, t_props *props);
+void	hotbar_select(int key, t_props *props);
+void	interact_key(int key, t_props *props);
+
+// HUD
+void	draw_hud(t_props *props);
 
 #endif

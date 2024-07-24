@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/18 22:47:41 by xlow             ###   ########.fr       */
+/*   Updated: 2024/07/24 13:43:28 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	ft_swap(float *a, float *b)
 
 void	handle_toggles(int key, t_props *props)
 {
-	if (key == 108)
+	if (key == 104)
+		props->player.hotbar = -props->player.hotbar;
+	else if (key == 108)
 		props->player.mouse_movement = -props->player.mouse_movement;
 	else if (key == 109)
 		props->player.minimap = -props->player.minimap;
@@ -60,28 +62,13 @@ void	handle_toggles(int key, t_props *props)
 		props->player.no_clip = -props->player.no_clip;
 }
 
-void	clear_display(t_props *props)
-{
-	int	x;
-	int	y;
-
-	props->pixel.color = 0;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-			draw_pixel(x++, y, props);
-		y++;
-	}
-}
-
 void	loop(t_props *props)
 {
-	clear_display(props);
 	draw_ceiling_floor(props);
 	cast_rays(props);
 	if (props->player.minimap == 1)
 		draw_minimap(props);
+	if (props->player.hotbar == 1)
+		draw_hud(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

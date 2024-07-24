@@ -24,6 +24,18 @@ static int	player_orientation(char c)
 		return (270);
 }
 
+static int	map_char_to_int(char c)
+{
+	if (c == '0')
+		return (0);
+	else if (c == '1')
+		return (1);
+	else if (c == 'D')
+		return (2);
+	else
+		return (player_orientation(c));
+}
+
 int	**convert_map(char **content)
 {
 	int	i;
@@ -39,12 +51,7 @@ int	**convert_map(char **content)
 		line = ft_calloc(sizeof(int), ft_strlen(content[i]));
 		while (content[i][j])
 		{
-			if (content[i][j] == '0')
-				line[j] = 0;
-			else if (content[i][j] == '1')
-				line[j] = 1;
-			else
-				line[j] = player_orientation(content[i][j]);
+			line[j] = map_char_to_int(content[i][j]);
 			j++;
 		}
 		j = 0;

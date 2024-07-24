@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/22 23:00:44 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/24 16:50:37 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,16 @@ t_img	load_img(char *file, int i, t_props *props)
 
 void	load_textures(t_props *props)
 {
-	t_texture	*texture;
-
-	texture = &props->textures[0];
-	texture->img = load_img(props->map.no, 0, props);
-	texture->id = 'N';
-	texture = &props->textures[1];
-	texture->img = load_img(props->map.so, 1, props);
-	texture->id = 'S';
-	texture = &props->textures[2];
-	texture->img = load_img(props->map.we, 2, props);
-	texture->id = 'W';
-	texture = &props->textures[3];
-	texture->img = load_img(props->map.ea, 3, props);
-	texture->id = 'E';
+	props->textures[0].img = load_img(props->map.no, 0, props);
+	props->textures[1].img = load_img(props->map.so, 1, props);
+	props->textures[2].img = load_img(props->map.we, 2, props);
+	props->textures[3].img = load_img(props->map.ea, 3, props);
+	props->hud[0].img = load_img("./maps/textures/hotbar_1.xpm", 4, props);
+	props->hud[1].img = load_img("./maps/textures/hotbar_2.xpm", 5, props);
+	props->hud[2].img = load_img("./maps/textures/block.xpm", 6, props);
+	props->hud[3].img = load_img("./maps/textures/door_block.xpm", 7, props);
+	if (props->map.has_door)
+		props->door_tex.img = load_img(props->map.dr, 11, props);
 }
 
 int	get_pixel_color(t_img *img, int x, int y)
