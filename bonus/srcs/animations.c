@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 01:23:30 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 03:26:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 04:08:27 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,18 @@ void	load_frames(t_props *props)
 
 void	update_animated(t_props *props)
 {
+	static int	dir;
+	
 	if (time_ms(props->animation_time) > 34)
 	{
 		props->animation_time = time_ms(0);
-		props->animated++;
-		if (props->animated > 16)
-			props->animated = 1;
+		if (props->animated == 1)
+			dir = 1;
+		if (props->animated == 17)
+			dir = 0;
+		if (dir)
+			props->animated++;
+		else
+			props->animated--;
 	}
 }
