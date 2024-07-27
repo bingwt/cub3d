@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:27:25 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 02:43:38 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 06:13:19 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ void	draw_hotbar(t_props *props)
 	draw_texture(start, scale, hotbar, props);
 }
 
+t_img	*equip_hand(int hand, t_props *props)
+{
+	t_img	*sprite;
+
+	if (hand == 1)
+	{
+		if (props->player.place_frame <= 8)
+			sprite = &props->blocks[props->player.place_frame].img;
+		else
+			sprite = &props->blocks[props->player.place_frame - 8].img;
+	}
+	if (hand == 2)
+	{
+		if (props->player.place_frame <= 8)
+			sprite = &props->blocks[props->player.place_frame + 16].img;
+		else
+			sprite = &props->blocks[props->player.place_frame + 16 - 8].img;
+	}
+	return (sprite);
+}
+
 void	draw_hand(t_props *props)
 {
 	t_vec2	start;
@@ -41,28 +62,12 @@ void	draw_hand(t_props *props)
 	scale.y = HEIGHT / 2;
 	hand = props->player.hand - 1;
 	sprite = &props->hud[hand + 2].img;
+	if ((props->player.place_frame > 8 && \
+	props->player.place_frame < 16))
+		return ;
+	sprite = equip_hand(hand, props);
 	if (hand != 0)
 		draw_texture(start, scale, sprite, props);
-}
-
-void	draw_crosshair(t_props *props)
-{
-	t_vec2	point;
-
-	point.x = 502;
-	point.y = 512;
-	while (point.x < 522)
-	{
-		fill_point(point, 3, 0x808080, props);
-		point.x += 1;
-	}
-	point.x = 512;
-	point.y = 502;
-	while (point.y < 522)
-	{
-		fill_point(point, 3, 0x808080, props);
-		point.y += 1;
-	}
 }
 
 void	draw_status(t_props *props)
@@ -82,8 +87,23 @@ void	draw_status(t_props *props)
 
 void	draw_hud(t_props *props)
 {
+	t_vec2	point;
+
 	draw_hand(props);
 	draw_hotbar(props);
 	draw_status(props);
-	draw_crosshair(props);
+	point.x = 502;
+	point.y = 512;
+	while (point.x < 522)
+	{
+		fill_point(point, 3, 0x808080, props);
+		point.x += 1;
+	}
+	point.x = 512;
+	point.y = 502;
+	while (point.y < 522)
+	{
+		fill_point(point, 3, 0x808080, props);
+		point.y += 1;
+	}
 }

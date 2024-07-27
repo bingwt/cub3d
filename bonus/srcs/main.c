@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 03:40:54 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 05:44:26 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_window(char *file, t_props *props)
 	props->animated = 0;
 	props->status_time = time_ms(0);
 	props->animation_time = time_ms(0);
+	props->frame_time = time_ms(0);
 	props->pause = -1;
 }
 
@@ -51,6 +52,7 @@ void	init_player(t_props *props)
 	props->player.minimap = -1;
 	props->player.no_clip = -1;
 	props->player.status_frame = 5;
+	props->player.place_frame = 23;
 	props->player.pos.relative.x = 0.5;
 	props->player.pos.relative.y = 0.5;
 	props->mouse.x = 64;
@@ -101,7 +103,9 @@ int	main(int argc, char **argv)
 	init_player(props);
 	player_start_pos(props);
 	load_textures(props);
-	load_frames(props);
+	load_animated(props);
+	load_block(props);
+	load_door(props);
 	draw_ceiling_floor(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 	handle_events(props);

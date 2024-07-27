@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:24:53 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 03:37:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 06:05:26 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	interact(t_action action, t_props *props)
 		if (props->player.hand == 3 && !props->map.has_door)
 			return ;
 		if (props->map.matrix[(int) dir.y][(int) dir.x] != props->player.hand)
+		{
+			props->player.place_frame = 0;
 			props->map.matrix[(int) dir.y][(int) dir.x] = \
 														props->player.hand - 1;
+		}
 	}
 	else if (action == INTERACT)
 	{

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 03:29:59 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 06:26:19 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct s_player
 	int		minimap;
 	int		no_clip;
 	int		status_frame;
+	int		place_frame;
 	t_pos	pos;
 }	t_player;
 
@@ -208,10 +209,12 @@ typedef struct s_prop
 	t_texture	sprite[5];
 	t_texture	hud[11];
 	t_texture	cat[17];
+	t_texture	blocks[32];
 	int			animated;
 	long		status_time;
 	int			texture_frame;
 	long		animation_time;
+	long		frame_time;
 	int			pause;
 }	t_props;
 
@@ -322,7 +325,11 @@ void	draw_hud(t_props *props);
 // ANIMATION
 long	time_ms(long start);
 void	update_status(t_props *props);
-void	load_frames(t_props *props);
+void	load_animated(t_props *props);
 void	update_animated(t_props *props);
+void	load_block(t_props *props);
+void	load_door(t_props *props);
+void	update_frames(t_props *props);
+void	free_textures(t_props *props);
 
 #endif

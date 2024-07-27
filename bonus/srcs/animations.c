@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 01:23:30 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 04:08:27 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 06:28:30 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	update_status(t_props *props)
 	}
 }
 
-void	load_frames(t_props *props)
+void	load_animated(t_props *props)
 {
 	props->cat[0].img = load_img("./assets/frames/cat/1.xpm", 0, props);
 	props->cat[1].img = load_img("./assets/frames/cat/2.xpm", 1, props);
@@ -57,7 +57,7 @@ void	load_frames(t_props *props)
 void	update_animated(t_props *props)
 {
 	static int	dir;
-	
+
 	if (time_ms(props->animation_time) > 34)
 	{
 		props->animation_time = time_ms(0);
@@ -69,5 +69,22 @@ void	update_animated(t_props *props)
 			props->animated++;
 		else
 			props->animated--;
+	}
+}
+
+void	free_textures(t_props *props)
+{
+	int	i;
+
+	i = 0;
+	while (i < 32)
+	{
+		if (i < 4)
+			mlx_destroy_image(props->mlx, props->textures[i].img.ptr);
+		if (i < 11)
+			mlx_destroy_image(props->mlx, props->hud[i].img.ptr);
+		if (i < 17)
+			mlx_destroy_image(props->mlx, props->cat[i].img.ptr);
+		mlx_destroy_image(props->mlx, props->blocks[i++].img.ptr);
 	}
 }
