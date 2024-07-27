@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 00:51:08 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 01:00:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	handle_keydown(int key, t_props *props)
 int	handle_button(int btn, int x, int y, t_props *props)
 {
 	(void) y;
-	printf("%d\n", btn);
 	if (btn == 1 && !props->mouse.l_btn)
 	{
 		interact_btn(btn, props);

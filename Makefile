@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/28 00:52:41 by btan             ###   ########.fr        #
+#    Updated: 2024/07/28 01:06:16 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,7 @@ fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(BONUS_NAME)
 
+bonus: CFLAGS += -D BONUS=1
 bonus: $(BONUS_NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:27:25 by btan              #+#    #+#             */
-/*   Updated: 2024/07/27 23:55:57 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 01:11:50 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,17 @@ void	draw_crosshair(t_props *props)
 	}
 }
 
+void	draw_status(t_props *props)
+{
+	if (props->player.no_clip == 1)
+		mlx_string_put(props->mlx, props->window, \
+		props->width * 0.05, props->height / 2, 0xffffff, "No-clip: ON");
+}
+
 void	draw_hud(t_props *props)
 {
 	draw_hand(props);
 	draw_hotbar(props);
 	draw_crosshair(props);
+	draw_status(props);
 }
