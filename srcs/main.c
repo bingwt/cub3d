@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/24 15:48:59 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 00:09:42 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	init_player(t_props *props)
 	props->mouse.x = 64;
 	props->mouse.y = 64;
 	props->mouse.l_btn = 0;
+	props->mouse.r_btn = 0;
 }
 
 void	player_start_pos(t_props *props)

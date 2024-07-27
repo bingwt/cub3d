@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/27 23:02:46 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 00:16:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,7 @@ void	handle_toggles(int key, t_props *props)
 	if (key == 104)
 		props->player.hotbar = -props->player.hotbar;
 	else if (key == 108)
-	{
-		// if (props->player.mouse_movement == 1)
-		// 	mlx_mouse_show(props->mlx, props->window);
-		// else
-		// 	mlx_mouse_hide(props->mlx, props->window);
 		props->player.mouse_movement = -props->player.mouse_movement;
-	}
 	else if (key == 109)
 		props->player.minimap = -props->player.minimap;
 	else if (key == 110)

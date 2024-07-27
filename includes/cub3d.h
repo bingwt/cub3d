@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/24 16:40:44 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 00:09:28 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ typedef struct s_mouse
 	int	y;
 	int	cell[2];
 	int	l_btn;
+	int	r_btn;
 	int	hold;
 }	t_mouse;
 
@@ -203,7 +204,7 @@ typedef struct s_prop
 	t_texture	door_tex;
 	t_texture	hotbar[2];
 	t_texture	sprite[5];
-	t_texture	hud[4];
+	t_texture	hud[5];
 }	t_props;
 
 // UTILS
@@ -304,8 +305,8 @@ void	draw_minimap(t_props *props);
 
 // INTERACTIONS
 void	interact(t_action action, t_props *props);
-void	hotbar_select(int key, t_props *props);
 void	interact_key(int key, t_props *props);
+void	interact_btn(int btn, t_props *props);
 
 // HUD
 void	draw_hud(t_props *props);

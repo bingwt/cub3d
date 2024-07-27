@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/27 23:04:55 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 00:16:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	handle_close(t_props *props)
 	if (props->map.has_door)
 		mlx_destroy_image(props->mlx, props->door_tex.img.ptr);
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 		mlx_destroy_image(props->mlx, props->hud[i++].img.ptr);
 	free(props->map.no);
 	free(props->map.ea);
@@ -54,7 +54,7 @@ int	handle_coords(int x, int y, t_props *props)
 	else
 		props->player.angle = props->player.angle + 1;
 	if (props->player.angle > 360)
-			props->player.angle = props->player.angle - 360;
+		props->player.angle = props->player.angle - 360;
 	return (0);
 }
 
@@ -63,8 +63,8 @@ int	handle_keydown(int key, t_props *props)
 	if (key == 97 || key == 100 || key == 115 || key == 119 || \
 		key == 65505 || key == 65507)
 		handle_movement(key, props);
-	else if (key == 49 || key == 50)
-		hotbar_select(key, props);
+	else if (key >= '0' && key <= '9')
+		props->player.hand = key - '0';
 	else if (key == 99 || key == 101 || key == 102)
 		interact_key(key, props);
 	else if (key == 104 || key == 108 || key == 109 || key == 110)
@@ -89,13 +89,22 @@ int	handle_keydown(int key, t_props *props)
 int	handle_button(int btn, int x, int y, t_props *props)
 {
 	(void) y;
+	printf("%d\n", btn);
 	if (btn == 1 && !props->mouse.l_btn)
 	{
+		interact_btn(btn, props);
 		props->mouse.l_btn = 1;
 		props->mouse.hold = x;
 	}
 	else if (btn == 1 && props->mouse.l_btn)
 		props->mouse.l_btn = 0;
+	if (btn == 3 && !props->mouse.r_btn)
+	{
+		interact_btn(btn, props);
+		props->mouse.r_btn = 1;
+	}
+	else if (btn == 3 && props->mouse.r_btn)
+		props->mouse.r_btn = 0;
 	return (0);
 }
 

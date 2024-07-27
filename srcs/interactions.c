@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:24:53 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 13:39:21 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 00:15:42 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,23 @@ void	set_interact_pos(t_vec2 *dir, t_props *props)
 		dir->x = props->player.pos.exact.x - 1;
 }
 
+int	check_interact_pos(t_props *props)
+{
+	t_vec2	dir;
+
+	dir.x = (int) props->player.pos.exact.x;
+	dir.y = (int) props->player.pos.exact.y;
+	if (props->player.angle >= 315 || props->player.angle < 45)
+		dir.y = (int) props->player.pos.exact.y - 1;
+	else if (props->player.angle >= 45 && props->player.angle < 135)
+		dir.x = (int) props->player.pos.exact.x + 1;
+	else if (props->player.angle >= 135 && props->player.angle < 225)
+		dir.y = (int) props->player.pos.exact.y + 1;
+	else
+		dir.x = props->player.pos.exact.x - 1;
+	return (props->map.matrix[(int) dir.y][(int) dir.x]);
+}
+
 void	interact(t_action action, t_props *props)
 {
 	t_vec2	dir;
@@ -36,10 +53,11 @@ void	interact(t_action action, t_props *props)
 		return ;
 	if (action == PLACE)
 	{
-		if (props->player.hand == 2 && !props->map.has_door)
+		if (props->player.hand == 3 && !props->map.has_door)
 			return ;
 		if (props->map.matrix[(int) dir.y][(int) dir.x] != props->player.hand)
-			props->map.matrix[(int) dir.y][(int) dir.x] = props->player.hand;
+			props->map.matrix[(int) dir.y][(int) dir.x] = \
+														props->player.hand - 1;
 	}
 	else if (action == INTERACT)
 	{
@@ -51,14 +69,6 @@ void	interact(t_action action, t_props *props)
 		props->map.matrix[(int) dir.y][(int) dir.x] = 0;
 }
 
-void	hotbar_select(int key, t_props *props)
-{
-	if (key == 49)
-		props->player.hand = 1;
-	else if (key == 50)
-		props->player.hand = 2;
-}
-
 void	interact_key(int key, t_props *props)
 {
 	if (key == 99)
@@ -67,4 +77,20 @@ void	interact_key(int key, t_props *props)
 		interact(INTERACT, props);
 	else if (key == 102)
 		interact(PLACE, props);
+}
+
+void	interact_btn(int btn, t_props *props)
+{
+	if (btn == 1)
+	{
+		if (abs(check_interact_pos(props)) == 2)
+			interact(INTERACT, props);
+		else if (check_interact_pos(props) == 0)
+			interact(PLACE, props);
+	}
+	else if (btn == 3)
+	{
+		if (check_interact_pos(props) > 0)
+			interact(CLEAR, props);
+	}
 }

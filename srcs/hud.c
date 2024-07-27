@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:27:25 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 16:53:13 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/27 23:55:57 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	draw_hand(t_props *props)
 	start.y = HEIGHT / 2;
 	hand = props->player.hand - 1;
 	sprite = &props->hud[hand + 2].img;
-	draw_texture(start, WIDTH / 2, sprite, props);
+	if (hand != 0)
+		draw_texture(start, WIDTH / 2, sprite, props);
 }
 
 void	draw_crosshair(t_props *props)
