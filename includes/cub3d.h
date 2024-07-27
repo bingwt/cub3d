@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 00:09:28 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 02:21:52 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # include <mlx.h>
 # include "libft.h"
 # include <stdbool.h>
+# include <sys/time.h>
 
 typedef enum e_mask
 {
@@ -168,6 +169,7 @@ typedef struct s_player
 	int		hotbar;
 	int		minimap;
 	int		no_clip;
+	int		status_frame;
 	t_pos	pos;
 }	t_player;
 
@@ -204,7 +206,8 @@ typedef struct s_prop
 	t_texture	door_tex;
 	t_texture	hotbar[2];
 	t_texture	sprite[5];
-	t_texture	hud[5];
+	t_texture	hud[11];
+	long		current_time;
 }	t_props;
 
 // UTILS
@@ -243,8 +246,8 @@ int		hex_to_dec(char *hex);
 void	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
 void	draw_ceiling_floor(t_props *props);
 void	fill_point(t_vec2 point, int size, int color, t_props *props);
-void	draw_texture(t_vec2 start, int scale, t_img *texture, t_props *props);
-void	draw_hotbar(t_props *props);
+void	draw_texture(t_vec2 start, t_vec2 scale, t_img *texture, t_props *props);
+void	texture_alt(t_vec2 start, t_vec2 res, t_img *texture, t_props *props);
 
 //VECTORS
 void	vec2_add(t_vec2 *a, t_vec2 *b);
@@ -310,5 +313,9 @@ void	interact_btn(int btn, t_props *props);
 
 // HUD
 void	draw_hud(t_props *props);
+
+// ANIMATION
+long	time_ms(long start);
+void	update_frame(t_props *props);
 
 #endif

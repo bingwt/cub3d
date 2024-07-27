@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 00:46:03 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 02:20:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_window(char *file, t_props *props)
 	props->window = mlx_new_window(props->mlx, props->width, \
 	props->height, props->title);
 	props->image = mlx_new_image(props->mlx, props->width, props->height);
+	props->current_time = time_ms(0);
 }
 
 void	init_player(t_props *props)
@@ -46,6 +47,7 @@ void	init_player(t_props *props)
 	props->player.hotbar = 1;
 	props->player.minimap = -1;
 	props->player.no_clip = -1;
+	props->player.status_frame = 5;
 	props->player.pos.relative.x = 0.5;
 	props->player.pos.relative.y = 0.5;
 	props->mouse.x = 64;
