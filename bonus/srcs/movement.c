@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:06:28 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 03:47:30 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 03:36:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	handle_movement(int key, t_props *props)
 {
 	t_vec2	dir;
 
+	if (props->pause == 1)
+		return ;
 	dir.x = 0;
 	dir.y = 0;
 	if (key == 119)

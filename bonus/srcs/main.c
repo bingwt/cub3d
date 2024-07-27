@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 03:27:39 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 03:40:54 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	init_window(char *file, t_props *props)
 	props->window = mlx_new_window(props->mlx, props->width, \
 	props->height, props->title);
 	props->image = mlx_new_image(props->mlx, props->width, props->height);
-	props->animated = 1;
+	props->animated = 0;
 	props->status_time = time_ms(0);
 	props->animation_time = time_ms(0);
+	props->pause = -1;
 }
 
 void	init_player(t_props *props)

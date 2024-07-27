@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 03:20:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 03:43:43 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,14 @@ void	handle_toggles(int key, t_props *props)
 {
 	if (!BONUS)
 		return ;
-	if (key == 104)
+	if (key == 103)
+	{
+		if (props->animated > 0)
+			props->animated = 0;
+		else
+			props->animated = 1;
+	}
+	else if (key == 104)
 		props->player.hotbar = -props->player.hotbar;
 	else if (key == 108)
 		props->player.mouse_movement = -props->player.mouse_movement;
@@ -62,16 +69,21 @@ void	handle_toggles(int key, t_props *props)
 		props->player.minimap = -props->player.minimap;
 	else if (key == 110)
 		props->player.no_clip = -props->player.no_clip;
+	else if (key == 112)
+		props->pause = -props->pause;
 }
 
 void	loop(t_props *props)
 {
+	if (props->pause == 1)
+		return ;
 	draw_ceiling_floor(props);
 	cast_rays(props);
 	if (props->player.minimap == 1)
 		draw_minimap(props);
 	update_status(props);
-	update_animated(props);
+	if (props->animated)
+		update_animated(props);
 	if (props->player.hotbar == 1)
 		draw_hud(props);
 	mlx_mouse_get_pos(props->mlx, props->window, \
