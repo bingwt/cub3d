@@ -6,11 +6,13 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/24 13:28:53 by btan             ###   ########.fr        #
+#    Updated: 2024/07/28 00:52:41 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
+
+BONUS_NAME = cub3D_bonus
 
 INCLUDES = includes
 
@@ -48,11 +50,44 @@ SRCS = srcs/cub3d_errors.c \
 	   srcs/hud.c \
 	   srcs/main.c
 
+BONUS_SRCS = bonus/srcs/cub3d_errors.c \
+	   bonus/srcs/cub3d_utils.c \
+	   bonus/srcs/world.c \
+	   bonus/srcs/map/assign_scene.c \
+	   bonus/srcs/map/check_file.c \
+	   bonus/srcs/map/convert_map.c \
+	   bonus/srcs/map/cub.c \
+	   bonus/srcs/map/free_map.c \
+	   bonus/srcs/map/gnl_skip_nl.c \
+	   bonus/srcs/map/map.c \
+	   bonus/srcs/map/normalise_map.c \
+	   bonus/srcs/map/rgb.c \
+	   bonus/srcs/map/scene.c \
+	   bonus/srcs/map/validate_map.c \
+	   bonus/srcs/textures.c \
+	   bonus/srcs/movement.c \
+	   bonus/srcs/events.c \
+	   bonus/srcs/vectors.c \
+	   bonus/srcs/rotation.c \
+	   bonus/srcs/raycast/pixel.c \
+	   bonus/srcs/raycast/primitives.c \
+	   bonus/srcs/raycast/dda.c \
+	   bonus/srcs/raycast/raycast.c \
+	   bonus/srcs/raycast/minimap.c \
+	   bonus/srcs/interactions.c \
+	   bonus/srcs/hud.c \
+	   bonus/srcs/main.c
+
 OBJECTS = $(SRCS:.c=.o)
+
+BONUS_OBJECTS = $(BONUS_SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS) libft/libft.a mlx/libmlx_Linux.a
+	$(CC) $(CFLAGS) $^ -o $@ -Llibft -Lmlx -lft -lmlx $(LIBS)
+
+$(BONUS_NAME): $(BONUS_OBJECTS) libft/libft.a mlx/libmlx_Linux.a
 	$(CC) $(CFLAGS) $^ -o $@ -Llibft -Lmlx -lft -lmlx $(LIBS)
 
 %.o: %.c
@@ -67,13 +102,14 @@ mlx/libmlx_Linux.a:
 clean:
 	make clean -C libft
 	rm -rf $(OBJECTS)
+	rm -rf $(BONUS_OBJECTS)
 
 fclean: clean
 	make fclean -C libft
 	rm -rf $(NAME)
+	rm -rf $(BONUS_NAME)
 
-bonus: CFLAGS += -D BONUS=1
-bonus: re
+bonus: $(BONUS_NAME)
 
 re: fclean all
 
