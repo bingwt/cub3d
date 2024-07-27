@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 16:41:22 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/27 23:02:25 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,16 @@ int	handle_close(t_props *props)
 
 int	handle_coords(int x, int y, t_props *props)
 {
-	props->mouse.x = x;
-	props->mouse.y = y;
+	(void) x;
+	(void) y;
 	if (props->player.mouse_movement == -1)
 		return (1);
-	if (props->mouse.l_btn)
-	{
-		if (props->mouse.hold - x > 0)
-			props->player.angle = props->player.angle - 1;
-		else
-			props->player.angle = props->player.angle + 1;
-		if (props->player.angle < 0)
-			props->player.angle = props->player.angle + 360;
-	}
+	if (props->mouse.x == WIDTH / 2)
+		return (1);
+	if (props->mouse.x < WIDTH / 2)
+		props->player.angle = props->player.angle - 1;
+	else
+		props->player.angle = props->player.angle + 1;
 	return (0);
 }
 
