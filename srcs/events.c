@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/27 23:02:25 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/27 23:04:55 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	handle_coords(int x, int y, t_props *props)
 		props->player.angle = props->player.angle - 1;
 	else
 		props->player.angle = props->player.angle + 1;
+	if (props->player.angle > 360)
+			props->player.angle = props->player.angle - 360;
 	return (0);
 }
 
