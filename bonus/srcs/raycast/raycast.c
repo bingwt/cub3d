@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 05:09:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 03:22:56 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	set_face_width(t_ray *ray, t_props *props)
 		face_width = props->textures[2].img.width;
 	else if (ray->wall_face == 'W')
 		face_width = props->textures[3].img.width;
+	if (props->animated && ray->hit != 2)
+		face_width = props->cat[props->animated - 1].img.width;
 	return (face_width);
 }
 
@@ -93,6 +95,9 @@ void	cast_rays(t_props *props)
 			texture_wall_slice(&ray, props, x, &props->textures[2].img);
 		else if (ray.wall_face == 'W')
 			texture_wall_slice(&ray, props, x, &props->textures[3].img);
+		if (props->animated && ray.hit != 2)
+			texture_wall_slice(&ray, props, x, \
+			&props->cat[props->animated - 1].img);
 		x++;
 	}
 }

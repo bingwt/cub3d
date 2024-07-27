@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 02:21:52 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 03:28:32 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,11 @@ typedef struct s_prop
 	t_texture	hotbar[2];
 	t_texture	sprite[5];
 	t_texture	hud[11];
-	long		current_time;
+	t_texture	cat[17];
+	int			animated;
+	long		status_time;
+	int			texture_frame;
+	long		animation_time;
 }	t_props;
 
 // UTILS
@@ -316,6 +320,8 @@ void	draw_hud(t_props *props);
 
 // ANIMATION
 long	time_ms(long start);
-void	update_frame(t_props *props);
+void	update_status(t_props *props);
+void	load_frames(t_props *props);
+void	update_animated(t_props *props);
 
 #endif
