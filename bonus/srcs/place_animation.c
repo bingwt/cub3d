@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 05:37:57 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 06:20:18 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 15:50:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	load_door(t_props *props)
 
 void	update_frames(t_props *props)
 {
-	if (time_ms(props->frame_time) > 5)
+	if (time_ms(props->frame_time) > 1)
 	{
 		props->frame_time = time_ms(0);
 		if (props->player.place_frame == 23)
