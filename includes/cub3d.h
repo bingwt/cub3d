@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 06:26:19 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 15:44:26 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ typedef struct s_prop
 	t_texture	door_tex;
 	t_texture	hotbar[2];
 	t_texture	sprite[5];
-	t_texture	hud[11];
+	t_texture	hud[10];
 	t_texture	cat[17];
 	t_texture	blocks[32];
 	int			animated;

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 02:42:32 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 15:45:05 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	load_textures(t_props *props)
 	props->hud[7].img = load_img("./assets/frames/noclip/3.xpm", 11, props);
 	props->hud[8].img = load_img("./assets/frames/noclip/4.xpm", 12, props);
 	props->hud[9].img = load_img("./assets/frames/noclip/5.xpm", 13, props);
-	props->hud[10].img = load_img("./assets/frames/noclip/6.xpm", 14, props);
 	if (props->map.has_door)
-		props->door_tex.img = load_img(props->map.dr, 15, props);
+		props->door_tex.img = load_img(props->map.dr, 14, props);
 }
 
 int	get_pixel_color(t_img *img, int x, int y)

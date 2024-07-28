@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 01:23:30 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 06:28:30 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 15:47:03 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ long	time_ms(long start)
 
 void	update_status(t_props *props)
 {
-	if (time_ms(props->status_time) > 100)
+	if (time_ms(props->status_time) > 150)
 	{
 		props->status_time = time_ms(0);
 		props->player.status_frame++;
-		if (props->player.status_frame > 10)
+		if (props->player.status_frame > 9)
 			props->player.status_frame = 5;
 	}
 }
@@ -81,7 +81,7 @@ void	free_textures(t_props *props)
 	{
 		if (i < 4)
 			mlx_destroy_image(props->mlx, props->textures[i].img.ptr);
-		if (i < 11)
+		if (i < 10)
 			mlx_destroy_image(props->mlx, props->hud[i].img.ptr);
 		if (i < 17)
 			mlx_destroy_image(props->mlx, props->cat[i].img.ptr);

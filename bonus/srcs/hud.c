@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:27:25 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 06:13:19 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 15:36:36 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ void	draw_hand(t_props *props)
 void	draw_status(t_props *props)
 {
 	t_vec2	start;
-	t_vec2	res;
+	t_vec2	scale;
 	t_img	*sprite;
 
 	sprite = &props->hud[props->player.status_frame].img;
-	start.x = 0;
-	start.y = (HEIGHT / 4) * 3;
-	res.x = sprite->width / 4;
-	res.y = sprite->height;
+	start.x = -(WIDTH / 8);
+	start.y = (HEIGHT / 8) * 5;
+	scale.x = sprite->width;
+	scale.y = sprite->height;
 	if (props->player.no_clip == 1)
-		texture_alt(start, res, sprite, props);
+		draw_texture(start, scale, sprite, props);
 }
 
 void	draw_hud(t_props *props)
