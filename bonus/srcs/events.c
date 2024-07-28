@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 06:27:31 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 22:57:27 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	handle_keydown(int key, t_props *props)
 	if ((key == 97 || key == 100 || key == 115 || key == 119 || \
 		key == 65505 || key == 65507) && props->pause != 1)
 		handle_movement(key, props);
-	else if (key >= '0' && key <= '9')
+	else if (key >= '1' && key <= '3')
 		props->player.hand = key - '0';
 	else if (key == 99 || key == 101 || key == 102)
 		interact_key(key, props);
