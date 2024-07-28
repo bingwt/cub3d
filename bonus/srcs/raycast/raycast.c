@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 03:22:56 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 23:46:17 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	set_face_width(t_ray *ray, t_props *props)
 
 	face_width = props->textures[0].img.width;
 	if (ray->hit == 2)
-		face_width = props->door_tex.img.width;
+		face_width = props->open[props->door_frame].img.width;
 	else if (ray->wall_face == 'S')
 		face_width = props->textures[1].img.width;
 	else if (ray->wall_face == 'E')
@@ -86,7 +86,8 @@ void	cast_rays(t_props *props)
 		dda(&ray, props);
 		get_hit_pos(&ray, props);
 		if (ray.hit == 2)
-			texture_wall_slice(&ray, props, x, &props->door_tex.img);
+			texture_wall_slice(&ray, props, x, \
+			&props->open[props->door_frame].img);
 		else if (ray.wall_face == 'N')
 			texture_wall_slice(&ray, props, x, &props->textures[0].img);
 		else if (ray.wall_face == 'S')

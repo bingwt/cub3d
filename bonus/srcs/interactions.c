@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:24:53 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 15:50:02 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 23:40:56 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	interact(t_action action, t_props *props)
 	}
 	else if (action == INTERACT)
 	{
+		update_door(props);
 		if (abs(props->map.matrix[(int) dir.y][(int) dir.x]) == 2)
 			props->map.matrix[(int) dir.y][(int) dir.x] = \
 			-props->map.matrix[(int) dir.y][(int) dir.x];

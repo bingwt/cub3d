@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/28 05:44:44 by btan             ###   ########.fr        #
+#    Updated: 2024/07/28 23:33:34 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ BONUS_SRCS = bonus/srcs/cub3d_errors.c \
 	   bonus/srcs/hud.c \
 	   bonus/srcs/animations.c \
 	   bonus/srcs/place_animation.c \
+	   bonus/srcs/open_door.c \
 	   bonus/srcs/main.c
 
 OBJECTS = $(SRCS:.c=.o)
