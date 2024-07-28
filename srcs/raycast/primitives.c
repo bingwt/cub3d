@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:18:40 by btan              #+#    #+#             */
-/*   Updated: 2024/07/24 13:40:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 23:54:49 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	fill_point(t_vec2 point, int size, int color, t_props *props)
 	}
 }
 
-void	draw_texture(t_vec2 start, int scale, t_img *texture, t_props *props)
+void	draw_texture(t_vec2 start, t_vec2 scale, t_img *texture, t_props *props)
 {
 	t_vec2	pos;
 	t_vec2	step;
@@ -71,13 +71,13 @@ void	draw_texture(t_vec2 start, int scale, t_img *texture, t_props *props)
 
 	pos.x = 0;
 	pos.y = 0;
-	step.x = texture->width / scale;
-	step.y = texture->height / scale;
+	step.x = texture->width / scale.x;
+	step.y = texture->height / scale.y;
 	y = 0;
-	while (y < scale)
+	while (y < scale.y)
 	{
 		x = 0;
-		while (x < scale)
+		while (x < scale.x)
 		{
 			props->pixel.color = get_pixel_color(texture, pos.x, pos.y);
 			if (props->pixel.color != 0)

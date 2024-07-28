@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 00:16:22 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 23:57:29 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,7 @@ void	loop(t_props *props)
 	cast_rays(props);
 	if (props->player.minimap == 1)
 		draw_minimap(props);
-	if (props->player.hotbar == 1)
-		draw_hud(props);
 	mlx_mouse_get_pos(props->mlx, props->window, \
 	&props->mouse.x, &props->mouse.y);
-	if (!props->mouse.l_btn)
-		mlx_mouse_move(props->mlx, props->window, WIDTH / 2, HEIGHT / 2);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }

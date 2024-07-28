@@ -6,7 +6,7 @@
 #    By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:19:43 by btan              #+#    #+#              #
-#    Updated: 2024/07/28 05:44:44 by btan             ###   ########.fr        #
+#    Updated: 2024/07/28 23:56:34 by btan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ SRCS = srcs/cub3d_errors.c \
 	   srcs/raycast/raycast.c \
 	   srcs/raycast/minimap.c \
 	   srcs/interactions.c \
-	   srcs/hud.c \
 	   srcs/main.c
 
 BONUS_SRCS = bonus/srcs/cub3d_errors.c \

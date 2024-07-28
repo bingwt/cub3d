@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 15:44:26 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 23:54:59 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,6 @@ void	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
 void	draw_ceiling_floor(t_props *props);
 void	fill_point(t_vec2 point, int size, int color, t_props *props);
 void	draw_texture(t_vec2 start, t_vec2 scale, t_img *texture, t_props *props);
-void	texture_alt(t_vec2 start, t_vec2 res, t_img *texture, t_props *props);
 
 //VECTORS
 void	vec2_add(t_vec2 *a, t_vec2 *b);
