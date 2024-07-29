@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/27 23:53:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/29 16:37:59 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,14 @@ void	load_textures(t_props *props)
 	props->hud[2].img = load_img("./assets/hotbar/3.xpm", 6, props);
 	props->hud[3].img = load_img("./maps/textures/block.xpm", 7, props);
 	props->hud[4].img = load_img("./maps/textures/door_block.xpm", 8, props);
+	props->hud[5].img = load_img("./assets/frames/noclip/1.xpm", 9, props);
+	props->hud[6].img = load_img("./assets/frames/noclip/2.xpm", 10, props);
+	props->hud[7].img = load_img("./assets/frames/noclip/3.xpm", 11, props);
+	props->hud[8].img = load_img("./assets/frames/noclip/4.xpm", 12, props);
+	props->hud[9].img = load_img("./assets/frames/noclip/5.xpm", 13, props);
 	if (props->map.has_door)
-		props->door_tex.img = load_img(props->map.dr, 9, props);
+		props->door_tex.img = load_img(props->map.dr, 14, props);
+	props->paused.img = load_img("./assets/pause.xpm", 15, props);
 }
 
 int	get_pixel_color(t_img *img, int x, int y)

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 01:04:00 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/28 22:57:27 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,12 @@ int	handle_close(t_props *props)
 {
 	int	i;
 
-	i = 0;
 	free(props->title);
-	while (i < 4)
-		mlx_destroy_image(props->mlx, props->textures[i++].img.ptr);
 	if (props->map.has_door)
 		mlx_destroy_image(props->mlx, props->door_tex.img.ptr);
 	i = 0;
-	while (i < 5)
-		mlx_destroy_image(props->mlx, props->hud[i++].img.ptr);
-	free(props->map.no);
-	free(props->map.ea);
-	free(props->map.so);
-	free(props->map.we);
+	free_textures(props);
+	free_texture_paths(props->map);
 	mlx_destroy_image(props->mlx, props->image);
 	mlx_destroy_window(props->mlx, props->window);
 	mlx_destroy_display(props->mlx);
@@ -43,9 +36,13 @@ int	handle_close(t_props *props)
 
 int	handle_coords(int x, int y, t_props *props)
 {
+	if (props->pause == 1)
+		return (1);
 	(void) x;
 	(void) y;
 	if (props->player.mouse_movement == -1)
+		return (1);
+	if (props->mouse.x == WIDTH / 2)
 		return (1);
 	if (props->mouse.x < WIDTH / 2)
 	{
@@ -64,14 +61,15 @@ int	handle_coords(int x, int y, t_props *props)
 
 int	handle_keydown(int key, t_props *props)
 {
-	if (key == 97 || key == 100 || key == 115 || key == 119 || \
-		key == 65505 || key == 65507)
+	if ((key == 97 || key == 100 || key == 115 || key == 119 || \
+		key == 65505 || key == 65507) && props->pause != 1)
 		handle_movement(key, props);
-	else if (key >= '0' && key <= '9')
+	else if (key >= '1' && key <= '3')
 		props->player.hand = key - '0';
 	else if (key == 99 || key == 101 || key == 102)
 		interact_key(key, props);
-	else if (key == 104 || key == 108 || key == 109 || key == 110)
+	else if (key == 103 || key == 104 || key == 108 || \
+	key == 109 || key == 110 || key == 112)
 		handle_toggles(key, props);
 	else if (key == 65307)
 		handle_close(props);
@@ -93,8 +91,6 @@ int	handle_keydown(int key, t_props *props)
 int	handle_button(int btn, int x, int y, t_props *props)
 {
 	(void) y;
-	if (!BONUS)
-		return (1);
 	if (btn == 1 && !props->mouse.l_btn)
 	{
 		interact_btn(btn, props);

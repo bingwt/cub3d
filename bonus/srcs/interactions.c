@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:24:53 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 00:15:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/29 16:09:10 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	check_interact_pos(t_props *props)
 		dir.y = (int) props->player.pos.exact.y + 1;
 	else
 		dir.x = props->player.pos.exact.x - 1;
+	if (((int) dir.x - 1 < 0 || (int) dir.x + 1 > props->map.width) || \
+			((int) dir.y - 1 < 0 || (int) dir.y + 1 > props->map.height))
+		return (0);
 	return (props->map.matrix[(int) dir.y][(int) dir.x]);
 }
 
@@ -51,13 +54,16 @@ void	interact(t_action action, t_props *props)
 	if (((int) dir.x - 1 < 0 || (int) dir.x + 1 > props->map.width) || \
 			((int) dir.y - 1 < 0 || (int) dir.y + 1 > props->map.height))
 		return ;
+	props->player.place_frame = 0;
 	if (action == PLACE)
 	{
 		if (props->player.hand == 3 && !props->map.has_door)
 			return ;
 		if (props->map.matrix[(int) dir.y][(int) dir.x] != props->player.hand)
+		{
 			props->map.matrix[(int) dir.y][(int) dir.x] = \
 														props->player.hand - 1;
+		}
 	}
 	else if (action == INTERACT)
 	{
@@ -71,6 +77,8 @@ void	interact(t_action action, t_props *props)
 
 void	interact_key(int key, t_props *props)
 {
+	if (props->pause == 1)
+		return ;
 	if (key == 99)
 		interact(CLEAR, props);
 	else if (key == 101)
@@ -81,6 +89,8 @@ void	interact_key(int key, t_props *props)
 
 void	interact_btn(int btn, t_props *props)
 {
+	if (props->pause == 1)
+		return ;
 	if (btn == 1)
 	{
 		if (abs(check_interact_pos(props)) == 2)
