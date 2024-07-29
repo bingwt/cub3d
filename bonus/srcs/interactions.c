@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:24:53 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 15:50:02 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/29 16:09:10 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	check_interact_pos(t_props *props)
 		dir.y = (int) props->player.pos.exact.y + 1;
 	else
 		dir.x = props->player.pos.exact.x - 1;
+	if (((int) dir.x - 1 < 0 || (int) dir.x + 1 > props->map.width) || \
+			((int) dir.y - 1 < 0 || (int) dir.y + 1 > props->map.height))
+		return (0);
 	return (props->map.matrix[(int) dir.y][(int) dir.x]);
 }
 
