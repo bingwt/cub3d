@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 23:54:59 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/29 16:37:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ typedef struct s_prop
 	long		animation_time;
 	long		frame_time;
 	int			pause;
+	t_texture	paused;
 }	t_props;
 
 // UTILS
