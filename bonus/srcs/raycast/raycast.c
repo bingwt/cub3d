@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 02:03:45 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 02:52:27 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ int	set_face_width(t_ray *ray, t_props *props)
 	face_width = props->textures[0].img.width;
 	if (ray->hit == 2)
 		face_width = props->door_tex.img.width;
+	else if (ray->hit == 3)
+		face_width = props->coin[props->coin_frame].img.width;
 	else if (ray->wall_face == 'S')
 		face_width = props->textures[1].img.width;
 	else if (ray->wall_face == 'E')
 		face_width = props->textures[2].img.width;
 	else if (ray->wall_face == 'W')
 		face_width = props->textures[3].img.width;
-	if (props->animated && ray->hit != 2)
+	if (props->animated && ray->hit != 2 && ray->hit != 3)
 		face_width = props->cat[props->animated - 1].img.width;
 	return (face_width);
 }
@@ -61,10 +63,10 @@ void	get_hit_pos(t_ray *ray, t_props *props)
 		ray->wall_dist = (ray->grid.y - ray->delta.y);
 	if (ray->grid_side == 'x')
 		ray->hit_pos = props->player.pos.exact.y + ray->wall_dist * \
-					props->player.pos.dir.y;
+		props->player.pos.dir.y;
 	else
 		ray->hit_pos = props->player.pos.exact.x + ray->wall_dist * \
-					props->player.pos.dir.x;
+		props->player.pos.dir.x;
 	ray->hit_pos -= floor(ray->hit_pos);
 	ray->texture_slice = (int)(ray->hit_pos * face_width);
 	if (ray->grid_side == 'x' && props->player.pos.dir.x < 0)

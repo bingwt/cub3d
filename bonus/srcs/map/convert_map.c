@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlow <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:43:15 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/17 19:44:01 by xlow             ###   ########.fr       */
+/*   Updated: 2024/08/01 02:47:56 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	map_char_to_int(char c)
 		return (1);
 	else if (c == 'D')
 		return (2);
+	else if (c == 'C')
+		return (3);
 	else
 		return (player_orientation(c));
 }

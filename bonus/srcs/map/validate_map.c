@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 19:45:57 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/24 05:10:03 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 02:48:18 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	char_check(char *next, char *line)
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'N'
 			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W'
-			&& line[i] != 'D')
+			&& line[i] != 'D' && line[i] != 'C')
 		{
 			printf("Error\nIncorrect character found in map content\n");
 			return (false);

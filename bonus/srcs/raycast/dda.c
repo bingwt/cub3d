@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:29:08 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 01:47:43 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 02:52:15 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	collision(t_ray *ray, t_props *props)
 		return (1);
 	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 1)
 		return (1);
-	// if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 2)
-	// 	return (2);
 	return (0);
 }
 
@@ -81,10 +79,10 @@ int	collision2(t_ray *ray, t_props *props)
 		return (1);
 	if (ray->map.y < 0 || ray->map.y >= props->map.height)
 		return (1);
-	// if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 1)
-	// 	return (1);
 	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 2)
 		return (2);
+	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 3)
+		return (3);
 	return (0);
 }
 

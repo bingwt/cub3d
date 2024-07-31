@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 01:48:03 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 02:26:38 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,14 @@ typedef struct s_prop
 	t_texture	hud[10];
 	t_texture	cat[17];
 	t_texture	blocks[32];
+	t_texture	coin[30];
 	int			animated;
 	long		status_time;
 	int			texture_frame;
 	long		animation_time;
 	long		frame_time;
+	int			coin_frame;
+	long		coin_time;
 	int			pause;
 	t_texture	paused;
 }	t_props;
@@ -273,6 +276,8 @@ void	dda(t_ray *ray, t_props *props);
 void	dda_layer2(t_ray *ray, t_props *props);
 
 // RAYCAST
+void	init_ray(t_ray *ray, t_props *props, int x);
+void	get_hit_pos(t_ray *ray, t_props *props);
 void	cast_rays(t_props *props);
 void	layer2_cast(t_props *props);
 
@@ -334,5 +339,7 @@ void	load_block(t_props *props);
 void	load_door(t_props *props);
 void	update_frames(t_props *props);
 void	free_textures(t_props *props);
+void	load_coin(t_props *props);
+void	update_coin(t_props *props);
 
 #endif
