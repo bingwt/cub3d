@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:27:25 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 15:36:36 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 22:45:04 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_hotbar(t_props *props)
 	start.y = (HEIGHT / 4) * 3;
 	scale.x = WIDTH / 4;
 	scale.y = HEIGHT / 4;
-	draw_texture(start, scale, hotbar, props);
+	draw_tex(start, scale, hotbar, props);
 }
 
 t_img	*equip_hand(int hand, t_props *props)
@@ -67,7 +67,7 @@ void	draw_hand(t_props *props)
 		return ;
 	sprite = equip_hand(hand, props);
 	if (hand != 0)
-		draw_texture(start, scale, sprite, props);
+		draw_tex(start, scale, sprite, props);
 }
 
 void	draw_status(t_props *props)
@@ -82,7 +82,7 @@ void	draw_status(t_props *props)
 	scale.x = sprite->width;
 	scale.y = sprite->height;
 	if (props->player.no_clip == 1)
-		draw_texture(start, scale, sprite, props);
+		draw_tex(start, scale, sprite, props);
 }
 
 void	draw_hud(t_props *props)

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/29 16:46:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 22:45:04 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_pause(t_props *props)
 	start.y = HEIGHT / 4;
 	scale.x = sprite->width;
 	scale.y = sprite->height;
-	draw_texture(start, scale, sprite, props);
+	draw_tex(start, scale, sprite, props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 }
 

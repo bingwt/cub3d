@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/28 00:09:28 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 22:45:04 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ int		hex_to_dec(char *hex);
 void	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
 void	draw_ceiling_floor(t_props *props);
 void	fill_point(t_vec2 point, int size, int color, t_props *props);
-void	draw_texture(t_vec2 start, int scale, t_img *texture, t_props *props);
+void	draw_tex(t_vec2 start, int scale, t_img *texture, t_props *props);
 void	draw_hotbar(t_props *props);
 
 //VECTORS

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/29 16:37:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 22:45:20 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,8 @@ typedef struct s_player
 	t_pos	pos;
 }	t_player;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	t_vec2	map;
 	t_vec2	delta;
 	t_vec2	step;
@@ -255,7 +256,7 @@ int		hex_to_dec(char *hex);
 void	fill_area(t_vec2 start, t_vec2 end, int color, t_props *props);
 void	draw_ceiling_floor(t_props *props);
 void	fill_point(t_vec2 point, int size, int color, t_props *props);
-void	draw_texture(t_vec2 start, t_vec2 scale, t_img *texture, t_props *props);
+void	draw_tex(t_vec2 start, t_vec2 scale, t_img *texture, t_props *props);
 
 //VECTORS
 void	vec2_add(t_vec2 *a, t_vec2 *b);
@@ -309,7 +310,7 @@ int		longest_width(char **content);
 char	**normalise_map(char **content);
 
 // CONVERT_MAP
-int	**convert_map(char **content);
+int		**convert_map(char **content);
 
 // MINIMAP
 void	draw_minimap(t_props *props);
