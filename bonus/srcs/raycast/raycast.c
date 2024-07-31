@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 03:22:56 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 01:48:17 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,37 @@ void	cast_rays(t_props *props)
 			texture_wall_slice(&ray, props, x, &props->textures[2].img);
 		else if (ray.wall_face == 'W')
 			texture_wall_slice(&ray, props, x, &props->textures[3].img);
+		if (props->animated && ray.hit != 2)
+			texture_wall_slice(&ray, props, x, \
+			&props->cat[props->animated - 1].img);
+		x++;
+	}
+}
+
+
+void	layer2_cast(t_props *props)
+{
+	t_ray	ray;
+	int		x;
+
+	x = 0;
+	while (x < props->width)
+	{
+		init_ray(&ray, props, x);
+		init_dda(&ray, props);
+		dda_layer2(&ray, props);
+		get_hit_pos(&ray, props);
+		// printf("x: %f, y: %f\n", ray.map.x, ray.map.y);
+		if (ray.hit == 2)
+			texture_wall_slice(&ray, props, x, &props->door_tex.img);
+		// else if (ray.wall_face == 'N')
+		// 	texture_wall_slice(&ray, props, x, &props->textures[0].img);
+		// else if (ray.wall_face == 'S')
+		// 	texture_wall_slice(&ray, props, x, &props->textures[1].img);
+		// else if (ray.wall_face == 'E')
+		// 	texture_wall_slice(&ray, props, x, &props->textures[2].img);
+		// else if (ray.wall_face == 'W')
+		// 	texture_wall_slice(&ray, props, x, &props->textures[3].img);
 		if (props->animated && ray.hit != 2)
 			texture_wall_slice(&ray, props, x, \
 			&props->cat[props->animated - 1].img);

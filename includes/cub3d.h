@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/31 22:45:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 01:48:03 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,9 +270,11 @@ void	rotate(t_vec2 *vec, float angle);
 // DDA
 void	init_dda(t_ray *ray, t_props *props);
 void	dda(t_ray *ray, t_props *props);
+void	dda_layer2(t_ray *ray, t_props *props);
 
 // RAYCAST
 void	cast_rays(t_props *props);
+void	layer2_cast(t_props *props);
 
 // CHECK_FILE
 bool	ends_with_xpm(char *file);
