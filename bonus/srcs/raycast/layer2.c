@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 02:03:58 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 02:50:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 04:29:07 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 int	layer2_visible(t_ray *ray, t_props *props)
 {
 	if (ray->wall_face == 'N' \
-		&& props->map.matrix[(int)ray->map.y + 1][(int)ray->map.x] == 0)
+		&& (props->map.matrix[(int)ray->map.y + 1][(int)ray->map.x] == 0 \
+		|| props->map.matrix[(int)ray->map.y + 1][(int)ray->map.x] > 3))
 		return (1);
 	else if (ray->wall_face == 'S' \
-	&& props->map.matrix[(int)ray->map.y - 1][(int)ray->map.x] == 0)
+	&& (props->map.matrix[(int)ray->map.y - 1][(int)ray->map.x] == 0 \
+	|| props->map.matrix[(int)ray->map.y - 1][(int)ray->map.x] > 3))
 		return (1);
 	else if (ray->wall_face == 'E' \
-	&& props->map.matrix[(int)ray->map.y][(int)ray->map.x + 1] == 0)
+	&& (props->map.matrix[(int)ray->map.y][(int)ray->map.x + 1] == 0 \
+	|| props->map.matrix[(int)ray->map.y][(int)ray->map.x + 1] > 3))
 		return (1);
 	else if (ray->wall_face == 'W' \
-	&& props->map.matrix[(int)ray->map.y][(int)ray->map.x - 1] == 0)
+	&& (props->map.matrix[(int)ray->map.y][(int)ray->map.x - 1] == 0 \
+	|| props->map.matrix[(int)ray->map.y][(int)ray->map.x - 1] > 3))
 		return (1);
 	return (0);
 }
