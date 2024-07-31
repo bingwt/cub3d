@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:24:53 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 00:15:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 13:30:04 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	interact(t_action action, t_props *props)
 
 void	interact_key(int key, t_props *props)
 {
+	if (!BONUS)
+		return ;
 	if (key == 99)
 		interact(CLEAR, props);
 	else if (key == 101)
