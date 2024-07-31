@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/27 23:53:23 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 23:19:38 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	load_textures(t_props *props)
 	props->hud[3].img = load_img("./maps/textures/block.xpm", 7, props);
 	props->hud[4].img = load_img("./maps/textures/door_block.xpm", 8, props);
 	if (props->map.has_door)
-		props->door_tex.img = load_img(props->map.dr, 9, props);
+		props->coin[props->coin_frame].img = load_img(props->map.dr, 9, props);
 }
 
 int	get_pixel_color(t_img *img, int x, int y)

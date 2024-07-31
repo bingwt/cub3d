@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/29 16:37:59 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 23:19:38 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	load_textures(t_props *props)
 	props->hud[8].img = load_img("./assets/frames/noclip/4.xpm", 12, props);
 	props->hud[9].img = load_img("./assets/frames/noclip/5.xpm", 13, props);
 	if (props->map.has_door)
-		props->door_tex.img = load_img(props->map.dr, 14, props);
+		props->coin[props->coin_frame].img = load_img(props->map.dr, 14, props);
 	props->paused.img = load_img("./assets/pause.xpm", 15, props);
 }
 

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/07/31 22:45:20 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 23:18:54 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,14 @@ typedef struct s_prop
 	t_texture	hud[10];
 	t_texture	cat[17];
 	t_texture	blocks[32];
+	t_texture	coin[10];
 	int			animated;
 	long		status_time;
 	int			texture_frame;
 	long		animation_time;
 	long		frame_time;
+	long		coin_time;
+	int			coin_frame;
 	int			pause;
 	t_texture	paused;
 }	t_props;
@@ -332,5 +335,7 @@ void	load_block(t_props *props);
 void	load_door(t_props *props);
 void	update_frames(t_props *props);
 void	free_textures(t_props *props);
+void	load_coin(t_props *props);
+void	update_coin(t_props *props);
 
 #endif

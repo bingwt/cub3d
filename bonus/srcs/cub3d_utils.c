@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/07/31 22:45:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 23:21:10 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	loop(t_props *props)
 	if (props->animated)
 		update_animated(props);
 	update_frames(props);
+	update_coin(props);
 	if (props->player.hotbar == 1)
 		draw_hud(props);
 	mlx_mouse_get_pos(props->mlx, props->window, \
