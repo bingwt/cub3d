@@ -3,6 +3,10 @@
 TEST_FOLDER="./bad"
 PROGRAM="../cub3D"
 
+if [ "$1" == "-b" ]; then 
+	PROGRAM="../cub3D_bonus"
+fi
+
 # Check if the program exists
 if [ ! -f "$PROGRAM" ]; then
   echo "Error: Program $PROGRAM not found!"
