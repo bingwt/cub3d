@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 16:04:00 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 22:57:27 by btan             ###   ########.fr       */
+/*   Updated: 2024/07/31 13:38:37 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	handle_close(t_props *props)
 	i = 0;
 	free_textures(props);
 	free_texture_paths(props->map);
+	mlx_destroy_image(props->mlx, props->paused.img.ptr);
 	mlx_destroy_image(props->mlx, props->image);
 	mlx_destroy_window(props->mlx, props->window);
 	mlx_destroy_display(props->mlx);
