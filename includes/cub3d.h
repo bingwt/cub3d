@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 02:26:38 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 03:01:42 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_player
 	int		no_clip;
 	int		status_frame;
 	int		place_frame;
+	int		coins;
 	t_pos	pos;
 }	t_player;
 
@@ -341,5 +342,8 @@ void	update_frames(t_props *props);
 void	free_textures(t_props *props);
 void	load_coin(t_props *props);
 void	update_coin(t_props *props);
+
+// COLLECTABLES
+void	collect(t_props *props);
 
 #endif

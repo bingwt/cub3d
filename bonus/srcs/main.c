@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 02:30:14 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 02:57:33 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_player(t_props *props)
 	props->player.place_frame = 23;
 	props->player.pos.relative.x = 0.5;
 	props->player.pos.relative.y = 0.5;
+	props->player.coins = 0;
 	props->mouse.x = 64;
 	props->mouse.y = 64;
 	props->mouse.l_btn = 0;
