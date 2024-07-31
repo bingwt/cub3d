@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:29:08 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 02:52:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 04:37:49 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,46 +70,5 @@ void	dda(t_ray *ray, t_props *props)
 				ray->wall_face = 'N';
 		}
 		ray->hit = collision(ray, props);
-	}
-}
-
-int	collision2(t_ray *ray, t_props *props)
-{
-	if (ray->map.x < 0 || ray->map.x >= props->map.width)
-		return (1);
-	if (ray->map.y < 0 || ray->map.y >= props->map.height)
-		return (1);
-	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 2)
-		return (2);
-	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 3)
-		return (3);
-	return (0);
-}
-
-void	dda_layer2(t_ray *ray, t_props *props)
-{
-	while (ray->hit == 0)
-	{
-		if (ray->grid.x < ray->grid.y)
-		{
-			ray->grid.x += ray->delta.x;
-			ray->map.x += ray->step.x;
-			ray->grid_side = 'x';
-			if (ray->step.x > 0)
-				ray->wall_face = 'W';
-			else
-				ray->wall_face = 'E';
-		}
-		else
-		{
-			ray->grid.y += ray->delta.y;
-			ray->map.y += ray->step.y;
-			ray->grid_side = 'y';
-			if (ray->step.y > 0)
-				ray->wall_face = 'S';
-			else
-				ray->wall_face = 'N';
-		}
-		ray->hit = collision2(ray, props);
 	}
 }
