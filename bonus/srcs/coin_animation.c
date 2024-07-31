@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 02:22:24 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 02:42:40 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 03:22:06 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	load_coin(t_props *props)
 {
 	int		i;
+	char	*n;
 	char	*tmp;
 	char	*path;
 
@@ -22,8 +23,10 @@ void	load_coin(t_props *props)
 	while (i < 30)
 	{
 		path = ft_strdup("./assets/frames/coin/");
-		tmp = ft_strjoin(path, ft_itoa(i + 1));
+		n = ft_itoa(i + 1);
+		tmp = ft_strjoin(path, n);
 		free(path);
+		free(n);
 		path = ft_strjoin(tmp, ".xpm");
 		free(tmp);
 		props->coin[i].img = load_img(path, i, props);

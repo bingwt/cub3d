@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:27:25 by btan              #+#    #+#             */
-/*   Updated: 2024/07/31 22:45:04 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 03:05:16 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	draw_hud(t_props *props)
 	draw_hand(props);
 	draw_hotbar(props);
 	draw_status(props);
+	draw_coins(props);
 	point.x = 502;
 	point.y = 512;
 	while (point.x < 522)

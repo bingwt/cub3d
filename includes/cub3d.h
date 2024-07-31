@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 03:01:42 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 03:04:50 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,5 +345,6 @@ void	update_coin(t_props *props);
 
 // COLLECTABLES
 void	collect(t_props *props);
+void	draw_coins(t_props *props);
 
 #endif

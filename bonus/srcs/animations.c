@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 01:23:30 by btan              #+#    #+#             */
-/*   Updated: 2024/07/28 15:47:03 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 03:19:45 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	free_textures(t_props *props)
 			mlx_destroy_image(props->mlx, props->hud[i].img.ptr);
 		if (i < 17)
 			mlx_destroy_image(props->mlx, props->cat[i].img.ptr);
+		if (i < 30)
+			mlx_destroy_image(props->mlx, props->coin[i].img.ptr);
 		mlx_destroy_image(props->mlx, props->blocks[i++].img.ptr);
 	}
 }
