@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:35:04 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 16:40:11 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 17:22:12 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,15 @@ void	enemy_cast(t_props *props)
 		init_dda(&ray, props);
 		dda_enemy(&ray, props);
 		get_hit_pos(&ray, props);
-		if (ray.hit == 4 && enemy_visible(&ray, props))
-			texture_wall_slice(&ray, props, x, \
-			&props->hud[props->player.status_frame].img);
-		if (props->animated && ray.hit != 2)
-			texture_wall_slice(&ray, props, x, \
-			&props->cat[props->animated - 1].img);
+		if (x <= (WIDTH / 8) * 2 || x >= (WIDTH / 8) * 6)
+		{
+			if (ray.hit == 4 && enemy_visible(&ray, props))
+				texture_wall_slice(&ray, props, x, \
+				&props->hud[props->player.status_frame].img);
+			if (props->animated && ray.hit != 2)
+				texture_wall_slice(&ray, props, x, \
+				&props->cat[props->animated - 1].img);
+		}
 		x++;
 	}
 }
