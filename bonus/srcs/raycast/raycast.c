@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:08:12 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 17:40:24 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 22:44:52 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	set_face_width(t_ray *ray, t_props *props)
 	int	face_width;
 
 	face_width = props->textures[0].img.width;
-	if (ray->hit == 2)
+	if (abs(ray->hit) == 2)
 		face_width = props->door_tex.img.width;
 	else if (ray->hit == 3)
 		face_width = props->coin[props->coin_frame].img.width;

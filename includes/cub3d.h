@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 13:52:08 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 22:48:05 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,7 @@ void	free_textures(t_props *props);
 void	load_coin(t_props *props);
 void	update_coin(t_props *props);
 void	load_re_doors(t_props *props);
-void	update_re_doors(t_props *props);
+void	update_re_doors(int dir, t_props *props);
 
 // COLLECTABLES
 void	collect(t_props *props);
