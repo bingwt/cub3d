@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 02:03:58 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 13:57:13 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 17:41:09 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	layer2_cast(t_props *props)
 		dda_layer2(&ray, props);
 		get_hit_pos(&ray, props);
 		if (ray.hit == 2 && layer2_visible(&ray, props))
-			texture_wall_slice(&ray, props, x, &props->re_doors[props->re_frame].img);
+			texture_wall_slice(&ray, props, x - (props->re_frame * 10), &props->door_tex.img);
 		if (ray.hit == 3 && layer2_visible(&ray, props))
 			texture_wall_slice(&ray, props, x, \
 			&props->coin[props->coin_frame].img);
