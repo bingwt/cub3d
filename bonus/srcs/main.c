@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 02:57:33 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 13:54:15 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	init_window(char *file, t_props *props)
 	props->frame_time = time_ms(0);
 	props->coin_frame = 0;
 	props->coin_time = time_ms(0);
+	props->re_frame = 0;
+	props->re_time = time_ms(0);
 	props->pause = -1;
 }
 
@@ -110,6 +112,7 @@ int	main(int argc, char **argv)
 	load_block(props);
 	load_door(props);
 	load_coin(props);
+	load_re_doors(props);
 	draw_ceiling_floor(props);
 	mlx_put_image_to_window(props->mlx, props->window, props->image, 0, 0);
 	handle_events(props);

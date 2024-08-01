@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 03:03:45 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 14:10:44 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ void	loop(t_props *props)
 		draw_minimap(props);
 	update_status(props);
 	if (props->animated)
+	{
 		update_animated(props);
+	}
+	update_re_doors(props);
 	update_frames(props);
 	update_coin(props);
 	if (props->player.hotbar == 1)
