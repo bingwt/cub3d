@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:12:25 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 03:04:50 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/01 15:38:51 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,6 +281,7 @@ void	init_ray(t_ray *ray, t_props *props, int x);
 void	get_hit_pos(t_ray *ray, t_props *props);
 void	cast_rays(t_props *props);
 void	layer2_cast(t_props *props);
+void	enemy_cast(t_props *props);
 
 // CHECK_FILE
 bool	ends_with_xpm(char *file);
