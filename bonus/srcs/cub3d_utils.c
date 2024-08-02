@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 20:10:32 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/02 14:22:14 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ void	loop(t_props *props)
 	}
 	draw_ceiling_floor(props);
 	cast_rays(props);
-	layer2_cast(props);
+	layer2_cast(props, 2);
+	layer2_cast(props, 3);
+	layer2_cast(props, 2);
 	if (props->player.minimap == 1)
 		draw_minimap(props);
 	update_status(props);

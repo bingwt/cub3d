@@ -6,13 +6,13 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 02:03:58 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 22:58:14 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/02 14:31:22 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	layer2_collision(t_ray *ray, t_props *props)
+int	layer2_collision(t_ray *ray, t_props *props, int tmp)
 {
 	if (ray->map.x < 0 || ray->map.x >= props->map.width)
 		return (1);
@@ -20,21 +20,23 @@ int	layer2_collision(t_ray *ray, t_props *props)
 		return (1);
 	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 1)
 		return (1);
-	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 2)
+	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 2 && tmp == 2)
 		return (2);
-	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == -2)
+	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == -2 && tmp == 2)
 		return (-2);
 	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == 3)
 		return (3);
 	return (0);
 }
 
-void	dda_layer2(t_ray *ray, t_props *props)
+void	dda_layer2(t_ray *ray, t_props *props, int tmp)
 {
 	while (ray->hit == 0)
 	{
 		if (ray->grid.x < ray->grid.y)
 		{
+	if (props->map.matrix[(int)ray->map.y][(int)ray->map.x] == -2)
+		return ;
 			ray->grid.x += ray->delta.x;
 			ray->map.x += ray->step.x;
 			ray->grid_side = 'x';
@@ -53,7 +55,7 @@ void	dda_layer2(t_ray *ray, t_props *props)
 			else
 				ray->wall_face = 'N';
 		}
-		ray->hit = layer2_collision(ray, props);
+		ray->hit = layer2_collision(ray, props, tmp);
 	}
 }
 
@@ -78,7 +80,7 @@ int	layer2_visible(t_ray *ray, t_props *props)
 	return (0);
 }
 
-void	layer2_cast(t_props *props)
+void	layer2_cast(t_props *props, int tmp)
 {
 	t_ray	ray;
 	int		x;
@@ -88,13 +90,13 @@ void	layer2_cast(t_props *props)
 	{
 		init_ray(&ray, props, x);
 		init_dda(&ray, props);
-		dda_layer2(&ray, props);
+		dda_layer2(&ray, props, tmp);
 		get_hit_pos(&ray, props);
 		if (abs(ray.hit) == 2 && x == props->width - 1)
 			update_re_doors(ray.hit, props);
-		if (abs(ray.hit) == 2 && layer2_visible(&ray, props))
+		if (abs(ray.hit) == 2 && layer2_visible(&ray, props) && tmp == 2)
 			texture_wall_slice(&ray, props, x - (props->re_frame * 40), &props->door_tex.img);
-		if (ray.hit == 3 && layer2_visible(&ray, props))
+		if (ray.hit == 3 && layer2_visible(&ray, props) && tmp ==3)
 			texture_wall_slice(&ray, props, x, \
 			&props->coin[props->coin_frame].img);
 		if (props->animated && ray.hit != 2)
