@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 21:25:28 by xlow              #+#    #+#             */
-/*   Updated: 2024/08/01 02:57:33 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/02 15:29:32 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_window(char *file, t_props *props)
 	props->coin_frame = 0;
 	props->coin_time = time_ms(0);
 	props->pause = -1;
+	props->middle_dist = 0;
 }
 
 void	init_player(t_props *props)

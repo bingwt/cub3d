@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:35:04 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 17:22:12 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/02 15:49:39 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,23 @@ int	enemy_visible(t_ray *ray, t_props *props)
 	|| props->map.matrix[(int)ray->map.y][(int)ray->map.x - 1] > 4))
 		return (1);
 	return (0);
+}
+
+void	draw_enemy(t_props *props)
+{
+	t_vec2	start;
+	t_vec2	scale;
+	t_img	*sprite;
+
+	sprite = &props->hud[props->player.status_frame].img;
+	start.x = 0;
+	start.y = 0;
+	scale.x = sprite->width;
+	scale.y = sprite->height;
+	vec2_scale(&scale, props->middle_dist / 100);
+	start.x -= (props->middle_dist / 100) * 2;
+	start.y -= (props->middle_dist / 100) * 2;
+	draw_tex(start, scale, sprite, props);
 }
 
 void	enemy_cast(t_props *props)

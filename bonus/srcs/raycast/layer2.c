@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 02:03:58 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 04:42:15 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/02 15:53:40 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	layer2_cast(t_props *props)
 		init_dda(&ray, props);
 		dda_layer2(&ray, props);
 		get_hit_pos(&ray, props);
+		printf("%f\n", props->middle_dist);
 		if (ray.hit == 2 && layer2_visible(&ray, props))
 			texture_wall_slice(&ray, props, x, &props->door_tex.img);
 		if (ray.hit == 3 && layer2_visible(&ray, props))

@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:14:26 by btan              #+#    #+#             */
-/*   Updated: 2024/07/29 16:37:59 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/02 15:28:23 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	texture_wall_slice(t_ray *ray, t_props *props, int x, t_img *texture)
 	float	tex_pos;
 
 	height = (int)(props->height / ray->wall_dist);
+	if (x == WIDTH / 2)
+		props->middle_dist = height;
 	slice[0] = (-height / 2) + (props->height / 2);
 	if (slice[0] < 0)
 		slice[0] = 0;

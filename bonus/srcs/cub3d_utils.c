@@ -6,7 +6,7 @@
 /*   By: btan <btan@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:40:47 by btan              #+#    #+#             */
-/*   Updated: 2024/08/01 16:04:32 by btan             ###   ########.fr       */
+/*   Updated: 2024/08/02 15:56:01 by btan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,13 @@ void	loop(t_props *props)
 	}
 	update_status(props);
 	draw_ceiling_floor(props);
-	enemy_cast(props);
+	if (props->middle_dist > 0 && props->middle_dist < 230)
+		draw_enemy(props);
+	// enemy_cast(props);
 	cast_rays(props);
 	layer2_cast(props);
+	if (props->middle_dist > 0 && props->middle_dist > 230)
+		draw_enemy(props);
 	if (props->player.minimap == 1)
 		draw_minimap(props);
 	if (props->animated)
